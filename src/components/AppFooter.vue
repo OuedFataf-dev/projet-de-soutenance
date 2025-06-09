@@ -16,7 +16,9 @@
       </div>
     </div>
 
-    <!-- Section des liens -->
+   
+       
+      <!-- Section des liens -->
     <div class=" px-3 grid grid-cols-3 lg:grid-cols-5  gap-6 mt-6">
       <div>
         <h3 class="font-bold mb-3">Certifications par émetteur</h3>
@@ -59,24 +61,15 @@
 
       <div>
 
-          
-       
-      </div>
-      
-    
-         
-       
-      
-    </div>
-
-   
+        </div>
+        </div>
 
 
   </footer>
 
 
-  <div class="bg-gray-900 text-white -mt-70 p-6">
-    <div class="grid grid-cols-4 gap-10">
+  <div class="bg-gray-900 text-white -mt-40 p-6">
+    <div class="grid grid-cols-4 gap-4">
       <div v-for="(category, index) in categories" :key="index">
         <h3 class="font-bold mb-3">{{ category.title }}</h3>
         <ul>

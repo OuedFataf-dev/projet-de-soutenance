@@ -376,6 +376,20 @@ const cancelHideTooltip = (type) => {
 </script>
 
 <style scoped>
+
+.mobile-menu-open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .mobile-menu-open {
+    position: static;
+    flex-direction: row;
+  }
+}
 /* Transition pour les tooltips */
 .tooltip-enter-active,
 .tooltip-leave-active {

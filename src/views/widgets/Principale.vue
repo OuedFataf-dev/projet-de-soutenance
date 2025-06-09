@@ -4,7 +4,7 @@
 
     <!-- Menu catégories -->
 
-         
+         <div>salu</div>
 
     <div class="text-center shadow-6xl" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);"></div>
   <div class="bg-white py-4 mt-5">
@@ -296,7 +296,7 @@
     :class="{ '-translate-x-full': showMore }"
   >
     <!-- Première série de boutons -->
-    <div class="grid grid-cols-4 gap-4 p-5 flex-shrink-0 w-full">
+    <div class="grid grid-cols-4 gap-4 p-4  flex-shrink-0 w-full">
       <template v-for="(item, index) in firstRow" :key="index">
         <router-link 
           v-if="item.isLink" 

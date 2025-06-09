@@ -19,20 +19,37 @@
       </div>
 
       <div class="-mt-45">
-        <div class="card card-border bg-white  w-full  h-45 shadow-xl">
-  <div class="card-body">
-    <h2 class="card-title text-4xl font-bold px-10  mt-">
+        <div class="card card-border bg-white  w-full  h-70 shadow-xl">
+ 
+
+
+ <div class="card-body">
+    <h2 class="card-title text-2xl font-bold px-10  mt-">
            <div class="py-8">
             Toutes les compétences dont vous avez besoin au même endroit
-           </div>
-       </h2>
-    <p class="px-10 -mt-5 text-xl">Des compétences essentielles aux sujets techniques, Udemy contribue à votre développement professionnel.
+            <p class="px-4  mt-8  text-xl text-base sm:text-xl whitespace-normal sm:whitespace-nowrap">Des compétences essentielles aux sujets techniques, Udemy contribue à votre développement professionnel.
 
-    
 
 </p>
+           </div>
+
+           
+       </h2>
+    
+
+  </div>
+
+
+
+
+
+
+
+
+
+
    </div>
-    <div class=" flex  gap-x-2 mt-10 card-actions px-10">
+    <div class=" flex  gap-x-2 mt-4 card-actions px-10">
       <button
         v-for="tab in tabs"
         :key="tab.id"
@@ -206,18 +223,16 @@
       </div>
       
     </div>
-
-    <div class="flex-col bg-white text-center h-50 px-60 mt-10">
-           <div>Plus de 16 000 entreprises et des millions de participants nous font confiance dans le monde entier</div>
-
-
-            <div class="flex gap-x-2 bg-white mt-0">
+           <div class=" bg-white text-center px mt-10">Plus de 16 000 entreprises et des millions de participants nous font confiance dans le monde entier</div>
+   
+        
+            <div class="flex  bg-white mt-0">
                 
-           <div class=" px-10 mt-10">
+           <div class=" px-20  mt-10">
                   <img src="https://cms-images.udemycdn.com/content/2gevcc0kxt/svg/samsung_logo.svg?position=c&quality=80&x.app=portals" alt="">
               </div>
                    
-           <div class=" px-10 mt-10">
+           <div class=" px-15 mt-10">
                   <img src="https://cms-images.udemycdn.com/content/mueb2ve09x/svg/cisco_logo.svg?position=c&quality=80&x.app=portals" alt="">
               </div>
                    
@@ -225,13 +240,13 @@
                   <img src="https://cms-images.udemycdn.com/content/siaewwmkch/svg/citi_logo.svg?position=c&quality=80&x.app=portals" alt="">
               </div>
             </div>
-       </div>
-       <div class=" mt- px-2 bg-white">
+       
+       <div class="  px-2 bg-white">
             <div class="font-bold px-2 text-3xl ">
               Les participants regardent
             </div>
         </div>
-        </div>
+        
 
         <!-- Carrousel avec gestion d'erreurs -->
   <div class="relative w-full bg-white overflow-hidden" v-if="groupedCourses2 && groupedCourses2.length">

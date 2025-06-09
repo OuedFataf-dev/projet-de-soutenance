@@ -244,7 +244,7 @@
   
   
   
-                               <div class="ml-60 -mt-150  w-256 mt-2 ">
+                               <div class="ml-55 -mt-150  w-256 mt-2 ">
   
                                 <div v-if="showGestionUtilisateurs" class="bg-gray-500 h-150 -mt-166 text-white">
         <div class="flex justify-between items-center mb-4">

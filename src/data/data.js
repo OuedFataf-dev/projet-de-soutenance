@@ -22,9 +22,9 @@ export const cards = [
 
 
 export const firstRow = [
-  { label: 'Développement Web', route: '/webflutter', isLink: true },
+  { label: 'Web', route: '/webflutter', isLink: true },
   { label: 'React JS', route: '/mobile', isLink: true },
-  { label: 'Developpement mobile', isLink: false },
+  { label: 'developpement mobile', isLink: false },
   { label: 'Python', route: '/web1', isLink: true },
   { label: 'java', isLink: false },
   { label: "machine leaning", isLink: false },

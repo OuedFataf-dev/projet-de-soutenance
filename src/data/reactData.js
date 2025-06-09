@@ -121,3 +121,9 @@ export const DataReact=[
       originalPrice: 59.99
     }
    ];
+
+
+
+
+
+   

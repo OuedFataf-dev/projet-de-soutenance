@@ -44,6 +44,7 @@ const formations = ref([
   { label: 'TypeScript', isLink: false },
 ])
 
+
 onMounted(async () => {
   // Récupérer le sous-domaine depuis l'URL
   const subdomain = route.params.subdomain || 'Génie Logiciel"' // Valeur par défaut
