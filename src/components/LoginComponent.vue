@@ -1,364 +1,184 @@
 <template>
-  <div id="app">
-    <nav class="flex justify-between items-center px-2 sm:px-6 py-4 bg-white border-b-0 border-gray-300 shadow-xl z-50">
-      <!-- Logo Gandy -->
-      <div class="text-xl sm:text-2xl font-bold text-purple-700">Gandy</div>
-
-      <!-- Menu burger pour mobile -->
-      <div class="md:hidden">
-        <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-700 hover:text-purple-600">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Navigation desktop -->
-      <div class="hidden md:flex items-center space-x-4 flex-1 justify-between">
-        <!-- Bouton Découvrir avec Tooltip -->
-        <div class="relative ml-8">
-          <router-link
-            id="decouvrir"
-            class="text-sm px-8 font-bold hover:text-purple-600"
-            @mouseenter="showMainTooltip('decouvrir')"
-            @mouseleave="startHideTooltip('main')"
-          >
-            Découvrir
-          </router-link>
-
-          <!-- Tooltip Découvrir -->
-          <div
-            v-show="showTooltip === 'decouvrir'"
-            class="absolute z-[60] mt-6 w-[300px] h-[500px] rounded-tl-lg bg-white border border-gray-200 shadow-lg left-1/2 transform -translate-x-1/2 flex"
-            @mouseenter="cancelHideTooltip('main')"
-            @mouseleave="startHideTooltip('main')"
-          >
-            <!-- Premier Tooltip (Gauche) -->
-            <div class="w-1/2 p-4 z-50">
-              <h5 class="mb-2 text-sm font-semibold whitespace-nowrap text-gray-900">
-                Parcourir les certifications
-              </h5>
-              <p class="text-sm whitespace-nowrap text-gray-500">Préparations aux certifications.</p>
-              <hr class="h-px -ml-4 w-74 my-4 bg-gray-200 border-0" />
-              <div class="space-y-3">
-                <div
-                  class="flex items-center space-x-4"
-                  v-for="category in categories"
-                  :key="category.name"
-                >
-                  <div class="flex items-start w-full">
-                    <a
-                      @mouseenter="showSubTooltip = category.name; cancelHideTooltip('all')"
-                      @mouseleave="startHideTooltip('sub')"
-                      :href="category.link"
-                      class="mt-2 hover:text-purple-600 whitespace-nowrap">{{ category.name }}</a>
-                    <div
-                      class="cursor-pointer mt-2 ml-20"
-                      :class="category.margin"
-                      @mouseenter="showSubTooltip = category.name; cancelHideTooltip('all')"
-                      @mouseleave="startHideTooltip('sub')"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        class="size-4"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Séparateur -->
-            <div class="border-l border-white h-full absolute top-0 left-1/2 transform translate-x-1/2"></div>
-
-            <!-- Deuxième Tooltip (Droite) -->
-            <div
-              v-show="showSubTooltip"
-              class="absolute top-0 left-[100%] w-80 border-l-2 border-gray-200 h-150 p-4 pl-20 z-20 bg-white"
-              @mouseenter="cancelHideTooltip('all')"
-              @mouseleave="startHideTooltip('sub')"
-            >
-              <h5 class="mb-2 text-sm font-semibold text-gray-900">Sous-catégories</h5>
-              <div class="space-y-3">
-                <div
-                  v-for="(category, index) in filteredSubCategories"
-                  :key="index"
-                  class="flex gap-x-2"
-                >
-                  <a 
-                    :href="category.link"
-                    @mouseenter="selectedSubCategory = category.name; showThirdTooltip = true; cancelHideTooltip('all')"
-                    @mouseleave="startHideTooltip('third')"
-                    class="-ml-4 text-center hover:text-purple-600 whitespace-nowrap">
-                    {{ category.name }}
-                  </a> 
-                  <div
-                    class="mt-1 px-5 cursor-pointer"
-                    :class="category.margin"
-                    @mouseenter="selectedSubCategory = category.name; showThirdTooltip = true; cancelHideTooltip('all')"
-                    @mouseleave="startHideTooltip('third')"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-4"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Troisième Tooltip -->
-            <div class="ml-16">
-              <div
-                v-show="showThirdTooltip"
-                class="absolute top-0 left-[200%] w-70 rounded-tr-lg border-l-2 border-gray-200 h-150 rounded-lg p-4 z-30 bg-white"
-                @mouseenter="cancelHideTooltip('all')"
-                @mouseleave="startHideTooltip('third')"
-              >
-                <ul>
-                  <li
-                    v-for="(subsub, index) in filteredSubsubCategories"
-                    :key="index"
-                    :class="subsub.margin"
-                  >
-                    <a v-if="subsub.link" :href="subsub.link">{{ subsub.name }}</a>
-                    <span v-else>{{ subsub.name }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+    <div class="h-200 w-full bg-white">
+      <div class="flex gap-x-20 justify-center items-center">
+        <div>
+          <img src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-2-x2.webp" width="500px" alt="">
         </div>
+  
+        <div class="mt-10 px-30">
+          <div class="font-bold text-3xl">
+          Se connecter par e-mail pour Continuer
 
-        <!-- Barre de recherche -->
-        <div class="flex-1 max-w-md mx-4">
-          <input
-            type="text"
-            placeholder="Que souhaitez-vous apprendre ?"
-            class="border rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-        </div>
-
-        <!-- Boutons droite -->
-        <div class="flex items-center space-x-2 lg:space-x-4">
-          <!-- Udemy Business -->
-          <div class="relative hidden lg:block">
-            <button
-              id="udemyBusinessBtn"
-              class="text-gray-700 text-sm hover:text-purple-600 whitespace-nowrap"
-              @mouseenter="showMainTooltip('udemyBusiness')"
-              @mouseleave="startHideTooltip('main')"
-            >
-              Udemy Business
-            </button>
-            <div
-              v-show="showTooltip === 'udemyBusiness'"
-              class="absolute z-10 mt-6 w-[300px] px-6 py-4 text-sm font-medium bg-white rounded-lg shadow-lg left-1/2 transform -translate-x-1/2"
-              @mouseenter="cancelHideTooltip('main')"
-              @mouseleave="startHideTooltip('main')"
-            >
-              Offrez aux membres de votre équipe un accès à plus de 27 000 des
-              meilleurs cours Udemy, à tout moment, où qu'ils soient.
+            <div class="flex ga-x-5">
+                  <div class="-ml-10 py-2">
+                    <button class="card border h-5 w-5 "></button>
+                  </div>
+                <div class="text-xs mt-4 ml-4">
+                    Je souhaite recevoir des offres spéciales, des <br> recommandations personnalisées et des conseils <br> d'apprentissage.
+                </div>
+            </div>
+            <div class="mt-5">
+             
+              <input 
+                v-model="email"
+                type="text" 
+                placeholder="E-mail"
+                class="border text-xl font-bold h-15  mt-5 px-4 py-2 w-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              /> 
+  
               <div class="mt-5">
                 <button
-                  class="w-full bg-purple-600 text-sm text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700"
-                >
-                  Essayer Business
+                 @click="handleSubmit"
+                 class="w-105 h-15 mt-4 bg-purple-600 text-white py-2 text-sm px-4 rounded-lg font-semibold hover:bg-purple-700">
+                  Continuer avec une adresse email
                 </button>
               </div>
-            </div>
-          </div>
-
-          <!-- Enseigner -->
-          <div class="relative hidden lg:block">
-            <button
-              id="Enseigner"
-              class="text-gray-700 text-sm hover:text-purple-600"
-              @mouseenter="showMainTooltip('enseigner')"
-              @mouseleave="startHideTooltip('main')"
-            >
-              Enseigner
-            </button>
-            <div
-              v-show="showTooltip === 'enseigner'"
-              class="absolute z-10 mt-6 w-[300px] px-6 py-4 text-sm font-medium bg-white rounded-lg shadow-lg left-1/2 transform -translate-x-1/2"
-              @mouseenter="cancelHideTooltip('main')"
-              @mouseleave="startHideTooltip('main')"
-            >
-              Transformez vos connaissances en véritable opportunité et touchez des
-              millions de personnes du monde entier.
-              <div class="mt-5">
-                <button
-                  class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700"
-                >
-                  En savoir plus
-                </button>
+  
+              <!-- Ligne horizontale avec le texte centré -->
+              <div class="relative flex items-center justify-center -ml-25 w-full my-8">
+                <hr class="w-100 h-px bg-gray-200 border-0 dark:bg-gray-700">
+                <span class="absolute bg-white px-0 font-medium text-gray-900 text-sm left-1/2 transform -translate-x-1/2 dark:text-white dark:bg-gray-900">
+                  Autres options de Connexion
+                </span>
               </div>
+  
+                  <div class="flex text-center px-20 ml-10 gap-x-4">
+  
+  
+  
+                    <div class="card border  rounded-lg border-purple-500 h-15 w-15 bg-blue">
+                                  <div class="text-center mt-2 px-3 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 512 512">
+                    <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" data-original="#fbbd00" />
+                    <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" data-original="#0f9d58" />
+                    <path fill="#31aa52" d="m139.131 325.477-86.308 86.308a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z" data-original="#31aa52" />
+                    <path fill="#3c79e6" d="M512 256a258.24 258.24 0 0 0-4.192-46.377l-2.251-12.299H256v120h121.452a135.385 135.385 0 0 1-51.884 55.638l86.216 86.216a260.085 260.085 0 0 0 25.235-22.158C485.371 388.667 512 324.38 512 256z" data-original="#3c79e6" />
+                    <path fill="#cf2d48" d="m352.167 159.833 10.606 10.606 84.853-84.852-10.606-10.606C388.668 26.629 324.381 0 256 0l-60 60 60 60c36.326 0 70.479 14.146 96.167 39.833z" data-original="#cf2d48" />
+                    <path fill="#eb4132" d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z" data-original="#eb4132" />
+                  </svg>
+                                  </div>
+                        </div>
+                         
+                        <div class="card border  rounded-lg border-purple-500 h-15 w-15 bg-blue">
+                                  <div class="text-center mt-2 px-3 ">
+                                        
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 512 512">
+                    <path fill="#1877f2" d="M512 256c0 127.78-93.62 233.69-216 252.89V330h59.65L367 256h-71v-48.02c0-20.25 9.92-39.98 41.72-39.98H370v-63s-29.3-5-57.31-5c-58.47 0-96.69 35.44-96.69 99.6V256h-65v74h65v178.89C93.62 489.69 0 383.78 0 256 0 114.62 114.62 0 256 0s256 114.62 256 256z" data-original="#1877f2" />
+                    <path fill="#fff" d="M355.65 330 367 256h-71v-48.021c0-20.245 9.918-39.979 41.719-39.979H370v-63s-29.296-5-57.305-5C254.219 100 216 135.44 216 199.6V256h-65v74h65v178.889c13.034 2.045 26.392 3.111 40 3.111s26.966-1.066 40-3.111V330z" data-original="#ffffff" />
+                  </svg>
+  
+  
+  
+                                  </div>
+                        </div>
+              
+  
+                        <div class="card border  rounded-lg border-purple-500 h-15 w-15 bg-blue">
+                                  <div class="text-center mt-2 px-3 ">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 22.773 22.773">
+                    <path d="M15.769 0h.162c.13 1.606-.483 2.806-1.228 3.675-.731.863-1.732 1.7-3.351 1.573-.108-1.583.506-2.694 1.25-3.561C13.292.879 14.557.16 15.769 0zm4.901 16.716v.045c-.455 1.378-1.104 2.559-1.896 3.655-.723.995-1.609 2.334-3.191 2.334-1.367 0-2.275-.879-3.676-.903-1.482-.024-2.297.735-3.652.926h-.462c-.995-.144-1.798-.932-2.383-1.642-1.725-2.098-3.058-4.808-3.306-8.276v-1.019c.105-2.482 1.311-4.5 2.914-5.478.846-.52 2.009-.963 3.304-.765.555.086 1.122.276 1.619.464.471.181 1.06.502 1.618.485.378-.011.754-.208 1.135-.347 1.116-.403 2.21-.865 3.652-.648 1.733.262 2.963 1.032 3.723 2.22-1.466.933-2.625 2.339-2.427 4.74.176 2.181 1.444 3.457 3.028 4.209z" data-original="#000000"></path>
+                  </svg>
+  
+  
+                                  </div>
+                        </div>
+  
+  
+                       
+                        
+                  </div>
+  
             </div>
-          </div>
 
-          <!-- Panier -->
-          <div class="relative group">
-            <router-link to="/cart">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                   stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 
-                         14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 
-                         2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 
-                         14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 
-                         1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-              </svg>
-            </router-link>
-            <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-max px-2 py-1 text-sm text-black h-20 bg-white rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
-              <div class="mt-10">
-                Votre panier est vide
-              </div>
-            </div>
-          </div>
 
-          <!-- Boutons Connexion et Inscription -->
-          <router-link
-            to="/dasboard"
-            class="bg-white border text-xs sm:text-sm border-purple-800 text-purple-900 px-2 sm:px-4 py-2 rounded hover:bg-gray-200 whitespace-nowrap"
-          >
-            Se connecter
-          </router-link>
-          <router-link
-            to="/Quiz"
-            class="bg-purple-500 text-white px-2 sm:px-4 py-2 rounded hover:bg-purple-600 text-xs sm:text-sm whitespace-nowrap"
-          >
-            S'inscrire
-          </router-link>
+               <div class="mt-5">
 
-          <!-- Globe icon -->
-          <div class="bg-gray-200 border text-sm border-purple-800 text-purple-900 px-2 sm:px-4 py-2 rounded hover:bg-gray-200">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 sm:w-6 sm:h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      <!-- Menu mobile -->
-      <div 
-        v-show="mobileMenuOpen"
-        class="absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-200 z-50 md:hidden"
-      >
-        <div class="px-4 py-2 space-y-3">
-          <!-- Barre de recherche mobile -->
-          <input
-            type="text"
-            placeholder="Que souhaitez-vous apprendre ?"
-            class="border rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-purple-500"
-          />
-          
-          <!-- Liens de navigation mobile -->
-          <div class="space-y-2">
-            <a href="#" class="block py-2 text-gray-700 hover:text-purple-600">Découvrir</a>
-            <a href="#" class="block py-2 text-gray-700 hover:text-purple-600">Udemy Business</a>
-            <a href="#" class="block py-2 text-gray-700 hover:text-purple-600">Enseigner</a>
-          </div>
-          
-          <!-- Boutons mobile -->
-          <div class="space-y-2 pt-2 border-t border-gray-200">
-            <router-link
-              to="/dasboard"
-              class="block w-full text-center bg-white border border-purple-800 text-purple-900 px-4 py-2 rounded hover:bg-gray-200"
-            >
-              Se connecter
-            </router-link>
-            <router-link
-              to="/Quiz"
-              class="block w-full text-center bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
-            >
-              S'inscrire
-            </router-link>
-          </div>
-        </div>
-      </div>
-    </nav>
+                   <div class="text-sm">
+                    En vous inscrivant, vous acceptez <a href="" class="text-blue-600 underline font-semibold hover:text-blue-800">nos Conditions d'utilisation</a> et <br>
+                    notre  <a href="" class="text-blue-600 underline font-semibold hover:text-blue-800">Politique de confidentialité.</a>
+                   </div>
+               </div>
+                                        
+  
+            <div class="py-10 mt-10 px-10 bg-gray-300 w-96 h-20 text-center">
+    
+    <p class="text-sm text-center justify-center -mt-3">
+      Vous n'avez pas de compte? 
+      <a href="/register" class="text-blue-600 underline font-semibold hover:text-blue-800">S'inscrire</a>
+    </p>
+  
   </div>
-</template>
+     
+
+
+
+
+  
+    
+    
+     
+          </div>   
+        </div>
+      </div>
+    </div>
+  </template>
+  
 <script>
 import axios from 'axios';
 
 export default {
+  name: 'LoginPage',
+
   data() {
     return {
       email: '',
-      error: ''
     };
   },
+
   methods: {
-    async loginWithEmail() {
-      this.error = '';
-      if (!this.email) {
-        this.error = "Veuillez entrer une adresse e-mail.";
+    async handleSubmit() {
+      if (!this.email || !this.email.includes('@') || !this.email.includes('.')) {
+        alert('Veuillez entrer une adresse email valide');
         return;
       }
 
       try {
         const response = await axios.post('http://localhost:5000/api/auth/login', {
-          email: this.email
+          email: this.email,
         });
 
-        if (response.data && response.data.token) {
-          console.log('Connexion réussie:', response.data);
-          
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('userRole', response.data.user.role);
+        const { token, user, message } = response.data;
+        const role = user?.role;
 
-          // Assure-toi que redirectUrl est défini
-          if (response.data.redirectUrl) {
-            this.$router.push(response.data.redirectUrl);
+        console.log('Rôle reçu:', role); // Pour débogage
+
+        if (token) {
+          localStorage.setItem('authToken', token);
+          localStorage.setItem('userRole', role); // Enregistre le rôle
+
+          // Redirection basée sur le rôle
+          if (role === 'admin') {
+            this.$router.push('/dasboard');
+          } else if (role === 'student') {
+            this.$router.push('/flutter');
+          } else if (role === 'instructor') {
+            this.$router.push('/instructor/panel');
           } else {
-            this.error = "Aucune redirection définie pour votre rôle.";
+            this.$router.push('/');
           }
         } else {
-          this.error = "Identifiants invalides.";
+          alert(message || 'Connexion réussie mais aucun token reçu');
         }
-      } catch (err) {
-        console.error(err);
-        this.error = "Erreur lors de la connexion.";
+
+      } catch (error) {
+        console.error('Erreur détaillée:', error);
+        if (error.response?.data?.message) {
+          alert(error.response.data.message);
+        } else {
+          alert('Erreur de connexion au serveur. Veuillez réessayer plus tard.');
+        }
       }
-    }
-  }
+    },
+  },
 };
 </script>
-
-
-<style scoped>
-.h-200 {
-  min-height: 100vh;
-}
-.w-100 {
-  width: 100%;
-}
-.w-105 {
-  width: 420px;
-}
-.h-15 {
-  height: 45px;
-}
-</style>

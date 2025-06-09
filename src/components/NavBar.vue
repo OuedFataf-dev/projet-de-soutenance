@@ -238,13 +238,13 @@
 
         <!-- Boutons Connexion et Inscription -->
         <router-link
-          to="/dasboard"
+          to="/login"
           class="bg-white border text-sm border-purple-800 text-purple-900 px-4 py-2 rounded hover:bg-gray-200"
         >
           Se connecter
         </router-link>
         <router-link
-           to="/Quiz"
+           to="/register"
           class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600"
         >
           S'inscrire
