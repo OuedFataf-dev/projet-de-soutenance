@@ -5,39 +5,36 @@
 <div class=" px-10 h-130 p-12 bg-cover bg-center" 
      style="background-image: url('https://img-c.udemycdn.com/notices/web_carousel_slide/image/27f2b7f6-f346-4d3e-927f-c722ad532660.png');"> 
 
-
-        
-<div class="card w-110 h-60  bg-white card-xl shadow-xl">
-  <div class="card-body">
-    <h2 class="card-title text-2xl font-bold mt-3 px-5">Il y a toujours quelque  <br> chose de nouveau à  <br> apprendre</h2>
-    <p class="text-sm  px-2">Avec des cours ajoutés régulièrement à notre  <br> catalogue, vous pouvez accéder aux compétences en  <br> vogue. La promotion à partir de 9,99 $US se termine <br> aujourd'hui.</p>
+<div class="card w-full   md:w-[600px] lg:w-[700px h-auto md:h-60 bg-white shadow-xl">
+  <div class="card-body p-4 md:p-6">
+    <h2 class="card-title text-xl md:text-2xl font-bold mt-1 md:mt-3 px-2 md:px-5">
+      Il y a toujours quelque chose de nouveau à apprendre
+    </h2>
+    <p class="text-xs md:text-sm px-2 md:px-2">
+      Avec des cours ajoutés régulièrement à notre catalogue, vous pouvez accéder aux compétences en vogue. La promotion à partir de 9,99 $US se termine aujourd'hui.
+    </p>
     <div class="justify-end card-actions">
-   
+      <!-- Vos boutons/actions ici -->
     </div>
   </div>
 </div>
+
       </div>
 
       <div class="-mt-45">
         <div class="card card-border bg-white  w-full  h-70 shadow-xl">
  
 
-
- <div class="card-body">
-    <h2 class="card-title text-2xl font-bold px-10  mt-">
-           <div class="py-8">
-            Toutes les compétences dont vous avez besoin au même endroit
-            <p class="px-4  mt-8  text-xl text-base sm:text-xl whitespace-normal sm:whitespace-nowrap">Des compétences essentielles aux sujets techniques, Udemy contribue à votre développement professionnel.
-
-
-</p>
-           </div>
-
-           
-       </h2>
-    
-
-  </div>
+<div class="card-body p-4 md:p-6">
+  <h2 class="card-title text-xl md:text-2xl font-bold px-4 md:px-10 mt-2 md:mt-4">
+    <div class="py-4 md:py-8">
+      Toutes les compétences dont vous avez besoin au même endroit
+      <p class="px-0 md:px-4 mt-4 md:mt-8 text-base md:text-lg whitespace-normal">
+        Des compétences essentielles aux sujets techniques, Udemy contribue à votre développement professionnel.
+      </p>
+    </div>
+  </h2>
+</div>
 
 
 
@@ -49,150 +46,142 @@
 
 
    </div>
-    <div class=" flex  gap-x-2 mt-4 card-actions px-10">
-      <button
-        v-for="tab in tabs"
-        :key="tab.id"
-        @click="activeTab = tab.id"
-        class="text-lg font-semibold pb-2 border-b-4 transition-all"
-        :class="{
-          'border-black text-black': activeTab === tab.id,
-          'border-transparent text-gray-500': activeTab !== tab.id
-        }"
-      >
-        {{ tab.label }}
-      </button>
-      
+<div class="flex flex-wrap gap-2 md:gap-x-4 mt-4 card-actions px-4 md:px-10 overflow-x-auto pb-2">
+  <button
+    v-for="tab in tabs"
+    :key="tab.id"
+    @click="activeTab = tab.id"
+    class="text-sm md:text-lg font-semibold pb-2 px-2 md:px-0 border-b-4 whitespace-nowrap transition-all"
+    :class="{
+      'border-black text-black': activeTab === tab.id,
+      'border-transparent text-gray-500': activeTab !== tab.id
+    }"
+  >
+    {{ tab.label }}
+  </button>
+</div>
 
-    </div>
-    
   </div>
-        <div class="bg-gray-100 w-full h-170">   
-          <div class="flex gap-x-2 px-10 bg-gray-100 h-100 w-full">
+
+  
+        <div class="bg-gray-100 w-full h-180">   
+          <div class="flex gap-2 px-4 py-4 bg-gray-100 w-full h-100 overflow-x-auto scrollbar-hide">
   <div
     v-for="card in filteredCards"
     :key="card.id"
-    class="card h-20 mt-5 rounded-4xl flex items-center justify-center cursor-pointer transition-colors duration-200"
-    :style="{ width: card.width }"
+    class="min-w-[160px] h-20 rounded-4xl flex-shrink-0 flex items-center justify-center cursor-pointer transition-colors duration-200 p-2"
     :class="{
       'bg-black text-white': selectedDomaine === card.domains,
       'bg-gray-200 text-black': selectedDomaine !== card.domains
     }"
     @click="selectDomaine(card.domains)"
   >
-    <div class="card-title text-center">
-      <div class="text-lg font-semibold">{{ card.domains }}</div>
-      <div class="text-xs">+ {{ card.participants }} de participants</div>
+    <div class="text-center">
+      <div class="text-sm font-semibold truncate">{{ card.domains }}</div>
+      <div class="text-[11px]">+ {{ card.participants }} participants</div>
     </div>
   </div>
 </div>
+
 
     
       <div class="px-2 -mt-60 ">
 
       
         <div class="relative w-full overflow-hidden">
-          
     <div 
       class="flex transition-transform duration-300 ease-in-out"
-      :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
+      :style="isMobile ? {} : { transform: `translateX(-${currentIndex * 100}%)` }"
     >
       <div
         v-for="(group, index) in groupedCourses"
         :key="index"
-        class="flex flex-nowrap gap-4 p-4 w-full flex-shrink-0"
-        
+        class="flex md:flex-row flex-col gap-4 p-4 w-full flex-shrink-0"
       >
         <div 
           v-for="course in group"
           :key="course.id"
-           @mouseenter="showTooltip(course.id)"
+          @mouseenter="showTooltip(course.id)"
           @mouseleave="hideTooltip"
-          class="bg-gray-200 shadow-sm border rounded-xl gap-6  overflow-hidden w-120 h-120 "
+          class="bg-gray-200 shadow-sm border rounded-xl gap-6 overflow-hidden md:w-1/3 w-full h-auto relative"
         >
-          <img :src="course.image" alt="course image" class="w-full h-40 object-cover">
-          <div class="p-4 px-12 mt-30 bg-white h-50">
+          <video
+            :src="`http://localhost:5000/${course.video}`"
+            controls 
+            autoplay 
+            muted 
+            playsinline
+            class="w-full h-64 md:h-72 object-cover"
+          ></video>
+
+          <div class="p-4 px-6 bg-white mt-2">
             <h2 class="text-lg font-bold">{{ course.title }}</h2>
             <p class="text-gray-600 text-sm mt-1">{{ course.author }}</p>
 
             <div class="flex items-center mt-2">
-              <span class="text-yellow-500 text-lg">{{ course.rating }} </span>
+              <span class="text-yellow-500 text-lg">{{ course.rating }}</span>
               <span class="text-yellow-500 text-lg">⭐</span>
               <span class="text-yellow-500 text-lg">⭐</span>
               <span class="text-yellow-500 text-lg">⭐</span>
               <span class="text-yellow-500 text-lg">⭐</span>
               <span class="text-yellow-500 text-lg">⭐</span>
-              <span class="ml-1 text-gray-700"> ({{ course.reviews }} avis)</span>
+              <span class="ml-1 text-gray-700">({{ course.reviews }} avis)</span>
             </div>
-
-
           </div>
 
-
-
+          <!-- Tooltip -->
           <div
-    v-show="hoveredIndex === course.id"
-    class="absolute z-10  -top-4  mt-2  w-[400px] px-6 py-4 text-sm font-medium bg-white rounded-lg shadow-lg"
-  >
-    <div class="text-xl font-bold">{{ course.title }}</div>
-    <div class="text-xs text-green-400">Mise à jour janvier 2025</div>
-    <div class="text-sm text-gray-500">76,5 heures au total · Tous les niveaux · Sous-titres</div>
+            v-show="hoveredIndex === course.id"
+            class="absolute z-10 top-0 mt-2 w-[95%] md:w-[400px] px-6 py-4 text-sm font-medium bg-white rounded-lg shadow-lg"
+          >
+            <div class="text-xl font-bold">{{ course.title }}</div>
+            <div class="text-xs text-green-400">Mise à jour janvier 2025</div>
+            <div class="text-sm text-gray-500">76,5 heures au total · Tous les niveaux · Sous-titres</div>
 
-    <div class="text-sm mt-2">
-         {{ course.title }}
-    </div>
+            <div class="text-sm mt-2">{{ course.title }}</div>
 
-    <div class="mt-4 space-y-3">
-      <div class="flex items-start gap-2">
-        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"/>
-        </svg>
-        <span class="xs"   >{{ course.list1 }}</span>
-      </div>
+            <div class="mt-4 space-y-3">
+              <div class="flex items-start gap-2" v-if="course.list1">
+                <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                </svg>
+                <span class="xs">{{ course.list1 }}</span>
+              </div>
 
-      <div class="flex items-start gap-2">
-        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"/>
-        </svg>
-        <span class="xs">Apprendre à réaliser des sites web et des projets complets de A à Z.</span>
-      </div>
+              <div class="flex items-start gap-2">
+                <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                </svg>
+                <span class="xs">Apprendre à réaliser des sites web et des projets complets de A à Z.</span>
+              </div>
 
-      <div class="flex items-start gap-2">
-        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"/>
-        </svg>
-        <span class="xs">{{ course.list3 }}.</span>
-      </div>
-    </div>
+              <div class="flex items-start gap-2" v-if="course.list3">
+                <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                     stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>
+                </svg>
+                <span class="xs">{{ course.list3 }}</span>
+              </div>
+            </div>
 
-    <div class="mt-6">
-      <button
-           @click="ajouterAuPanier(course)"
-        class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700"
-      >
-        Ajouter au panier
-      </button>
-    </div>
-    
-  </div>
-
-
-
+            <div class="mt-6">
+              <button
+                @click="ajouterAuPanier(course)"
+                class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700"
+              >
+                Ajouter au panier
+              </button>
+            </div>
+          </div>
         </div>
-        
       </div>
-      
     </div>
 
-    <!-- Bouton gauche (masqué au début, s'affiche après le premier clic) -->
+    <!-- Navigation boutons -->
     <button
-      v-if="currentIndex > 0"
+      v-if="!isMobile && currentIndex > 0"
       @click="prevGroup"
       class="absolute top-1/2 left-0 transform -translate-y-1/2 w-12 h-12 rounded-full shadow-lg bg-white flex items-center justify-center hover:bg-gray-200"
     > 
@@ -201,8 +190,8 @@
       </svg>
     </button>
 
-    <!-- Bouton droite (toujours visible) -->
     <button
+      v-if="!isMobile"
       @click="nextGroup"
       class="absolute top-1/2 right-0 transform -translate-y-1/2 w-12 h-12 rounded-full shadow-lg bg-white flex items-center justify-center hover:bg-gray-200"
     >  
@@ -211,19 +200,26 @@
       </svg>
     </button>
   </div>
-      <div class="px-10 mt-10">
-              <button class="bg-white dark:text-sky-400 border border-gray-500 text-purple-600 px-4 py-2 rounded-sm"> Afficher tous les cours de la categories science des donnéés </button>
-        </div>
 
-      
-
-
+  <!-- Bouton Afficher tous -->
+  <div class="px-4 mt-4">
+    <button class="bg-white dark:text-sky-400 border border-gray-500 text-purple-600 px-4 py-2 rounded-sm w-full md:w-auto">
+      Afficher tous les cours de la catégorie science des données
+    </button>
+  </div>
 
 
       </div>
+
+      
       
     </div>
-           <div class=" bg-white text-center px mt-10">Plus de 16 000 entreprises et des millions de participants nous font confiance dans le monde entier</div>
+
+
+<div class="bg-white text-center px mt-200 md:mt-4">
+  Plus de 16 000 entreprises et des millions de participants nous font confiance dans le monde entier
+</div>
+
    
         
             <div class="flex  bg-white mt-0">
@@ -369,89 +365,75 @@
 
      
      
-<div class="bg-gray-100 mt- h-250 w-full">
-        <h2 id="values-props-and-features-title" class=" text-3xl  px-5 py-10 font-bold ud-heading-serif-xxl">Un apprentissage axé sur vos objectifs</h2>
-     
-       <div class="flex gap-x-5 px-10">
+<div class="bg-gray-200 mt- h-280 w-full">
+        
+<h2 class="text-3xl px-5 py-10 font-bold">Un apprentissage axé sur vos objectifs</h2>
 
-           <div class="flex-col gap-y-4">
-
-            <div class="border border-gray-500  mt-5  border-gray-500 rounded-lg p-5 w-130 h-45 shadow-sm bg-white flex items-center space-x-4">
-    <!-- Icône -->
-    <div>
-        <img src="https://cms-images.udemycdn.com/96883mtakkm8/7kN9RBFSMFNHzsGWsElMPi/dde73f8d1c47e046f035274e78410590/hands-on-practice.png" alt="Icône" class="w-30 h-20">
-    </div>
-
-    <!-- Contenu texte -->
-    <div>
+<div class="flex flex-col lg:flex-row gap-x-5 px-5">
+  <!-- Cartes -->
+  <div class="flex flex-col gap-y-5 flex-1">
+    <!-- Carte 1 -->
+    <div class="border border-gray-500 rounded-lg p-5 shadow-sm bg-white flex flex-col md:flex-row items-center gap-4">
+      <img src="https://cms-images.udemycdn.com/96883mtakkm8/7kN9RBFSMFNHzsGWsElMPi/dde73f8d1c47e046f035274e78410590/hands-on-practice.png" alt="Icône" class="w-24 h-20">
+      <div>
         <h2 class="font-bold text-lg">Formation pratique</h2>
         <p class="text-gray-600 text-sm">
-            Perfectionnez vos compétences de manière efficace grâce à des exercices de codage, des exercices pratiques, 
-            des quiz et des espaces de travail alimentés par l'IA.
+          Perfectionnez vos compétences grâce à des exercices de codage, quiz et des espaces de travail alimentés par l'IA.
         </p>
-    </div>
-</div>
-            <div class="border border-purple-500 border-l-7  mt-5  border-purple-500 rounded-lg p-5 w-130 h-45 shadow-sm bg-white flex items-center space-x-4">
-    <!-- Icône -->
-    <div>
-        <img src="https://cms-images.udemycdn.com/96883mtakkm8/7kN9RBFSMFNHzsGWsElMPi/dde73f8d1c47e046f035274e78410590/hands-on-practice.png" alt="Icône" class="w-30 h-20">
+      </div>
     </div>
 
-    <!-- Contenu texte -->
-    <div class="flex-col ">
+    <!-- Carte 2 -->
+    <div class="border-l-4 border-purple-500 rounded-lg p-5 shadow-sm bg-white flex flex-col md:flex-row items-center gap-4">
+      <img src="https://cms-images.udemycdn.com/96883mtakkm8/7kN9RBFSMFNHzsGWsElMPi/dde73f8d1c47e046f035274e78410590/hands-on-practice.png" alt="Icône" class="w-24 h-20">
+      <div>
         <h2 class="font-bold text-lg">Préparation aux certifications</h2>
         <p class="text-gray-600 text-sm">
-          Préparez-vous à obtenir des certifications reconnues par <br> le secteur en relevant des défis concrets et décrochez <br> des badges au passage.
+          Préparez-vous à obtenir des certifications reconnues grâce à des défis concrets.
         </p>
-          <div class="mt-5">
-              <a class="text-purple-600"  href=""> Explore course</a>
-          </div>
-    </div>
-          
-</div>
-             
-            <div class="border border-gray-500  mt-5  border-gray-500 rounded-lg p-5 w-130 h-45 shadow-sm bg-white flex items-center space-x-4">
-    <!-- Icône -->
-    <div>
-        <img src="https://cms-images.udemycdn.com/96883mtakkm8/6w8plrr7vY9rIY46UuX0q5/2f0a3f0c22e99bd2d430b998c81321f2/empty-state-1.png" alt="Icône" class="w-30 h-20">
+        <div class="mt-2">
+          <a class="text-purple-600" href="">Explore course</a>
+        </div>
+      </div>
     </div>
 
-    <!-- Contenu texte -->
-    <div>
-        <h2 class=" font-bold text-lg">Formation pratique</h2>
+    <!-- Carte 3 -->
+    <div class="border border-gray-500 rounded-lg p-5 shadow-sm bg-white flex flex-col md:flex-row items-center gap-4">
+      <img src="https://cms-images.udemycdn.com/96883mtakkm8/6w8plrr7vY9rIY46UuX0q5/2f0a3f0c22e99bd2d430b998c81321f2/empty-state-1.png" alt="Icône" class="w-24 h-20">
+      <div>
+        <h2 class="font-bold text-lg">Formation accompagnée</h2>
         <p class="text-gray-600 text-sm">
-          Atteignez rapidement vos objectifs grâce à des <br> informations avancées et à une équipe dédiée à la <br> réussite des clients qui vous aidera à mettre en place un <br> apprentissage efficace.
+          Atteignez vos objectifs grâce à une équipe dédiée et un accompagnement personnalisé.
         </p>
-    </div>
-</div>   
-
-<div class="border border-gray-500  mt-5  border-gray-500 rounded-lg p-5 w-130 h-45 shadow-sm bg-white flex items-center space-x-4">
-    <!-- Icône -->
-    <div>
-        <img src="https://cms-images.udemycdn.com/96883mtakkm8/2tKGBrb1N60wox2Lh8j3tz/7f1528c9f88ea47bd6ebb46f345902c3/organizations-2.png" alt="Icône" class="w-30 h-20">
+      </div>
     </div>
 
-    <!-- Contenu texte -->
-    <div>
+    <!-- Carte 4 -->
+    <div class="border border-gray-500 rounded-lg p-5 shadow-sm bg-white flex flex-col md:flex-row items-center gap-4">
+      <img src="https://cms-images.udemycdn.com/96883mtakkm8/2tKGBrb1N60wox2Lh8j3tz/7f1528c9f88ea47bd6ebb46f345902c3/organizations-2.png" alt="Icône" class="w-24 h-20">
+      <div>
         <h2 class="font-bold text-lg">Contenu personnalisable</h2>
         <p class="text-gray-600 text-sm">
-          Créez des parcours d'apprentissage personnalisés en <br> fonction des objectifs de l'équipe et de l'organisation, et <br> hébergez même votre propre contenu ainsi que vos <br> propres ressources.
+          Créez des parcours d'apprentissage adaptés à vos besoins, avec vos propres ressources.
         </p>
+      </div>
     </div>
-</div>   
+  </div>
 
-           </div>
-
-         <div class=" flex justify-end ml-20 -mt-10"> 
-                <img src="https://cms-images.udemycdn.com/96883mtakkm8/4kbyXne3Slx9Sfz4nTBqdf/dcee8645ac7a78bbebc8e2ef1d3993f2/French.png" height="50px"  width ="900px">
-         </div>
-
-
+  <!-- Image de droite -->
+  <div class="flex justify-center lg:justify-end mt-10 lg:mt-0 flex-1">
+    <img src="https://cms-images.udemycdn.com/96883mtakkm8/4kbyXne3Slx9Sfz4nTBqdf/dcee8645ac7a78bbebc8e2ef1d3993f2/French.png" class="w-full max-w-xl">
+  </div>
+</div>
+    
         
 
-       </div>
-           
-          <div class="  mt-15 bg-white w-full h-200 shadow-3xl">
+
+
+
+
+
+         <div class="  mt-15 bg-white w-full h-200 shadow-3xl">
                <div class="px-10 font-bold text-3xl py-10">
                 Accélérez votre évolution ou celle de votre entreprise
                </div>
@@ -460,79 +442,76 @@
                   Atteignez plus rapidement vos objectifs grâce à l'un de nos abonnements ou programmes. Essayez-en un gratuitement <br> aujourd'hui, ou contactez le service commercial pour en savoir plus.
                  </div>
 
-       <div class="flex px-10 py-10 gap-x-5 ">
-             
-        <a href="#" class="relative block max-w-sm w-120 h-130  rounded-lg  bg-white border border-t-7 border-gray-500 shadow-sm dark:bg-purple-600 dark:border-bg-purple-600 dark:hover:bg-purple-600">
-    <!-- En-tête avec bg-gray-100 couvrant toute la largeur -->
+
+                 
+<div class="flex flex-col md:flex-row px-4 md:px-10 py-10 gap-5 items-center md:items-stretch">
+  
+  <!-- Carte Abonnement Individuel -->
+  <a href="#" class="relative block w-full max-w-md rounded-lg bg-white border border-t-4 border-gray-500 shadow-sm dark:bg-purple-600 dark:border-purple-600 dark:hover:bg-purple-700">
     <div class="absolute top-0 left-0 w-full bg-gray-100 rounded-t-lg p-4">
-        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Abonnement individuel</h5>
-        <p class="text-gray-600 text-sm">Pour vous</p>
+      <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Abonnement individuel</h5>
+      <p class="text-gray-600 text-sm">Pour vous</p>
     </div>
+    <div class="pt-20 mt-5 p-6">
+      <p class="text-xl font-bold text-gray-900 dark:text-white">À partir de <span class="text-black">$10.00 US</span> par mois</p>
+      <p class="text-sm text-gray-600">Facturation mensuelle ou annuelle. Annulez à tout moment.</p>
+      <button class="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700">
+        Bénéficiez d'un essai gratuit →
+      </button>
+      <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
+        <li class="flex items-center"><span class="text-green-500">✔</span> Accès à plus de 12 000 cours parmi les meilleurs</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Préparation aux certifications</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Recommandations basées sur les objectifs</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Exercices de codage optimisés par l'IA</li>
+      </ul>
+    </div>
+  </a>
 
-    <div class="pt-20 mt-5  p-6"> <!-- Ajout de pt-20 pour laisser la place au header -->
-        <p class="text-xl font-bold text-gray-900 dark:text-white">À partir de <span class="text-black">$10.00 US</span> par mois</p>
-        <p class="text-sm text-gray-600">Facturation mensuelle ou annuelle. Annulez à tout moment.</p>
-        <button class="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700">
-            Bénéficiez d'un essai gratuit →
-        </button>
-        <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
-            <li class="flex items-center"><span class="text-green-500">✔</span> Accès à plus de 12 000 cours parmi les meilleurs</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Préparation aux certifications</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Recommandations basées sur les objectifs</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Exercices de codage optimisés par l'IA</li>
-        </ul>
-    </div>
-</a>
-<a href="#" class="relative block max-w-sm w-120 h-130  rounded-lg  bg-white border border-t-7 border-gray-500 shadow-sm dark:bg-purple-600 dark:border-bg-purple-600 dark:hover:bg-purple-600">
-    <!-- En-tête avec bg-gray-100 couvrant toute la largeur -->
+  <!-- Carte Abonnement Team -->
+  <a href="#" class="relative block w-full max-w-md rounded-lg bg-white border border-t-4 border-gray-500 shadow-sm dark:bg-purple-600 dark:border-purple-600 dark:hover:bg-purple-700">
     <div class="absolute top-0 left-0 w-full bg-gray-100 rounded-t-lg p-4">
-        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Abonnement Team</h5>
-        <p class="text-gray-600 text-sm">Pour votre equipe</p>
+      <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Abonnement Team</h5>
+      <p class="text-gray-600 text-sm">Pour votre équipe</p>
     </div>
-
-    <div class="pt-20 mt-5  p-6"> <!-- Ajout de pt-20 pour laisser la place au header -->
-        <p class="text-xl font-bold text-gray-900 dark:text-white"> <span class="text-black text-sm">30.00 $US par mois, par utilisateur</span></p>
-        <p class="text-sm text-gray-600">Facturation mensuelle ou annuelle. Annulez à tout moment.</p>
-        <button class="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700">
-            Bénéficiez d'un essai gratuit →
-        </button>
-        <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
-            <li class="flex items-center"><span class="text-green-500">✔</span> Accès à plus de 12 000 cours parmi les meilleurs</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Préparation aux certifications</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Recommandations basées sur les objectifs</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Exercices de codage optimisés par l'IA</li>
-        </ul>
+    <div class="pt-20 mt-5 p-6">
+      <p class="text-xl font-bold text-gray-900 dark:text-white"><span class="text-black text-sm">$30.00 US par mois, par utilisateur</span></p>
+      <p class="text-sm text-gray-600">Facturation mensuelle ou annuelle. Annulez à tout moment.</p>
+      <button class="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700">
+        Bénéficiez d'un essai gratuit →
+      </button>
+      <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
+        <li class="flex items-center"><span class="text-green-500">✔</span> Accès à plus de 12 000 cours parmi les meilleurs</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Préparation aux certifications</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Recommandations basées sur les objectifs</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Exercices de codage optimisés par l'IA</li>
+      </ul>
     </div>
-</a>
+  </a>
 
-<a href="#" class="relative block max-w-sm w-120 h-130  rounded-lg  bg-white border border-t-7 border-gray-500 shadow-sm dark:bg-purple-600 dark:border-bg-purple-600 dark:hover:bg-purple-600">
-    <!-- En-tête avec bg-gray-100 couvrant toute la largeur -->
+  <!-- Carte Abonnement Enterprise -->
+  <a href="#" class="relative block w-full max-w-md rounded-lg bg-white border border-t-4 border-gray-500 shadow-sm dark:bg-purple-600 dark:border-purple-600 dark:hover:bg-purple-700">
     <div class="absolute top-0 left-0 w-full bg-gray-100 rounded-t-lg p-4">
-        <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Abonnement Enterprise</h5>
-        <p class="text-gray-600 text-sm">Pour l'ensemble de votre entreprise</p>
+      <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900 dark:text-white">Abonnement Enterprise</h5>
+      <p class="text-gray-600 text-sm">Pour l'ensemble de votre entreprise</p>
     </div>
-
-    <div class="pt-20 mt-5  p-6"> <!-- Ajout de pt-20 pour laisser la place au header -->
-        <p class="text-sm font-bold text-gray-900 dark:text-white">Contacter le service commercial pour obtenir la <br> tarification
-
-<span class="text-black"></span> </p>
-        <p class="text-sm text-gray-600"></p>
-        <button class="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700">
-            Demander une démonstration →
-        </button>
-        <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
-            <li class="flex items-center"><span class="text-green-500">✔</span> Access to 27,000+ top courses</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Préparation aux certifications</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Recommandations basées sur les objectifs</li>
-            <li class="flex items-center"><span class="text-green-500">✔</span> Exercices de codage optimisés par l'IA</li>
-            
-        </ul>
-
+    <div class="pt-20 mt-5 p-6">
+      <p class="text-sm font-bold text-gray-900 dark:text-white">
+        Contacter le service commercial pour obtenir la <br> tarification
+      </p>
+      <button class="w-full mt-4 bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700">
+        Demander une démonstration →
+      </button>
+      <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
+        <li class="flex items-center"><span class="text-green-500">✔</span> Access to 27,000+ top courses</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Préparation aux certifications</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Recommandations basées sur les objectifs</li>
+        <li class="flex items-center"><span class="text-green-500">✔</span> Exercices de codage optimisés par l'IA</li>
+      </ul>
     </div>
-</a>
+  </a>
 
+</div>
 
-       </div>
       
   <div class= "bg-gray-100 px-1  w-full py-16">
     <div class="text-3xl font-bold px-10 mb-10 px-10">
@@ -617,12 +596,51 @@
 
  
 
-        <AppFooter/>
-
-
+       
+<AppFooter/>
           </div>
   
       </div>
+
+
+
+ 
+
+
+<div>
+
+  
+</div>
+
+
+
+  <div class="fixed bottom-6 right-6 z-50">
+    <button
+      class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-4 shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 rotate-animation"
+      @click="openChat"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4-.84l-4 1 1.1-3.3A7.993 7.993 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    </button>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     
@@ -877,8 +895,22 @@ const nextGroup1 = () => {
     
 </script>
 
-<style scoped>
 
+
+
+<style scoped>
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-animation {
+  animation: rotation 2s linear infinite;
+}
 
 /* Masquer la barre de défilement si nécessaire */
 .scrollbar-hide::-webkit-scrollbar {

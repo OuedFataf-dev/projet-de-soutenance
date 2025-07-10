@@ -1,5 +1,5 @@
 <template>
-    <div class="h-200 w-full bg-white">
+    <div class="h-200 bg-white">
       <div class="flex gap-x-20 justify-center items-center">
         <div>
           <img src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-2-x2.webp" width="500px" alt="">
@@ -17,27 +17,32 @@
                     Je souhaite recevoir des offres spéciales, des <br> recommandations personnalisées et des conseils <br> d'apprentissage.
                 </div>
             </div>
-            <div class="mt-5">
-              <input 
-                v-model="name"
-                type="text" 
-                placeholder="Nom complet"
-                class="border text-xl font-bold h-15 px-4 py-2 w-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              /> 
-              <input 
-                v-model="email"
-                type="text" 
-                placeholder="E-mail"
-                class="border text-xl font-bold h-15  mt-5 px-4 py-2 w-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              /> 
-  
-              <div class="mt-5">
-                <button
-                 @click="handleSubmit"
-                 class="w-105 h-15 mt-4 bg-purple-600 text-white py-2 text-sm px-4 rounded-lg font-semibold hover:bg-purple-700">
-                  Continuer avec une adresse email
-                </button>
-              </div>
+            <div class="mt-2">
+              <div class="w-full max-w-md mx-auto px-0">
+  <input 
+    v-model="name"
+    type="text" 
+    placeholder="Nom complet"
+    class="w-full border text-base md:text-lg font-bold h-12 md:h-14 px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
+  /> 
+
+  <input 
+    v-model="email"
+    type="email" 
+    placeholder="E-mail"
+    class="w-full border text-base md:text-lg font-bold h-12 md:h-14 px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
+  /> 
+
+  <div class="mt-4">
+    <button
+      @click="handleSubmit"
+      class="w-full h-12 md:h-14 bg-purple-600 text-white text-sm md:text-base px-4 rounded-lg font-semibold hover:bg-purple-700 transition"
+    >
+      Continuer avec une adresse email
+    </button>
+  </div>
+</div>
+
   
               <!-- Ligne horizontale avec le texte centré -->
               <div class="relative flex items-center justify-center -ml-25 w-full my-8">
@@ -53,7 +58,9 @@
   
                     <div class="card border  rounded-lg border-purple-500 h-15 w-15 bg-blue">
                                   <div class="text-center mt-2 px-3 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 512 512">
+                                    <svg 
+                                    @click="handleGoogleLogin"
+                                    xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 512 512">
                     <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" data-original="#fbbd00" />
                     <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" data-original="#0f9d58" />
                     <path fill="#31aa52" d="m139.131 325.477-86.308 86.308a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z" data-original="#31aa52" />
@@ -98,10 +105,14 @@
 
                <div class="mt-5">
 
-                   <div class="text-sm">
-                    En vous inscrivant, vous acceptez <a href="" class="text-blue-600 underline font-semibold hover:text-blue-800">nos Conditions d'utilisation</a> et <br>
-                    notre  <a href="" class="text-blue-600 underline font-semibold hover:text-blue-800">Politique de confidentialité.</a>
-                   </div>
+                  <div class="text-sm leading-relaxed">
+  En vous inscrivant, vous acceptez 
+  <a href="#" class="text-blue-600 underline font-semibold hover:text-blue-800">nos Conditions d'utilisation</a>
+  <span class="block sm:inline">et notre  
+    <a href="#" class="text-blue-600 underline font-semibold hover:text-blue-800">Politique de confidentialité.</a>
+  </span>
+</div>
+
                </div>
                                         
   
@@ -130,60 +141,95 @@
   
 
 
-
 <script>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 export default {
+  name: 'RegisterOrLoginComponent',
+
   data() {
     return {
       name: '',
       email: '',
     };
   },
-  
+
   methods: {
-  async handleSubmit() {
-    // Validation simple côté client
-    if (!this.name || !this.email) {
-      alert('Veuillez remplir tous les champs');
-      return;
-    }
-
-    if (!this.email.includes('@') || !this.email.includes('.')) {
-      alert('Veuillez entrer une adresse email valide');
-      return;
-    }
-
-    try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
-        name: this.name,
-        email: this.email,
-      });
-
-      const { token, message } = response.data;
-      
-      if (token) {
-        localStorage.setItem('authToken', token);
-        this.$router.push('/login');
-      } else {
-        alert(message || 'Inscription réussie mais aucun token reçu');
+    async handleSubmit() {
+      // 🔍 Validation simple côté client
+      if (!this.name || !this.email) {
+        alert('Veuillez remplir tous les champs');
+        return;
       }
 
-    } catch (error) {
-      console.error('Erreur détaillée:', error);
-      
-      // Afficher le message d'erreur spécifique du serveur si disponible
-      if (error.response && error.response.data && error.response.data.message) {
-        alert(error.response.data.message);
-      } else {
-        alert('Erreur de connexion au serveur. Veuillez réessayer plus tard.');
+      if (!this.email.includes('@') || !this.email.includes('.')) {
+        alert('Veuillez entrer une adresse email valide');
+        return;
       }
+
+      try {
+        const response = await axios.post('http://localhost:5000/api/auth/register', {
+          name: this.name,
+          email: this.email,
+        });
+
+        const { token, message } = response.data;
+
+        if (token) {
+          localStorage.setItem('authToken', token);
+          this.$router.push('/login');
+        } else {
+          alert(message || 'Inscription réussie mais aucun token reçu');
+        }
+
+      } catch (error) {
+        console.error('Erreur détaillée:', error);
+
+        // Affiche un message d’erreur clair
+        if (error.response?.data?.message) {
+          alert(error.response.data.message);
+        } else {
+          alert('Erreur de connexion au serveur. Veuillez réessayer plus tard.');
+        }
+      }
+    },
+
+    handleGoogleLogin() {
+      const width = 500;
+      const height = 600;
+      const left = (window.innerWidth / 2) - (width / 2);
+      const top = (window.innerHeight / 2) - (height / 2);
+
+      const googleLoginWindow = window.open(
+        'http://localhost:5000/auth/google',
+        'Connexion Google',
+        `width=${width},height=${height},top=${top},left=${left}`
+      );
+
+      const messageListener = (event) => {
+        // ✅ Sécurité : vérifier l’origine
+        if (event.origin !== 'http://localhost:3000') {
+          console.warn('Origine invalide:', event.origin);
+          return;
+        }
+
+        const { token } = event.data || {};
+
+        if (token && typeof token === 'string') {
+          localStorage.setItem('authToken', token);
+          this.$router.push('/'); // Redirection vers la page d'accueil
+        } else {
+          alert('Erreur : Aucun token reçu depuis la popup Google');
+          console.error('Données reçues:', event.data);
+        }
+
+        googleLoginWindow.close();
+        window.removeEventListener('message', messageListener);
+      };
+
+      window.addEventListener('message', messageListener, { once: true });
     }
   }
-}
-}
-
-
+};
 </script>

@@ -35,12 +35,20 @@ import FinanceComptabilité from '../components/componentAuther/FinanceComptabil
 
 import QuizComponent from '../views/widgets/QuizComponent.vue';
 import StatsComponent from '../views/widgets/statsComponent.vue';
+import Principale from '../views/widgets/Principale.vue';
 
+import Ajout_DeQuiz from '../Ajout_DeQuiz.vue';
+
+import Rapport from '../components/Rapport.vue';
+import QuizFlutter from '../views/widgets/QuizFlutter.vue';
+import OranageMoney from '../components/componentAuther/OranageMoney.vue';
+import VuejsQuiz from '../views/widgets/VuejsQuiz.vue';
+import PythonQuiz from '../views/widgets/PythonQuiz.vue';
 const routes = [
   { path: '/login',           name: 'login',           component: LoginComponent },
-  { path: '/stats',           name: 'stats',           component: StatsComponent },
+
   { path: '/seo',             name: 'seo',             component: SEO },
-  { path: '/update/:id',             name: 'update',             component: UpdatePage },
+  { path: '/update/:id',             name: 'update',             component: UpdatePage,meta: { requiresAdmin: true } },
   { path: '/business',        name: 'business',        component: Business },
   { path: '/payement',        name: 'payement',        component: checkoutPage },
   { path: '/informatique',    name: 'informatique',    component: InfoLogicielComponent },
@@ -55,27 +63,62 @@ const routes = [
   { path: '/app',             name: 'app',             component: AppComponent },
   { path: '/flutter',         name: 'flutter',         component: AppSecondePage },
   { path: '/webflutter',      name: 'webflutter',      component: FlutterPage },
-  { path: '/add',         name: 'add',         component: AJouter_Component },
+  { path: '/add',         name: 'add',         component: AJouter_Component ,meta: { requiresAdmin: true }},
   { path: '/html',            name: 'html',            component: pageHtml },
   { path: '/css',             name: 'css',             component: css },
   { path: '/cart',            name: 'cart',            component: Panier },
   { path: '/mobile',          name: 'mobile',          component: DeveloppementWeb },
   { path: '/web1',            name: 'web1',            component: developpment },
   { path: '/visuel',          name: 'visuel',          component: PagePaiement },
-  { path: '/dasboard', name: 'dasboard', component: Dashboard },
+  { path: '/Ajout', name: 'Ajout', component: Ajout_DeQuiz,meta: { requiresAdmin: true } },
+ { path: '/stats',  name: 'quiz', component: StatsComponent},
+{ path: '/dashboard', name: 'dashboard', component: Dashboard ,meta: { requiresAdmin: true }},
 
-  { path: '/web',          name: 'web',          component: web },
+
+  { path: '/rapport', name: 'rapport', component: Rapport, meta: { requiresAdmin: true } },
   { path: '/Quiz',          name: 'Quiz',          component: QuizComponent },
+  { path: '/principle',          name: 'principle',          component: Principale },
 
 
   { path: '/marketing',          name: 'marketing',          component: Marketing },
   { path: '/finance',          name: 'finance',          component: FinanceComptabilité},
   
+  { path: '/quizFlutter',          name: 'quizFlutter',          component: QuizFlutter},
+   {path: '/orangeMoney',          name:'orangeMoney',             component:OranageMoney},
+
+    { path: '/vue_js',          name: 'vue js',          component: VuejsQuiz},
+    { path: '/python',          name: 'python',          component: PythonQuiz},
 ];
+
+
+
+
+
+//()
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = localStorage.getItem('authToken');
+
+  // ✅ Rediriger si la route nécessite une authentification
+  if (to.meta.requiresAuth && (!user || !token)) {
+    return next({ name: 'login' });
+  }
+
+  // ✅ Rediriger si la route nécessite un rôle admin
+  if (to.meta.requiresAdmin && user?.role !== 'admin') {
+    return next({ name: 'login' });
+  }
+
+  next(); // ✅ sinon, continuer normalement
+});
+ 
+
+
 
 export default router;

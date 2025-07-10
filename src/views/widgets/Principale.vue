@@ -4,30 +4,7 @@
 
     <!-- Menu catégories -->
 
-         <div>salu</div>
-
-    <div class="text-center shadow-6xl" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);"></div>
-  <div class="bg-white py-4 mt-5">
-    <div class="container mx-auto flex space-x-6 px-4">
-      <template v-for="(item, index) in formations.slice(0, 6)" :key="index">
-        <a 
-          v-if="item.isLink" 
-          :href="item.route" 
-          class="text-gray-700 hover:text-purple-600"
-        >
-          {{ item.label }}
-        </a>
-        <a 
-          v-else 
-          href="#" 
-          class="text-gray-700 hover:text-purple-600"
-        >
-          {{ item.label }}
-        </a>
-      </template>
-    </div>
-  </div>
-
+    
 
    
   </nav>
@@ -204,44 +181,42 @@
       </svg>
     </button>
   </div>
-    
-      <div class="bg-white w-full h-50 -mt-40">
-        <div class="flex justify-between items-center border-t border-b border-gray-200 p-6 bg-white ">
-    <div class="flex items-start space-x-3">
-      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
+    <div class="bg-white -mt-40 w-full">
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-t border-b border-gray-200 p-6 bg-white space-y-6 md:space-y-0">
+    <div class="flex items-start space-x-3 w-full md:w-auto">
+      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 flex-shrink-0">
         <span class="text-lg">▶️</span>
       </div>
       <div>
         <p class="font-bold text-gray-900">
-          Obtenez des compétences à la <br> demande grâce à plus de 250 000 <br> cours vidéo
+          Obtenez des compétences à la <br class="hidden sm:inline"> demande grâce à plus de 250 000 <br class="hidden sm:inline"> cours vidéo
         </p>
       </div>
     </div>
 
-    <div class="flex items-start space-x-3">
-      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
+    <div class="flex items-start space-x-3 w-full md:w-auto">
+      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 flex-shrink-0">
         <span class="text-lg">⭐</span>
       </div>
       <div>
         <p class="font-bold text-gray-900">
-          Choisissez des cours enseignés par  <br> des formateurs confirmés
+          Choisissez des cours enseignés par <br class="hidden sm:inline"> des formateurs confirmés
         </p>
       </div>
     </div>
 
-    <div class="flex items-start space-x-3">
-      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200">
+    <div class="flex items-start space-x-3 w-full md:w-auto">
+      <div class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 flex-shrink-0">
         <span class="text-lg">∞</span>
       </div>
       <div>
         <p class="font-bold text-gray-900">
-          Apprenez à votre rythme et  <br> bénéficiez d'un accès  illimité sur <br> mobile et ordinateur de bureau
+          Apprenez à votre rythme et <br class="hidden sm:inline"> bénéficiez d'un accès illimité sur <br class="hidden sm:inline"> mobile et ordinateur de bureau
         </p>
       </div>
     </div>
   </div>
-      </div>
-
+</div>
 
    
 
@@ -289,63 +264,103 @@
   Sujets populaires
 </div>
 
-<div class="relative overflow-hidden w-full"> 
-  <!-- Conteneur principal avec transition -->
-  <div 
-    class="flex transition-transform duration-500 ease-in-out"
-    :class="{ '-translate-x-full': showMore }"
-  >
+
+<div class="relative overflow-hidden w-full">
+  <!-- Version desktop avec transition -->
+  <div class="hidden md:flex transition-transform duration-500 ease-in-out" :class="{ '-translate-x-full': showMore }">
     <!-- Première série de boutons -->
-    <div class="grid grid-cols-4 gap-4 p-4  flex-shrink-0 w-full">
+    <div class="grid grid-cols-4 gap-4 p-4 flex-shrink-0 w-full">
       <template v-for="(item, index) in firstRow" :key="index">
         <router-link 
           v-if="item.isLink" 
           :to="item.route" 
-          class="border px-4 py-2 whitespace-nowrap"
+          class="border px-4 py-2 whitespace-nowrap text-center hover:bg-gray-50 transition-colors"
         >
           {{ item.label }}
         </router-link>
         <button 
           v-else 
-          class="border px-4 py-2 whitespace-nowrap"
+          class="border px-4 py-2 whitespace-nowrap text-center hover:bg-gray-50 transition-colors"
         >
           {{ item.label }}
         </button>
       </template>
     </div>
-    
+
     <!-- Deuxième série de boutons -->
-    <div class="grid grid-cols-4 gap-4 p-5 flex-shrink-0 w-full">
+    <div class="grid grid-cols-4 gap-4 p-4 flex-shrink-0 w-full">
       <template v-for="(item, index) in secondRow" :key="index">
         <router-link 
           v-if="item.isLink" 
           :to="item.route" 
-          class="border px-4 py-2 whitespace-nowrap"
+          class="border px-4 py-2 whitespace-nowrap text-center hover:bg-gray-50 transition-colors"
         >
           {{ item.label }}
         </router-link>
         <button 
           v-else 
-          class="border px-4 py-2 whitespace-nowrap"
+          class="border px-4 py-2 whitespace-nowrap text-center hover:bg-gray-50 transition-colors"
         >
           {{ item.label }}
         </button>
       </template>
     </div>
   </div>
-  
-  <!-- Bouton flottant pour faire défiler -->
+
+  <!-- Version mobile avec scroll horizontal et deux lignes -->
+  <div class="md:hidden space-y-4 py-4">
+    <!-- Première ligne avec scroll horizontal -->
+    <div class="overflow-x-auto whitespace-nowrap hide-scrollbar px-4">
+      <div class="inline-flex space-x-4">
+        <template v-for="(item, index) in firstRow" :key="index">
+          <router-link 
+            v-if="item.isLink" 
+            :to="item.route" 
+            class="border px-4 py-2 whitespace-nowrap inline-block hover:bg-gray-50 transition-colors"
+          >
+            {{ item.label }}
+          </router-link>
+          <button 
+            v-else 
+            class="border px-4 py-2 whitespace-nowrap inline-block hover:bg-gray-50 transition-colors"
+          >
+            {{ item.label }}
+          </button>
+        </template>
+      </div>
+    </div>
+    
+    <!-- Deuxième ligne avec scroll horizontal -->
+    <div class="overflow-x-auto whitespace-nowrap hide-scrollbar px-4">
+      <div class="inline-flex space-x-4">
+        <template v-for="(item, index) in secondRow" :key="index">
+          <router-link 
+            v-if="item.isLink" 
+            :to="item.route" 
+            class="border px-4 py-2 whitespace-nowrap inline-block hover:bg-gray-50 transition-colors"
+          >
+            {{ item.label }}
+          </router-link>
+          <button 
+            v-else 
+            class="border px-4 py-2 whitespace-nowrap inline-block hover:bg-gray-50 transition-colors"
+          >
+            {{ item.label }}
+          </button>
+        </template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton "Voir plus" desktop -->
   <button 
-    @click="toggleCards"
-    class="absolute top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full shadow-md bg-white flex items-center justify-center hover:bg-gray-200 z-10"
-    :class="showMore ? 'left-2' : 'right-2'"
+    @click="showMore = !showMore" 
+    class="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 bg-white border px-3 py-6 rounded-l-lg shadow-sm hover:bg-gray-50"
   >
-    <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" :d="showMore ? 'M15 19l-7-7 7-7' : 'M9 5l7 7-7 7'" />
-    </svg>
+    {{ showMore ? '←' : '→' }}
   </button>
-  
-</div><!-- Conteneur principal en relative -->
+</div>
+
 
 
 
@@ -412,37 +427,42 @@
 <div class="p-4 font-bold text-2xl">Tous les cours de la catégorie {{ categoryId }}</div>
     
     
-    
-    
-    <div class="flex items-center w-260 h-20 ml-10 p-4 px-20 border border-gray-300 rounded-xl bg-white">
-      <svg class="w-6 h-6 mr-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
-      </svg>
-      <span class="font-bold">Vous n'êtes pas sûr de vous ?</span>
-      <span class="ml-1 font-bold ">Tous nos cours s'accompagnent d'une garantie satisfait ou remboursé de <strong>30  jours</strong></span>
-    </div>
-    
-    
-    <div class="flex items-center mt-4 ml-10 gap-4">
-      <button class="border px-4 py-2 rounded">📂 Filtrer</button>
-               
-      <div class="h-22 p-6 bg-white shadow-lg rounded-lg border">
-      <h3 class="text-lg font-semibold mb-2"><Tarea:c>Trier </Tarea:c> par :</h3>
-      
-      <select class="-mt-6 ">
-        <option>Les mieux notés</option>
-        <option>Les plus récentes</option>
-        <option>Les plus populaires</option>
-      </select>
-    </div>
-    </div>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center w-full max-w-full sm:w-auto sm:ml-10 p-4 sm:px-6 border border-gray-300 rounded-xl bg-white text-sm sm:text-base">
+  <div class="flex items-center mb-2 sm:mb-0 sm:mr-4">
+    <svg class="w-6 h-6 mr-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+    </svg>
+    <span class="font-bold">Vous n'êtes pas sûr de vous ?</span>
+  </div>
+  <span class="font-bold leading-snug">
+    Tous nos cours s'accompagnent d'une garantie satisfait ou remboursé de 
+    <strong>30 jours</strong>
+  </span>
+</div>
+
+
+    <div class="flex flex-col sm:flex-row items-start sm:items-center mt-4 ml-4 sm:ml-10 gap-4">
+  <button class="border px-4 py-2 rounded w-full sm:w-auto">📂 Filtrer</button>
+
+  <div class="w-full sm:w-auto p-4 bg-white shadow-lg rounded-lg border">
+    <h3 class="text-lg font-semibold mb-2">Trier par :</h3>
+
+    <select class="w-full border rounded px-2 py-1">
+      <option>Les mieux notés</option>
+      <option>Les plus récentes</option>
+      <option>Les plus populaires</option>
+    </select>
+  </div>
+</div>
+
+
     
     <div class="flex flex-col md:flex-row mt-4 p-0 -ml-20 gap-6">
       <div class=" flex md:w-1/4  ">
           <h3 class=" ml-30 font-bold"></h3>
     
          
-          <div>
+          <div class="hidden md:block">
     
     <div>
       <h2 class="font-bold mt-4 flex items-center cursor-pointer" @click="toggle('Notes')">
@@ -685,40 +705,45 @@
       </div>
       
       <div class="md:w-3/4 p-4">
-          <p class="text-gray-600 justify-end  whitespace-nowrap  ml-210 ">10 000 résultats</p>
+          <p class="hidden md:block text-gray-600 whitespace-nowrap ml-210">10 000 résultats</p>
+
           
          <div
-  class="relative flex flex-col w-fit"
+  class="relative flex ml-10 flex-col w-fit"
   @mouseenter="hoveredIndex = index"
   @mouseleave="hoveredIndex = null"
   v-for="(item, index) in coursesData3"
   :key="index"
 >
   <!-- Carte -->
-  <router-link 
-     to="/visuel"
-  class="flex w-200 ml-20 p-4 mt-4 gap-4">
-    <iframe
-      class="w-80 h-40"
-      :src="item.image"
-      
-      frameborder="0"ssssssssssss
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
+  
 
-    <div>
-      <h3 class="font-bold">{{ item.title }}</h3>
-      <p>{{ item.description }}</p>
-      <p><strong>{{ item.author }}</strong></p>
-      <p>⭐ {{ item.rating }} ({{ item.reviews }})</p>
-      <p>{{ item.duration }} · {{ item.sessions }} sessions · {{ item.level }}</p>
-      <p class="text-red-600 font-bold">
-        {{ item.price }} $US
-        <span class="text-gray-500 line-through">{{ item.originalPrice }} $US</span>
-      </p>
-    </div>
-  </router-link>
+
+
+  <router-link 
+  to="/visuel"
+  class="flex flex-col sm:flex-row w-full sm:w-[800px] mx-auto p-4 pl-4 sm:pl-0 mt-4 gap-4"
+>
+  <iframe
+    class="w-full h-48 sm:w-80 sm:h-40"
+    :src="item.image"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen
+  ></iframe>
+
+  <div class="text-sm sm:text-base">
+    <h3 class="font-bold">{{ item.title }}</h3>
+    <p>{{ item.description }}</p>
+    <p><strong>{{ item.author }}</strong></p>
+    <p>⭐ {{ item.rating }} ({{ item.reviews }})</p>
+    <p>{{ item.duration }} · {{ item.sessions }} sessions · {{ item.level }}</p>
+    <p class="text-red-600 font-bold">
+      {{ item.price }} $US
+      <span class="text-gray-500 line-through">{{ item.originalPrice }} $US</span>
+    </p>
+  </div>
+</router-link>
 
   <!-- Tooltip -->
   <div
@@ -774,7 +799,7 @@
   
 </div>
                    
-      <div class=" border-t-2 border-gray-200 ml-50  mt-5 w-180  bg-gray-100"></div>
+      <div class=" hidden sm:block border-t-2 border-gray-200 ml-20  mt-5 w-180  bg-gray-100"></div>
     
              
             
@@ -784,43 +809,57 @@
       
     
     
-       <div class="px-50">
-                    
-    <div class="border rounded-lg p-6 max-w-4xl h-60 mt-5 w-190   mx-auto shadow-sm bg-white">
-      <!-- Titre -->
-      <h2 class="text-xl font-bold">Les meilleures entreprises font confiance à Udemy</h2>
-      <p class="text-gray-600 mt-1">
-        Offrez aux membres de votre équipe un accès à plus de 250 000 cours parmi les meilleurs d'Udemy
-      </p>
-    
-      <!-- Logos des entreprises -->
-      <div class="flex items-center space-x-6 mt-4">
-        <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg" alt="Nasdaq" class="h-8 grayscale">
-        <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg" alt="Volkswagen" class="h-8 grayscale">
-        <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg" alt="NetApp" class="h-8 grayscale">
-        <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg" alt="Eventbrite" class="h-8 grayscale">
+     <div class="px-10 sm:px-12 ml-4 sm:ml-0"> <!-- px-10 sur mobile, sm:px-12 sur desktop -->
+  <div class="border rounded-lg p-4 sm:p-6 max-w-4xl h-auto sm:h-60 mt-5 w-full mx-auto shadow-sm bg-white">
+    <!-- Titre -->
+    <h2 class="text-lg sm:text-xl font-bold">Les meilleures entreprises font confiance à Udemy</h2>
+    <p class="text-gray-600 mt-1 text-sm sm:text-base">
+      Offrez aux membres de votre équipe un accès à plus de 250 000 cours parmi les meilleurs d'Udemy
+    </p>
+
+    <!-- Logos des entreprises - Version mobile avec scroll horizontal -->
+    <div class="mt-4">
+      <div class="overflow-x-auto hide-scrollbar px-2 -mx-2"> <!-- Ajustement pour le scroll -->
+        <div class="flex space-x-6 w-max min-w-full pb-2 pl-2">
+          <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg" alt="Nasdaq" class="h-6 sm:h-8 grayscale min-w-max">
+          <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg" alt="Volkswagen" class="h-6 sm:h-8 grayscale min-w-max">
+          <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg" alt="NetApp" class="h-6 sm:h-8 grayscale min-w-max">
+          <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg" alt="Eventbrite" class="h-6 sm:h-8 grayscale min-w-max">
+        </div>
       </div>
-    
-      <!-- Bouton -->
-      <button class="mt-4 px-4 py-2 border border-purple-600 text-purple-600 font-semibold rounded-md hover:bg-purple-600 hover:text-white transition">
+    </div>
+
+    <!-- Bouton -->
+    <div class="mt-4 text-center sm:text-left">
+      <button class="px-4 py-2 border border-purple-600 text-purple-600 font-semibold rounded-md hover:bg-purple-600 hover:text-white transition text-sm sm:text-base w-full sm:w-auto">
         Essayer Udemy Business
       </button>
     </div>
-       </div>
-    
-    <div class="flex  w-200 ml-20 p-4 mt-4 gap-4">
-            <iframe class="w-80 h-40" src="https://www.youtube.com/embed/SXmWVboohsA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-              <div>
-                  <h3 class="font-bold">Flexbox CSS | Le programme Ultime par la pratique</h3>
-                  <p>Apprendre Flexbox CSS par la pratique</p>
-                  <p><strong>Mathias Grdl</strong></p>
-                  <p>⭐ 5,0 (5)</p>
-                  <p>2,5 heures au total · 32 sessions · Tous les niveaux</p>
-                  <p class="text-red-600 font-bold">9,99 $US <span class="text-gray-500 line-through">19,99 $US</span></p>
-              </div>
-                
-          </div>
-      
+  </div>
+</div>
+
+    <div class="flex flex-col sm:flex-row w-full sm:w-[500px] ml-0 sm:ml-20 p-2 sm:p-4 mt-4 gap-3 sm:gap-4">
+  <!-- Vidéo - taille réduite sur mobile -->
+  <iframe 
+    class="max-w-[300px] sm:max-w-none mx-auto sm:mx-0" 
+    src="https://www.youtube.com/embed/SXmWVboohsA" 
+    frameborder="0" 
+    allow="autoplay; encrypted-media" 
+    allowfullscreen>
+  </iframe>
+  
+  <!-- Contenu texte -->
+  <div class="px-2 sm:px-0">
+    <h3 class="font-bold text-sm sm:text-base">Flexbox CSS | Le programme Ultime par la pratique</h3>
+    <p class="text-xs sm:text-sm">Apprendre Flexbox CSS par la pratique</p>
+    <p class="text-xs sm:text-sm"><strong>Mathias Grdl</strong></p>
+    <p class="text-xs sm:text-sm">⭐ 5,0 (5)</p>
+    <p class="text-xs sm:text-sm">2,5 heures au total · 32 sessions · Tous les niveaux</p>
+    <p class="text-red-600 font-bold text-sm sm:text-base">
+      9,99 $US <span class="text-gray-500 line-through text-xs sm:text-sm">19,99 $US</span>
+    </p>
+  </div>
+</div>
      
             
 
@@ -863,8 +902,7 @@
            
     
     
-              <AppFooter/>
-                
+             
                  
                 
          
@@ -873,6 +911,7 @@
 
 
 
+ <AppFooter/>
  
     
 
@@ -891,6 +930,9 @@ import AppFooter from '../../components/AppFooter.vue'
 
 
 import { useCartStore } from '../../stores/cartStore';
+
+
+
 
 const cartStore = useCartStore()
 function ajouterAuPanier(course) {
@@ -1049,6 +1091,15 @@ showMore.value = !showMore.value;
 .scrollbar-hide {
  -ms-overflow-style: none;
  scrollbar-width: none;
+}
+
+
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
 }
 </style>
 

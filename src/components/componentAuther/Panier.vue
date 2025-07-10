@@ -75,9 +75,12 @@
       </div>
     </div>
   </div>    
+
+  <AppFooter/>
 </template>
 
 <script setup>
+import AppFooter   from '../AppFooter.vue'
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useCartStore } from '../../stores/cartStore'

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><title>Callback Google</title></head>
+<body>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get('token');
+
+  console.log('[Callback Google] Token reçu :', token);
+
+  if (token && window.opener) {
+    window.opener.postMessage({ token }, 'http://localhost:3000');
+    window.close();
+  } else {
+    console.warn('[Callback Google] Pas de token ou pas de fenêtre parente');
+  }
+</script>
+</body>
+</html>

@@ -12,77 +12,64 @@
 
 
 
-
-
+<div class="mt-10 bg-white px-4 sm:px-10 py-2 w-full">
+  <div class="flex flex-col lg:flex-row items-stretch w-full mt-5 sm:mt-10 py-2 border rounded-lg shadow-md overflow-hidden min-h-[200px]">
+    <!-- Contenu principal -->
+    <div class="p-4 lg:w-1/2">
+      <h2 class="text-xl sm:text-2xl font-bold">
+        Vous souhaitez améliorer vos compétences sur le sujet {{ categoryName }}? Nous avons ce qu'il vous faut.
+      </h2>
+      <p class="mt-2 text-gray-700 text-sm sm:text-base">
+        Retrouvez tout ce dont vous avez besoin pour atteindre vos objectifs dans un lot pratique.
+      </p>
+      <ul class="mt-4 space-y-2 text-gray-600 text-sm sm:text-base">
+        <li class="flex items-center">
+          ✅ Cours parmi les mieux notés
+        </li>
+        <li class="flex items-center">
+          ✅ Populaires auprès de participants au profil similaire au vôtre
+        </li>
+        <li class="flex items-center">
+          ✅ Conseils dispensés par des formateurs confirmés
+        </li>
+      </ul>
+      <p class="mt-4 text-lg font-bold">
+        Total : <span class="text-purple-600 text-xl">22.98 $US</span> <span class="line-through text-gray-500">134.98 $US</span>
+      </p>
     
-<div class=" mt-10 bg-white px-10  py-2 h-200 w-full ">
-       
-       <div class="flex items-center w-300 mt-10 py-2 border rounded-lg shadow-md overflow-hidden h-130">
-         <!-- Image du cours -->
-        <div class="">
-         <h2 class="text-2xl px-2 font-bold">
-           Vous souhaitez améliorer vos compétences sur le sujet {{ categoryName }}? Nous avons ce  <br> qu'il vous faut.
-         </h2>
-         <p class="mt-2 text-gray-700 px-2">
-           Retrouvez tout ce dont vous avez besoin pour atteindre <br> vos objectifs dans un lot pratique.
-         </p>
-         <ul class="mt-4 space-y-2  px-2text-gray-600">
-           <li class="flex px-2 items-center">
-             ✅ Cours parmi les mieux notés
-           </li>
-           <li class="flex px-2 items-center">
-             ✅ Populaires auprès de participants au profil similaire au vôtre
-           </li>
-           <li class="flex px-2 items-center">
-             ✅ Conseils dispensés par des formateurs confirmés
-           </li>
-         </ul>
-         <p class="mt-4 text-lg  px-2 font-bold">
-           Total : <span class="text-purple-600 text-xl">22.98 $US</span> <span class="line-through text-gray-500">134.98 $US</span>
-         </p>
-       
-         <button class="px-2 mt-4 bg-purple-600 text-white px-8 ml-5 py-3 rounded-lg font-semibold w-130 hover:bg-purple-700">
-           Tout ajouter au panier
-         </button>
-       
+      <button class="mt-4 bg-purple-600 text-white px-6 py-2 sm:px-8 sm:py-3 rounded-lg font-semibold w-full sm:w-auto hover:bg-purple-700 transition-colors">
+        Tout ajouter au panier
+      </button>
+    </div>
+
+    <!-- Carte du cours -->
+    <div class="p-4 lg:w-1/2 flex justify-center lg:justify-end">
+      <div class="card bg-white shadow-sm w-full max-w-xs sm:max-w-sm">
+        <img src="" alt="WordPress" class="w-full h-32 sm:h-40 object-cover rounded-t-lg">
+        <div class="p-4">
+          <h2 class="text-base sm:text-lg font-bold">
+            Créez votre site WordPress de A à Z - Débutants (2025)
+          </h2>
+          <p class="text-xs text-gray-600">Stephanie Canovas</p>
+          <div class="flex items-center mt-1">
+            <span class="text-yellow-500 font-semibold text-sm">4,3</span>
+            <span class="text-yellow-500 ml-1">⭐</span>
+            <span class="text-xs text-gray-500 ml-1">(1418)</span>
+          </div>
+          <div class="flex items-center mt-1">
+            <span class="text-base sm:text-lg font-bold text-black">10,99 $US</span>
+            <span class="text-sm text-gray-500 line-through ml-2">59,99 $US</span>
+          </div>
+          <span class="inline-block mt-2 bg-blue-200 text-blue-700 text-xs px-2 py-1 rounded-md">Meilleure vente</span>
         </div>
-       
-         <!-- Contenu du cours -->
-         <div class="p-5 w-2/3">
-             <div class=" flex space-x-4">
-                 <div class="card bg-white shadow-sm -mt-40 w-80 h-50">
-           <img src="" alt="WordPress" class="w-full h-40 object-cover">
-           <div class="card-body mt-12">
-             <h2 class="card-title text-lg font-bold">
-               Créez votre site WordPress de A à Z - Débutants (2025)
-             </h2>
-             <p class="text-xs text-gray-600">Stephanie Canovas</p>
-             <div class="flex items-center">
-               <span class="text-yellow-500 font-semibold text-sm">4,3</span>
-               <span class="text-yellow-500">⭐</span>
-               <span class="text-xs text-gray-500">(1418)</span>
-             </div>
-             <div class="flex items-center">
-               <span class="text-lg font-bold text-black">10,99 $US</span>
-               <span class="text-sm text-gray-500 line-through">59,99 $US</span>
-             </div>
-             <span class="bg-blue-200 text-blue-700 text-xs px-2 py-1 rounded-md">Meilleure vente</span>
-       
-           </div>
-       
-         </div>
-       
-           
-       
-                </div>
-                  </div>
-                    </div>
-       
-                    </div>
+      </div>
+    </div>
+  </div>
+</div>
        
        
        
-            <div  class=" w-full -mt-40 h-150 ">
+            <div  class=" w-full mt-10 h-150 ">
        
        
              <div class="font-bold px-10 -mt-5 text-2xl">
@@ -285,50 +272,60 @@
          Les participants qui suivent des cours sur le sujet {{ categoryName }} suivent également les cours suivants
        </div>
        
-       <div class="relative overflow-hidden w-full"> 
-           <!-- Conteneur principal avec transition -->
-           <div 
-             class="flex transition-transform duration-500 ease-in-out"
-             :class="{ '-translate-x-full': showMore }"
-           >
-             <!-- Première série de boutons -->
-             <div class="grid grid-cols-4 gap-4 p-5 flex-shrink-0 w-full">
-               <button  class="border px-4 py-2 whitespace-nowrap">Développement Web</button>
-               <button class="border px-4 py-2 whitespace-nowrap">React JS</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Next.js</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Langage HTML</button>
-               <button class="border px-4 py-2 whitespace-nowrap">JavaScript</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Cadre d'application Angular</button>
-               <router-link  to="/css" class="border px-4 py-2 whitespace-nowrap">CSS</router-link>
-               <button class="border px-4 py-2 whitespace-nowrap">TypeScript</button>
-             </div>
-             
-             <!-- Deuxième série de boutons -->
-             <div class="grid grid-cols-4 gap-4 p-5 flex-shrink-0 w-full">
-               <button class="border px-4 py-2 whitespace-nowrap">Vue.js</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Node.js</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Express.js</button>
-               <button class="border px-4 py-2 whitespace-nowrap">MongoDB</button>
-               <button class="border px-4 py-2 whitespace-nowrap">PHP</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Laravel</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Symfony</button>
-               <button class="border px-4 py-2 whitespace-nowrap">Django</button>
-             </div>
-           </div>
-           
-           <!-- Bouton flottant pour faire défiler -->
-           <button 
-             @click="toggleCards"
-             class="absolute top-1/2 transform -translate-y-1/2 w-12 h-12 rounded-full shadow-md bg-white flex items-center justify-center hover:bg-gray-200 z-10"
-             :class="showMore ? 'left-2' : 'right-2'"
-           >
-             <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-               <path stroke-linecap="round" stroke-linejoin="round" :d="showMore ? 'M15 19l-7-7 7-7' : 'M9 5l7 7-7 7'" />
-             </svg>
-           </button>
-         </div><!-- Conteneur principal en relative -->
-        
-       
+     <div class="relative overflow-hidden w-full">
+  <!-- Conteneur principal avec transition -->
+  <div 
+    class="flex transition-transform duration-500 ease-in-out"
+    :class="{ '-translate-x-full': showMore }"
+  >
+    <!-- Première série de boutons -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 p-2 sm:p-5 flex-shrink-0 w-full">
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Développement Web</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">React JS</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Next.js</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">HTML</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">JavaScript</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Angular</button>
+      <router-link to="/css" class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">CSS</router-link>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">TypeScript</button>
+    </div>
+    
+    <!-- Deuxième série de boutons -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 p-2 sm:p-5 flex-shrink-0 w-full">
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Vue.js</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Node.js</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Express.js</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">MongoDB</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">PHP</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Laravel</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Symfony</button>
+      <button class="border px-2 sm:px-4 py-1 sm:py-2 text-sm sm:text-base whitespace-nowrap truncate">Django</button>
+    </div>
+  </div>
+  
+  <!-- Boutons de navigation -->
+  <button 
+    v-if="!showMore"
+    @click="toggleCards"
+    class="absolute top-1/2 right-1 sm:right-2 transform -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-md bg-white flex items-center justify-center hover:bg-gray-200 z-10 transition-colors"
+    aria-label="Voir plus"
+  >
+    <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+  
+  <button 
+    v-if="showMore"
+    @click="toggleCards"
+    class="absolute top-1/2 left-1 sm:left-2 transform -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full shadow-md bg-white flex items-center justify-center hover:bg-gray-200 z-10 transition-colors"
+    aria-label="Voir moins"
+  >
+    <svg class="w-4 h-4 sm:w-6 sm:h-6 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+</div>
        
        
        
@@ -356,8 +353,15 @@
       <!-- Carte ne contenant que l'image -->
       <router-link to="/visuel"    class="card bg-white shadow-lg w-full h-50">
           
-      
-        <iframe class="w-full h-full" :src="item.image" :alt="item.title"  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <video 
+  class="w-full h-full" 
+  :src="`http://localhost:5000/${item.video}`" 
+  controls 
+  autoplay 
+  muted 
+  playsinline
+></video>
+
       </router-link>
 
       <h2 class="text-lg font-bold">{{ item.title }}</h2>
@@ -420,15 +424,13 @@
 
     </div>
   </div>
-
-       
-       
-       
-       
        
        </div>
        
-       <div class="p-4 font-bold text-2xl">Meilleurs cours dans les catégories {{ categoryName1 }}</div>
+       <div class="mt-8 sm:mt-12 p-4 text-lg sm:text-xl font-bold">
+  Meilleurs cours dans les catégories {{ categoryName1 }}
+</div>
+
        
        
        <div class="h-100 flex px-8  gap-3">
@@ -436,28 +438,45 @@
         
        
        
-        <!-- Deuxième carte (Tu peux remplacer les informations ici) -->
-        <div class="flex flex-col items-center m">
-         <div class="card bg-white shadow-lg w-80 h-50">
-           <iframe class="w-full h-full" src="https://www.youtube.com/embed/SXmWVboohsA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+       <!-- Deuxième carte (Responsive) -->
+<div class="flex flex-col items-center w-full sm:w-auto px-4 mb-6">
+  <div class="bg-white shadow-lg rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+    
+    <!-- Vidéo intégrée -->
+    <div class="aspect-w-16 aspect-h-9">
+      <iframe
+        class="w-full h-full rounded-t-lg"
+        src=""
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      ></iframe>
+    </div>
+
+    <!-- Contenu de la carte -->
+    <div class="p-4">
+      <h2 class="text-lg font-bold">Maîtriser React.js</h2>
+      <p class="text-xs text-gray-600">Matthieu Passerel</p>
+
+      <div class="flex items-center mt-1">
+        <span class="text-yellow-500 font-semibold text-sm">4,5</span>
+        <span class="text-yellow-500 ml-1">⭐</span>
+        <span class="text-xs text-gray-500 ml-1">(1020)</span>
+      </div>
+
+      <div class="flex items-center mt-2">
+        <span class="text-lg font-bold text-black">12,99 $US</span>
+        <span class="text-sm text-gray-500 line-through ml-2">49,99 $US</span>
+      </div>
+
+      <span class="bg-blue-200 text-blue-700 text-xs px-2 py-1 rounded-md inline-block mt-2">
+        Meilleure vente
+      </span>
+    </div>
+  </div>
+</div>
+
        
-           
-           <div class="card-body mt-12">
-             <h2 class="card-title text-lg font-bold">Maîtriser React.js</h2>
-             <p class="text-xs text-gray-600">Matthieu Passerel</p>
-             <div class="flex items-center">
-               <span class="text-yellow-500 font-semibold text-sm">4,5</span>
-               <span class="text-yellow-500">⭐</span>
-               <span class="text-xs text-gray-500">(1020)</span>
-             </div>
-             <div class="flex items-center">
-               <span class="text-lg font-bold text-black">12,99 $US</span>
-               <span class="text-sm text-gray-500 line-through">49,99 $US</span>
-             </div>
-             <span class="bg-blue-200 text-blue-700 text-xs px-2 py-1 rounded-md">Meilleure vente</span>
-           </div>
-         </div>
-       </div>
        
          </div>
 
@@ -495,15 +514,19 @@
      
      
      
-     <div class="flex items-center w-260 h-20 ml-10 p-4 px-20 border border-gray-300 rounded-xl bg-white">
-       <svg class="w-6 h-6 mr-2 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
-       </svg>
-       <span class="font-bold">Vous n'êtes pas sûr de vous ?</span>
-       <span class="ml-1 font-bold ">Tous nos cours s'accompagnent d'une garantie satisfait ou remboursé de <strong>30  jours</strong></span>
-     </div>
-     
-     
+    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 border border-gray-300 rounded-xl bg-white p-4 sm:px-8 w-full max-w-5xl mx-auto mt-4">
+  <svg class="w-6 h-6 text-blue-500 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z"/>
+  </svg>
+  <div class="text-sm sm:text-base">
+    <span class="font-bold block sm:inline">Vous n'êtes pas sûr de vous ?</span>
+    <span class="ml-0 sm:ml-1 font-bold block sm:inline">
+      Tous nos cours s'accompagnent d'une garantie satisfait ou remboursé de
+      <strong>30 jours</strong>
+    </span>
+  </div>
+</div>
+
      <div class="flex items-center mt-4 ml-10 gap-4">
        <button class="border px-4 py-2 rounded">📂 Filtrer</button>
                 
@@ -523,7 +546,7 @@
            <h3 class=" ml-30 font-bold"></h3>
      
           
-           <div>
+           <div class="hidden md:block">
      
      <div>
        <h2 class="font-bold mt-4 flex items-center cursor-pointer" @click="toggle('Notes')">
@@ -754,19 +777,22 @@
          <li><input type="checkbox"> Hébreu</li>
      </ul>
      
-     <div class=" border-t-2 border-gray-200 -ml-5 w-100 mt-5  bg-gray-100"></div>
-      
-     
        <!-- Ajoute d'autres catégories ici -->
      </div>
+
+
      
      
      
      </div>
        </div>
+
+       <div
+       class="-ml-20"
+       ><div class="border-t border-gray-200 w-full my-5 bg-gray-100 h-[1px]"></div></div>
        
        <div class="md:w-3/4 p-4 ml-4 -mt-8">
-           <p class="text-gray-600 justify-end  whitespace-nowrap  ml-210 ">10 000 résultats</p>
+           <p class=" hidden  text-gray-600 justify-end  whitespace-nowrap  ml-210 ">10 000 résultats</p>
            <div
   class="relative flex flex-col w-fit"
   @mouseenter="hoveredIndex = index"
@@ -857,10 +883,13 @@
   </div>
   
 </div>
-     
-       <div class=" border-t-2 border-gray-200 ml-50  mt-5 w-180  bg-gray-100"></div>
-     
-              
+
+</div>
+</div>
+
+
+
+     <div class=" hidden border-t border-gray-200 md:border-t-2 w-full my-5 bg-gray-100 h-[1px]"></div> 
              
      
      
@@ -868,45 +897,64 @@
        
      
      
-        <div class="ml-50 ">
-                     
-     <div class="border rounded-lg p-6  max-w-4xl h-60 mt-5 w-180  mx-auto shadow-sm bg-white">
-       <!-- Titre -->
-       <h2 class="text-xl font-bold">Les meilleures entreprises font confiance à Udemy</h2>
-       <p class="text-gray-600 mt-1">
-         Offrez aux membres de votre équipe un accès à plus de 250 000 cours parmi les meilleurs d'Udemy
-       </p>
-     
-       <!-- Logos des entreprises -->
-       <div class="flex items-center space-x-6 mt-4">
-         <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg" alt="Nasdaq" class="h-8 grayscale">
-         <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg" alt="Volkswagen" class="h-8 grayscale">
-         <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg" alt="NetApp" class="h-8 grayscale">
-         <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg" alt="Eventbrite" class="h-8 grayscale">
-       </div>
-     
-       <!-- Bouton -->
-       <button class="mt-4 px-4 py-2 border border-purple-600 text-purple-600 font-semibold rounded-md hover:bg-purple-600 hover:text-white transition">
-         Essayer Udemy Business
-       </button>
-     </div>
-        </div>
- 
-        <div class=" border-t-2 border-gray-200 ml-50  mt-5 w-180  bg-gray-100"></div>
-     
-     <div class="flex  w-200 ml-40 p-4 mt-2 gap-4">
-             <iframe class="w-80 h-40" src="https://www.youtube.com/embed/SXmWVboohsA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-               <div>
-                   <h3 class="font-bold">Flexbox CSS | Le programme Ultime par la pratique</h3>
-                   <p>Apprendre Flexbox CSS par la pratique</p>
-                   <p><strong>Mathias Grdl</strong></p>
-                   <p>⭐ 5,0 (5)</p>
-                   <p>2,5 heures au total · 32 sessions · Tous les niveaux</p>
-                   <p class="text-red-600 font-bold">9,99 $US <span class="text-gray-500 line-through">19,99 $US</span></p>
-               </div>
-                 
-           </div>
-       
+       <div class="p-4 sm:px-0 py-6">
+  <div class="border rounded-lg p-6 max-w-5xl mx-auto shadow-sm bg-white">
+    <!-- Titre -->
+    <h2 class="text-xl sm:text-2xl font-bold text-center sm:text-left">
+      Les meilleures entreprises font confiance à Udemy
+    </h2>
+    <p class="text-gray-600 mt-2 text-center sm:text-left">
+      Offrez aux membres de votre équipe un accès à plus de 250 000 cours parmi les meilleurs d'Udemy
+    </p>
+
+    <!-- Logos des entreprises (responsive) -->
+    <div class="grid grid-cols-2 sm:flex sm:items-center sm:space-x-6 mt-6 justify-center gap-4 sm:gap-0">
+      <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-dark.svg" alt="Nasdaq" class="h-8 grayscale mx-auto sm:mx-0">
+      <img src="https://s.udemycdn.com/partner-logos/v4/netapp-dark.svg" alt="Volkswagen" class="h-8 grayscale mx-auto sm:mx-0">
+      <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-dark.svg" alt="NetApp" class="h-8 grayscale mx-auto sm:mx-0">
+      <img src="https://s.udemycdn.com/partner-logos/v4/eventbrite-dark.svg" alt="Eventbrite" class="h-8 grayscale mx-auto sm:mx-0">
+    </div>
+
+    <!-- Bouton -->
+    <div class="mt-6 text-center sm:text-left">
+      <button class="px-4 py-2 border border-purple-600 text-purple-600 font-semibold rounded-md hover:bg-purple-600 hover:text-white transition">
+        Essayer Udemy Business
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Ligne de séparation -->
+<div class="border-t-2 border-gray-200 mt-5 bg-gray-100 w-full"></div>
+
+<!-- Bloc principal -->
+<div class="flex flex-col sm:flex-row w-full max-w-5xl mx-auto p-4 mt-4 gap-4 bg-white rounded shadow-sm">
+  <!-- Vidéo -->
+  <iframe 
+    class="w-full sm:w-80 h-48 sm:h-40 rounded" 
+    src="https://www.youtube.com/embed/SXmWVboohsA" 
+    frameborder="0" 
+    allow="autoplay; encrypted-media" 
+    allowfullscreen>
+  </iframe>
+
+  <!-- Contenu -->
+  <div class="flex flex-col justify-between">
+    <h3 class="font-bold text-lg">Flexbox CSS | Le programme Ultime par la pratique</h3>
+    <p class="text-sm text-gray-700">Apprendre Flexbox CSS par la pratique</p>
+    <p class="text-sm"><strong>Mathias Grdl</strong></p>
+    <p class="text-sm text-yellow-600">⭐ 5,0 (5)</p>
+    <p class="text-sm">2,5 heures au total · 32 sessions · Tous les niveaux</p>
+    <p class="text-red-600 font-bold text-base">
+      9,99 $US <span class="text-gray-500 line-through text-sm">19,99 $US</span>
+    </p>
+  </div>
+</div>
+
                  
              
  
@@ -939,27 +987,23 @@
      
      
      
-       </div>
-     
-     
-       
-     </div>
+   
 
      
             
      
      
 
-       <AppFooter/>
+      
                  
                   
                  
           
  
  
+   
  
- 
- 
+    <AppFooter/>
   
      </template>
      
@@ -1168,7 +1212,7 @@ const router = useRouter();
   display: none;
  }
  .scrollbar-hide {
-  -ms-overflow-style: none;
+  -ms-overflow-style: none; 
   scrollbar-width: none;
  }
  </style>

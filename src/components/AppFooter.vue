@@ -1,85 +1,79 @@
 <template>
   
-  <footer class="bg-gray-900 w-full h-150 text-white py-10 px-6">
-    <!-- Section des partenaires -->
-    <div class="flex justify-between items-center border-b border-gray-700 pb-6">
-      <div class="text-xl">
-        Les meilleures entreprises choisissent 
-        <a href="#" class="text-blue-400 hover:underline">Udemy Business</a>
-        pour développer les compétences professionnelles dont elles ont besoin.
-      </div>
-      <div class="flex gap-4">
-        <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-light.svg" alt="Nasdaq" class="h-6">
-        <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-light.svg" alt="Volkswagen" class="h-6">
-        <img src="https://s.udemycdn.com/partner-logos/v4/box-light.svg" alt="Box" class="h-6">
-        <img src="https://s.udemycdn.com/partner-logos/v4/netapp-light.svg" alt="NetApp" class="h-6">
-      </div>
+  <footer class="bg-gray-900 text-white py-10 px-6 w-full">
+  <!-- Partenaires -->
+  <div class="flex flex-col lg:flex-row justify-between items-center border-b border-gray-700 pb-6 gap-6">
+    <div class="text-center lg:text-left text-lg max-w-2xl">
+      Les meilleures entreprises choisissent 
+      <a href="#" class="text-blue-400 hover:underline">Udemy Business</a>
+      pour développer les compétences professionnelles dont elles ont besoin.
+    </div>
+    <div class="flex flex-wrap justify-center gap-4">
+      <img src="https://s.udemycdn.com/partner-logos/v4/nasdaq-light.svg" alt="Nasdaq" class="h-6">
+      <img src="https://s.udemycdn.com/partner-logos/v4/volkswagen-light.svg" alt="Volkswagen" class="h-6">
+      <img src="https://s.udemycdn.com/partner-logos/v4/box-light.svg" alt="Box" class="h-6">
+      <img src="https://s.udemycdn.com/partner-logos/v4/netapp-light.svg" alt="NetApp" class="h-6">
+    </div>
+  </div>
+
+  <!-- Liens par catégorie -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-10">
+    <div>
+      <h3 class="font-bold mb-3">Certifications par émetteur</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:underline">AWS</a></li>
+        <li><a href="#" class="hover:underline">Six Sigma</a></li>
+        <li><a href="#" class="hover:underline">Microsoft</a></li>
+        <li><a href="#" class="hover:underline">Cisco</a></li>
+        <li><a href="#" class="hover:underline">Tableau</a></li>
+      </ul>
     </div>
 
-   
-       
-      <!-- Section des liens -->
-    <div class=" px-3 grid grid-cols-3 lg:grid-cols-5  gap-6 mt-6">
-      <div>
-        <h3 class="font-bold mb-3">Certifications par émetteur</h3>
-        <ul>
-          <li><a href="#" class="text-white hover:underline">AWS</a></li>
-          <li><a href="#" class="text-white hover:underline">Six Sigma</a></li>
-          <li><a href="#" class="text-white hover:underline">Microsoft</a></li>
-          <li><a href="#" class="text-white hover:underline">Cisco</a></li>
-          <li><a href="#" class="text-white hover:underline">Tableau</a></li>
-        </ul>
-      </div>
+    <div>
+      <h3 class="font-bold mb-3">Développement Web</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:underline">JavaScript</a></li>
+        <li><a href="#" class="hover:underline">React JS</a></li>
+        <li><a href="#" class="hover:underline">Angular</a></li>
+        <li><a href="#" class="hover:underline">Java</a></li>
+      </ul>
+    </div>
 
-      <div>
-        <h3 class="font-bold mb-3 whitespace-nowrap px-10">Développement Web</h3>
-        <ul>
-          <li><a href="#" class="text-white hover:underline   px-10">JavaScript</a></li>
-          <li><a href="#" class="text-white hover:underline  px-10">React JS</a></li>
-          <li><a href="#" class="text-white hover:underline  px-10">Angular</a></li>
-          <li><a href="#" class="text-white hover:underline  px-10">Java</a></li>
-        </ul>
-      </div>
+    <div>
+      <h3 class="font-bold mb-3">Certifications informatiques</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:underline">AWS Certified</a></li>
+        <li><a href="#" class="hover:underline">Azure Fundamentals</a></li>
+        <li><a href="#" class="hover:underline">Kubernetes</a></li>
+      </ul>
+    </div>
 
-      <div>
-        <h3 class="font-bold mb-3">Certifications informatiques</h3>
-        <ul>
-          <li><a href="#" class="text-white hover:underline">AWS Certified</a></li>
-          <li><a href="#" class="text-white hover:underline">Azure Fundamentals</a></li>
-          <li><a href="#" class="text-white hover:underline">Kubernetes</a></li>
-        </ul>
-      </div>
+    <div>
+      <h3 class="font-bold mb-3">Leadership</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="hover:underline">Compétences en gestion</a></li>
+        <li><a href="#" class="hover:underline">Gestion de projets</a></li>
+        <li><a href="#" class="hover:underline">Productivité</a></li>
+      </ul>
+    </div>
+  </div>
 
-      <div>
-        <h3 class="font-bold mb-3 px-20">Leadership</h3>
-        <ul>
-          <li><a href="#" class="text-white hover:underline px-20 whitespace-nowrap">Compétences en gestion</a></li>
-          <li><a href="#" class="text-white hover:underline  px-20 whitespace-nowrap">Gestion de projets</a></li>
-          <li><a href="#" class="text-white hover:underline  px-20">Productivité</a></li>
-        </ul>
-      </div>
-
-      <div>
-
-        </div>
-        </div>
-
-
-  </footer>
-
-
-  <div class="bg-gray-900 text-white -mt-40 p-6">
-    <div class="grid grid-cols-4 gap-4">
+  <!-- Section dynamique en bas (avec Vue.js) -->
+  <div class="mt-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       <div v-for="(category, index) in categories" :key="index">
         <h3 class="font-bold mb-3">{{ category.title }}</h3>
-        <ul>
+        <ul class="space-y-2">
           <li v-for="(item, idx) in category.items" :key="idx">
-            <a href="#" class="hover:underline">{{ item }}</a>
+            <a href="#" class="hover:underline text-sm">{{ item }}</a>
           </li>
         </ul>
       </div>
     </div>
   </div>
+</footer>
+
+
 
   <footer class="bg-black text-white w-full py-10 px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-sm">
@@ -157,8 +151,7 @@ export default {
           items: [
             "Certification en cybersécurité",
             "Certification en gestion de projets",
-            "Certification cloud",
-            "Certification en analyse de données",
+          
             "Certification en gestion des ressources humaines",
             "Voir l'ensemble des certifications",
           ],

@@ -32,7 +32,10 @@
   
           <p class="text-sm text-gray-500 mb-2">No password required</p>
   
-          <button class="bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-600">
+          <button 
+
+           @click="orangeMoney"
+         class="bg-purple-500 text-white px-6 py-2 rounded hover:bg-purple-600">
             Continue
           </button>
         </div>
@@ -54,28 +57,88 @@
   
       <!-- Partie droite : Résumé de commande -->
       <div class="w-full md:w-1/3 bg-white p-8 shadow-md border-t md:border-l md:border-t-0">
-        <h2 class="text-xl font-semibold mb-4">Order summary</h2>
-        <div class="flex justify-between text-gray-600 mb-2">
-          <span>Original Price:</span>
-          <span>$159.97</span>
-        </div>
-        <div class="flex justify-between text-green-600 mb-2">
-          <span>Discounts (81% Off):</span>
-          <span>-$130.00</span>
-        </div>
-        <hr class="my-2" />
-        <div class="flex justify-between text-lg font-bold">
-          <span>Total (3 courses):</span>
-          <span>$29.97</span>
-        </div>
+        <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 to-yellow-200 dark:from-gray-900 dark:to-gray-800 px-4">
+    <div class="bg-white dark:bg-gray-900 p-8 rounded-3xl shadow-xl w-full max-w-md space-y-6">
+      <h2 class="text-2xl font-bold text-center text-orange-600 dark:text-orange-400">
+        🔐 Paiement Orange Money
+      </h2>
+
+      <!-- Champ montant -->
+      <div>
+        <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-200">Montant (FCFA)</label>
+        <input
+          v-model="amount"
+          type="number"
+          min="100"
+          class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          placeholder="Ex: 2000"
+        />
       </div>
+
+      <!-- Champ téléphone -->
+      <div>
+        <label class="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-200">Téléphone</label>
+        <input
+          v-model="phone"
+          type="tel"
+          class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+          placeholder="Ex: 0700123456"
+        />
+      </div>
+
+      <!-- Bouton avec spinner -->
+      <div class="text-center">
+        <button
+          @click="startPayment"
+          :disabled="loading"
+          class="bg-orange-500 text-white font-bold py-3 px-6 rounded-full shadow-md transition duration-200 flex items-center justify-center w-full"
+        >
+          <svg
+            v-if="loading"
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+          </svg>
+          {{ loading ? "Paiement en cours..." : "✅ Payer maintenant" }}
+        </button>
+      </div>
+
+      <!-- Message de succès/erreur -->
+      <div v-if="message" :class="['text-center font-semibold', success ? 'text-green-600' : 'text-red-600']">
+        {{ message }}
+      </div>
+
+      <!-- QR Code -->
+      <div v-if="qrCodeUrl" class="text-center">
+        <p class="text-gray-700 dark:text-gray-200 mb-2">📲 Scannez le QR Code :</p>
+        <img :src="qrCodeUrl" alt="QR Code" class="mx-auto w-40 h-40" />
+      </div>
+    </div>
+  </div>
+
+      </div>
+
+
+    
     </div>
   </template>
   
-  <script>
-  export default {
-    name: "CheckoutPage",
-  };
+  <script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+function orangeMoney() {
+  console.log("Redirection vers la page de paiement...")
+  router.push('/orangeMoney') // ou '/checkout/payment' selon votre configuration
+}
+
+
+ 
   </script>
   
   <style scoped>

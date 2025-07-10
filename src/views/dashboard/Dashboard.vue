@@ -38,13 +38,13 @@
     <!-- Quiz -->
     <div class="px-4 py-2 flex items-center space-x-2 hover:bg-gray-800">
       <span class="material-symbols-outlined">quiz</span>
-      <router-link to="/Quiz" class="text-sm hover:underline">Quiz</router-link>
+      <router-link to="/Ajout" class="text-sm hover:underline"> Ajout de Quiz</router-link>
     </div>
 
     <!-- Liste des étudiants -->
     <div class="px-4 py-2 flex items-center space-x-2 hover:bg-gray-800">
-      <span class="material-symbols-outlined">groups</span>
-      <router-link to="/add" class="text-sm hover:underline">Liste des étudiants</router-link>
+   
+      <router-link to="/add" class="text-sm hover:underline">Ajout de Cours</router-link>
     </div>
 
     <!-- Gestion des cours -->
@@ -60,14 +60,16 @@
 
     <!-- Rapports -->
     <div class="px-4 py-2 flex items-center space-x-2 hover:bg-gray-800">
-      <span class="material-symbols-outlined">bar_chart</span>
-      <router-link  class="text-sm hover:underline">Rapports</router-link>
+      <span class="material-symbols-outlined"></span>
+      <router-link  to="/rapport" class="text-sm hover:underline">Rapports</router-link>
     </div>
 
     <!-- Déconnexion -->
-    <div class="mt-8 px-4 py-2 flex items-center space-x-2 text-red-400 hover:bg-red-800 hover:text-white cursor-pointer">
+    <div
+      @click="logout"
+     class="mt-8 px-4 py-2 flex items-center space-x-2 text-red-400 hover:bg-red-800 hover:text-white cursor-pointer">
       <span class="material-symbols-outlined">logout</span>
-      <span>Déconnexion</span>
+     
     </div>
   </div>
 </div>
@@ -267,7 +269,7 @@
             <thead class="text-gray-400 border-b border-gray-700">
               <tr>
                 <th class="py-2 px-4">Name</th>
-                <th class="py-2 px-4">Title</th>
+                <th class="py-2 px-4">Progression</th>
                 <th class="py-2 px-4">Email</th>
                 <th class="py-2 px-4">Role</th>
                 <th class="py-2 px-4"></th>
@@ -276,7 +278,12 @@
             <tbody class="text-white divide-y divide-gray-700">
   <tr v-for="user in users" :key="user.id">
     <td class="py-3 px-4 font-semibold">{{ user.name }}</td>
-    <td class="py-3 px-4">–</td> <!-- titre (placeholder si pas dans l'API) -->
+     <td class="py-3 px-4">
+            <button @click="Rapports" class="text-blue-400 hover:underline">
+              Voir
+            </button>
+          </td>
+ <!-- titre (placeholder si pas dans l'API) -->
     <td class="py-3 px-4">{{ user.email }}</td>
     <td class="py-3 px-4">{{ user.role }}</td>
     <td class="py-3 px-4 text-indigo-400 hover:underline cursor-pointer">
@@ -310,10 +317,16 @@
 
 
 
-
-
-
-
+  <div v-if="selectedUser" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white rounded-lg p-6 w-96 text-black">
+      <h2 class="text-xl font-bold mb-4">Progression de {{ selectedUser.name }}</h2>
+      <p>Email : {{ selectedUser.email }}</p>
+      <p>Quiz complétés : {{ selectedUser.progress.quiz }}/{{ selectedUser.progress.totalQuiz }}</p>
+      <p>Score moyen : {{ selectedUser.progress.score }}%</p>
+      <progress :value="selectedUser.progress.score" max="100" class="w-full my-3"></progress>
+      <button @click="selectedUser = null" class="mt-4 px-4 py-2 bg-red-500 text-white rounded">Fermer</button>
+    </div>
+  </div>
 
 
                           
@@ -347,7 +360,29 @@ function openModal(id) {
 
 
 
+
+
+
+// Fonction déconnexion
+function logout() {
+  axios.post('http://localhost:5000/api/auth/logout', {}, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  }).then(() => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/login'; // redirection vers la page login
+  }).catch(error => {
+    console.error("Erreur lors de la déconnexion :", error);
+  });
+}
+
+
+
 const users = ref([])
+
+
 
 
 // Suppression d’un utilisateur
@@ -372,6 +407,15 @@ async function deleteUser(id) {
   } catch (error) {
     console.error("Erreur de suppression:", error);
   }
+}
+
+
+
+
+
+function Rapports() {
+  console.log("Redirection vers la page de paiement...")
+  router.push('/rapport') // ou '/checkout/payment' selon votre configuration
 }
 
 // Si tu veux charger automatiquement les utilisateurs quand on affiche la section :
@@ -424,6 +468,12 @@ function update(courseId) {
 
 const router = useRouter()
 
+
+const selectedUser = ref(null)
+
+const showProgress = (user) => {
+  selectedUser.value = user
+}
 
 
 function ajouter() {
@@ -586,6 +636,28 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active {
+  transition: transform 0.3s ease;
+}
+.slide-enter-from {
+  transform: translateX(-100%);
+}
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+.slide-leave-to {
+  transform: translateX(-100%);
+}
 select:disabled {
   background-color: #f3f3f3;
 }

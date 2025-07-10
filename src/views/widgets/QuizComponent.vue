@@ -5,7 +5,7 @@
    
    <!-- Section recherche -->
    <div class="bg-pink-800 py-16 px-4">
-     <h1 class="text-3xl font-bold mb-6 text-center">Rechercher un Quiz</h1>
+     <h1 class="text-3xl font-bold mb-6 text-center">Rechercher un domaine</h1>
      <div class="max-w-4xl mx-auto flex items-center">
        <input
          type="text"
@@ -61,13 +61,13 @@
 const domaines = [
   { name: "Deep learning", icon: "🧠",link:"/stats" },
   { name: "Statistique", icon: "📊" },
-  { name: "React js", icon: "⚛️" },
-  { name: "Vue js", icon: "🖼️" },
+  { name: "React js", icon: "⚛️" ,link:''},
+  { name: "Vue js", icon: "🖼️" ,link:'vue_js'},
   { name: "Angular", icon: "🅰️" },
   { name: "PhP", icon: "🐘" },
   { name: "Science de Données", icon: "📈" },
-  { name: "Python", icon: "🐍" },
-  { name: "Flutter", icon: "💙" },
+  { name: "Python", icon: "🐍",link:'Python' },
+  { name: "Flutter", icon: "💙",link:'/QuizFlutter' },
   { name: "Kotlin", icon: "🧡" },
   { name: "ChatGPT", icon: "🤖" },
   { name: "Node js", icon: "🌳" },
@@ -76,4 +76,8 @@ const domaines = [
   { name: "Informatique et Logiciel", icon: "💻" },
   { name: "Marketing", icon: "📢" },
 ];
+
+
+
+
 </script>

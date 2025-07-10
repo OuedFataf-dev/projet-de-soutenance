@@ -13,10 +13,15 @@
       </div>
 
       <div>
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="categories">Catégories (séparées par des virgules)</label>
-        <input id="categories" type="text" v-model="categories" placeholder="ex: design,web,popular"
-               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-      </div>
+  <label class="block text-gray-700 text-sm font-bold mb-2" for="categories">
+    Catégories
+  </label>
+  <select id="categories" v-model="categories" multiple class="block w-full border rounded px-3 py-2">
+    <option value="new">New</option>
+    <option value="popular">Popular</option>
+    <option value="trending">Trending</option>
+  </select>
+</div>
 
       <div>
         <label class="block text-gray-700 text-sm font-bold mb-2" for="image">URL de l'image</label>
@@ -88,6 +93,23 @@
   <input id="list3" type="text" v-model="list3" placeholder="Entrez la troisième liste" required
          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
 </div>
+
+
+
+<div>
+  <label for="list3" class="block text-gray-700 text-sm font-bold mb-2">
+    Vidéo (optionnelle) :
+  </label>
+
+  <!-- Affichage d’une vidéo si disponible -->
+  <video v-if="list3" :src="list3" controls class="mb-2 w-full max-h-64 rounded shadow"></video>
+
+  <!-- Champ de sélection de fichier vidéo -->
+  
+   <input type="file" accept="video/*" @change="handleVideoUpload" />
+
+</div>
+
 
     </div>
 
@@ -163,7 +185,7 @@
     <div>
       <button type="submit"
               class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150"
-              :disabled="!isFormValid">Créer le cours</button>
+              :disabled="!submitForm">Créer le cours</button>
     </div>
   </form>
 
@@ -185,6 +207,8 @@ const title = ref('')
 const description = ref('')
 
 const list1 = ref('')
+const videoFile = ref(null)
+
 
 const list2 = ref('')
 
@@ -194,6 +218,8 @@ const categories = ref('')
 const image = ref('')
 const badge = ref('')
 const author = ref('')
+const video = ref(null)
+
 const rating = ref(0)
 const reviews = ref(0)
 const price = ref(0)
@@ -276,6 +302,15 @@ const selectedSecondSubdomain = ref('')
 const onlyDomain = ref(false)
 const enableSecondSubdomain = ref(false)
 
+
+
+
+
+const handleVideoUpload = (e) => {
+  videoFile.value = e.target.files[0]
+}
+
+
 const subdomains = computed(() => {
   return selectedDomaine.value && domaines_info[selectedDomaine.value]
     ? Object.keys(domaines_info[selectedDomaine.value])
@@ -287,67 +322,62 @@ const sousSousDomaines = computed(() => {
   return domaines_info[selectedDomaine.value][selectedSousDomaine.value] || []
 })
 
-const isFormValid = computed(() => {
-  return title.value && author.value && price.value && selectedDomaine.value
-})
 const submitForm = async () => {
-  const payload = {
-    title: title.value,
-    description: description.value,
-    list1: list1.value,
-    list2: list2.value,
-    list3: list3.value,
-    image: image.value,
-    categories: Array.isArray(categories.value) ? categories.value : [categories.value],
-    badge: badge.value,
-    author: author.value,
-    rating: rating.value,
-    reviews: reviews.value,
-    price: price.value,
-    originalPrice: originalPrice.value,
+  const formData = new FormData()
+
+  formData.append('title', title.value)
+  formData.append('description', description.value)
+  formData.append('list1', list1.value)
+  formData.append('list2', list2.value)
+  formData.append('list3', list3.value)
+  formData.append('image', image.value)
+  formData.append('badge', badge.value || '')
+  formData.append('author', author.value)
+  formData.append('rating', rating.value)
+  formData.append('reviews', reviews.value)
+  formData.append('price', price.value)
+  formData.append('originalPrice', originalPrice.value)
+ formData.append('categories', JSON.stringify([categories.value]))
+
+
+  // 🔁 Ajouter le fichier vidéo si sélectionné
+  if (videoFile.value) {
+    formData.append('video', videoFile.value)
   }
 
-  // --- Priorité 1 : Catégorie du domaine sélectionnée ---
+  // --- Gestion des domaines ---
   if (selectedSousSousDomaine.value) {
-    payload.sousSousDomaines = [selectedSousSousDomaine.value]
-    delete payload.domains
-    delete payload.subdomains
-    delete payload.secondSubdomain
-  }
-
-  // --- Priorité 2 : Deuxième sous-domaine activé ---
-  else if (enableSecondSubdomain.value) {
-    payload.secondSubdomain = [selectedSecondSubdomain.value]
-
-    delete payload.domains
-    delete payload.subdomains
-    delete payload.sousSousDomaines
-  }
-
-  // --- Priorité 3 : Domaine et sous-domaine ---
-  else {
-    if (!selectedSousDomaine.value && selectedDomaine.value) {
-      payload.domains = [selectedDomaine.value]
+    formData.append('sousSousDomaines', JSON.stringify([selectedSousSousDomaine.value]))
+  } else if (enableSecondSubdomain.value) {
+    formData.append('secondSubdomain', JSON.stringify([selectedSecondSubdomain.value]))
+  } else {
+    if (selectedDomaine.value) {
+      formData.append('domains', JSON.stringify([selectedDomaine.value]))
     }
     if (selectedSousDomaine.value) {
-      payload.subdomains = [selectedSousDomaine.value]
+      formData.append('subdomains', JSON.stringify([selectedSousDomaine.value]))
     }
-    delete payload.sousSousDomaines
-    delete payload.secondSubdomain
   }
 
   console.log('--- Données du formulaire ---')
-  console.log('Payload envoyé :', payload)
+  for (let pair of formData.entries()) {
+    console.log(`${pair[0]}:`, pair[1])
+  }
 
   try {
-    const response = await axios.post('http://localhost:5000/api/dev/create', payload)
+    const response = await axios.post('http://localhost:5000/api/dev/create', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
     console.log('Cours créé avec succès :', response.data)
     alert('Cours créé avec succès !')
   } catch (error) {
-    console.error('Erreur lors de la création du cours :', error)
+    console.error('Erreur lors de la création du cours :', error.response?.data || error.message)
     alert('Erreur lors de la création du cours.')
   }
 }
+
 
 
 

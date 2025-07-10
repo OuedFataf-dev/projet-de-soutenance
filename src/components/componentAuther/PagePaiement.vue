@@ -581,12 +581,14 @@
 </div>
 
     
-
+<AppFooter/>
 
 </template>
 
-<script setup>
 
+
+<script setup>
+import AppFooter from '../AppFooter.vue';
 
 document.addEventListener('DOMContentLoaded', function() {
   const pricingCard = document.getElementById('pricing-card');

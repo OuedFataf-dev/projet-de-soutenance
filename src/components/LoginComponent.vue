@@ -1,12 +1,12 @@
 <template>
-    <div class="h-200 w-full bg-white">
+    <div class="h-200  bg-white">
       <div class="flex gap-x-20 justify-center items-center">
         <div>
           <img src="https://frontends.udemycdn.com/components/auth/desktop-illustration-step-2-x2.webp" width="500px" alt="">
         </div>
   
         <div class="mt-10 px-30">
-          <div class="font-bold text-3xl">
+          <div class="font-bold text-2xl">
           Se connecter par e-mail pour Continuer
 
             <div class="flex ga-x-5">
@@ -23,13 +23,13 @@
                 v-model="email"
                 type="text" 
                 placeholder="E-mail"
-                class="border text-xl font-bold h-15  mt-5 px-4 py-2 w-100 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                class="border text-xl font-bold h-12  mt-5 px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-purple-500"
               /> 
   
               <div class="mt-5">
                 <button
                  @click="handleSubmit"
-                 class="w-105 h-15 mt-4 bg-purple-600 text-white py-2 text-sm px-4 rounded-lg font-semibold hover:bg-purple-700">
+                 class="w-90 h-15 mt-4 bg-purple-600 text-white py-2 text-sm px-4 rounded-lg font-semibold hover:bg-purple-700">
                   Continuer avec une adresse email
                 </button>
               </div>
@@ -47,16 +47,22 @@
   
   
                     <div class="card border  rounded-lg border-purple-500 h-15 w-15 bg-blue">
-                                  <div class="text-center mt-2 px-3 ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="32px" viewBox="0 0 512 512">
-                    <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z" data-original="#fbbd00" />
-                    <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z" data-original="#0f9d58" />
-                    <path fill="#31aa52" d="m139.131 325.477-86.308 86.308a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z" data-original="#31aa52" />
-                    <path fill="#3c79e6" d="M512 256a258.24 258.24 0 0 0-4.192-46.377l-2.251-12.299H256v120h121.452a135.385 135.385 0 0 1-51.884 55.638l86.216 86.216a260.085 260.085 0 0 0 25.235-22.158C485.371 388.667 512 324.38 512 256z" data-original="#3c79e6" />
-                    <path fill="#cf2d48" d="m352.167 159.833 10.606 10.606 84.853-84.852-10.606-10.606C388.668 26.629 324.381 0 256 0l-60 60 60 60c36.326 0 70.479 14.146 96.167 39.833z" data-original="#cf2d48" />
-                    <path fill="#eb4132" d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z" data-original="#eb4132" />
-                  </svg>
-                                  </div>
+                                  <div class="text-center mt-2 px-3">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="32px"
+    viewBox="0 0 512 512"
+    style="cursor:pointer;"
+    @click="handleGoogleLogin"
+  >
+    <path fill="#fbbd00" d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z"/>
+    <path fill="#0f9d58" d="m256 392-60 60 60 60c57.079 0 111.297-18.568 155.785-52.823v-86.216h-86.216C305.044 385.147 281.181 392 256 392z"/>
+    <path fill="#31aa52" d="m139.131 325.477-86.308 86.308a260.085 260.085 0 0 0 22.158 25.235C123.333 485.371 187.62 512 256 512V392c-49.624 0-93.117-26.72-116.869-66.523z"/>
+    <path fill="#3c79e6" d="M512 256a258.24 258.24 0 0 0-4.192-46.377l-2.251-12.299H256v120h121.452a135.385 135.385 0 0 1-51.884 55.638l86.216 86.216a260.085 260.085 0 0 0 25.235-22.158C485.371 388.667 512 324.38 512 256z"/>
+    <path fill="#cf2d48" d="m352.167 159.833 10.606 10.606 84.853-84.852-10.606-10.606C388.668 26.629 324.381 0 256 0l-60 60 60 60c36.326 0 70.479 14.146 96.167 39.833z"/>
+    <path fill="#eb4132" d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z"/>
+  </svg>
+</div>
                         </div>
                          
                         <div class="card border  rounded-lg border-purple-500 h-15 w-15 bg-blue">
@@ -93,10 +99,14 @@
 
                <div class="mt-5">
 
-                   <div class="text-sm">
-                    En vous inscrivant, vous acceptez <a href="" class="text-blue-600 underline font-semibold hover:text-blue-800">nos Conditions d'utilisation</a> et <br>
-                    notre  <a href="" class="text-blue-600 underline font-semibold hover:text-blue-800">Politique de confidentialité.</a>
-                   </div>
+                 <div class="text-sm leading-relaxed">
+  En vous inscrivant, vous acceptez 
+  <a href="#" class="text-blue-600 underline font-semibold hover:text-blue-800">nos Conditions d'utilisation</a>
+  <span class="block sm:inline">et notre  
+    <a href="#" class="text-blue-600 underline font-semibold hover:text-blue-800">Politique de confidentialité.</a>
+  </span>
+</div>
+
                </div>
                                         
   
@@ -124,7 +134,8 @@
   </template>
   
 <script>
-import axios from 'axios';
+import axios from 'axios'
+import { useAuthStore } from '../stores/auth'
 
 export default {
   name: 'LoginPage',
@@ -138,47 +149,131 @@ export default {
   methods: {
     async handleSubmit() {
       if (!this.email || !this.email.includes('@') || !this.email.includes('.')) {
-        alert('Veuillez entrer une adresse email valide');
-        return;
+        alert('Veuillez entrer une adresse email valide')
+        return
       }
 
       try {
         const response = await axios.post('http://localhost:5000/api/auth/login', {
           email: this.email,
-        });
+        })
 
-        const { token, user, message } = response.data;
-        const role = user?.role;
+        const { token, user, message } = response.data
 
-        console.log('Rôle reçu:', role); // Pour débogage
+        if (token && user) {
+          localStorage.setItem('authToken', token)
+          localStorage.setItem('user', JSON.stringify({
+            name: user.name,
+            role: user.role,
+            email: user.email,
+          }))
 
-        if (token) {
-          localStorage.setItem('authToken', token);
-          localStorage.setItem('userRole', role); // Enregistre le rôle
+          const auth = useAuthStore()
+          auth.login({
+            name: user.name,
+            role: user.role,
+            email: user.email,
+          })
 
-          // Redirection basée sur le rôle
-          if (role === 'admin') {
-            this.$router.push('/dasboard');
-          } else if (role === 'student') {
-            this.$router.push('/flutter');
-          } else if (role === 'instructor') {
-            this.$router.push('/instructor/panel');
+          if (user.role === 'admin') {
+            this.$router.push('/dashboard')
+          } else if (user.role === 'student') {
+            this.$router.push('/flutter')
+          } else if (user.role === 'instructor') {
+            this.$router.push('/instructor/panel')
           } else {
-            this.$router.push('/');
+            this.$router.push('/')
           }
+
         } else {
-          alert(message || 'Connexion réussie mais aucun token reçu');
+          alert(message || 'Connexion réussie mais aucun token reçu')
         }
 
       } catch (error) {
-        console.error('Erreur détaillée:', error);
-        if (error.response?.data?.message) {
-          alert(error.response.data.message);
-        } else {
-          alert('Erreur de connexion au serveur. Veuillez réessayer plus tard.');
-        }
+        console.error('Erreur détaillée:', error)
+        alert(error.response?.data?.message || 'Erreur de connexion au serveur.')
       }
     },
-  },
-};
+
+    parseJwt(token) {
+      try {
+        const base64Payload = token.split('.')[1]
+        const payload = atob(base64Payload)
+        return JSON.parse(payload)
+      } catch {
+        return null
+      }
+    },
+
+    handleGoogleLogin() {
+      const auth = useAuthStore()
+      const router = this.$router
+
+      const messageListener = (event) => {
+        console.log('[GoogleLogin] Message reçu:', event.data)
+
+        if (event.origin !== 'http://localhost:3000') {
+          console.warn('[GoogleLogin] Origine invalide:', event.origin)
+          return
+        }
+
+        const { token } = event.data || {}
+
+        if (token) {
+          console.log('[GoogleLogin] Token reçu:', token)
+          localStorage.setItem('authToken', token)
+
+          const decodedUser = this.parseJwt(token)
+          if (decodedUser) {
+            const formattedUser = {
+              name: decodedUser.name || '',
+              role: decodedUser.role || '',
+              email: decodedUser.email || ''
+            }
+
+            console.log('[GoogleLogin] User décodé:', formattedUser)
+
+            localStorage.setItem('user', JSON.stringify(formattedUser))
+            auth.login(formattedUser)
+
+            console.log('[GoogleLogin] Store auth.user:', auth.user)
+            console.log('[GoogleLogin] localStorage user:', localStorage.getItem('user'))
+            console.log('[GoogleLogin] localStorage authToken:', localStorage.getItem('authToken'))
+
+            if (formattedUser.role === 'admin') {
+              router.push('/dashboard')
+            } else if (formattedUser.role === 'student') {
+              router.push('/')
+            } else if (formattedUser.role === 'instructor') {
+              router.push('/instructor/panel')
+            } else {
+              router.push('/')
+            }
+          } else {
+            alert('Impossible de décoder le token.')
+          }
+        } else {
+          alert('Erreur : Aucun token reçu depuis la popup Google')
+          console.error('[GoogleLogin] Données reçues sans token:', event.data)
+        }
+
+        googleLoginWindow?.close()
+        window.removeEventListener('message', messageListener)
+      }
+
+      window.addEventListener('message', messageListener, { once: true })
+
+      const width = 500
+      const height = 600
+      const left = window.innerWidth / 2 - width / 2
+      const top = window.innerHeight / 2 - height / 2
+
+      const googleLoginWindow = window.open(
+        'http://localhost:5000/auth/google',
+        'Connexion Google',
+        `width=${width},height=${height},top=${top},left=${left}`
+      )
+    }
+  }
+}
 </script>

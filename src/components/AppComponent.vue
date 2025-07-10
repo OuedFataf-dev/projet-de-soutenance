@@ -706,6 +706,7 @@
 <script setup>
 
 import { ref, computed } from 'vue';
+import AppFooter from './AppFooter.vue';
 import { cards } from '../data/data';
 
 const dataweb = ref(cards);
