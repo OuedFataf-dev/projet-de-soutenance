@@ -66,7 +66,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-
+const API_URL = process.env.VUE_APP_API_URL;
 const phone = ref('')
 const amount = ref('')
 const message = ref('')
@@ -99,7 +99,7 @@ const startPayment = async () => {
 
       // Lancer le polling toutes les 5 sec
       pollingInterval = setInterval(async () => {
-        const statusRes = await axios.get(`http://localhost:5000/api/payment/status/${response.data.transactionId}`)
+        const statusRes = await axios.get(`${API_URL}/api/payment/status/${response.data.transactionId}`)
         if (statusRes.data.status === 'confirmed') {
           clearInterval(pollingInterval)
           message.value = "🎉 Paiement confirmé avec succès."

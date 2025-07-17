@@ -85,7 +85,7 @@ import axios from 'axios'
 
 const route = useRoute()
 const courseId = route.params.id
-
+const API_URL = process.env.VUE_APP_API_URL;
 const courseData = ref({
   title: '',
   categories: '',
@@ -105,7 +105,7 @@ const courseData = ref({
 
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/admin/courses/id/${courseId}`)
+    const response = await axios.get(`${API_URL}/api/admin/courses/id/${courseId}`)
     const data = response.data
 
     // Parse les champs JSON reçus en chaîne
@@ -131,7 +131,7 @@ async function submitHandler() {
       sousSousDomaines: JSON.stringify(courseData.value.sousSousDomaines)
     }
 
-    const response = await axios.put(`http://localhost:5000/api/admin/courses/${courseId}`, payload)
+    const response = await axios.put(`${API_URL}/api/admin/courses/${courseId}`, payload)
     console.log('Modification enregistrée:', response.data)
     alert('Modifications enregistrées avec succès !')
   } catch (error) {

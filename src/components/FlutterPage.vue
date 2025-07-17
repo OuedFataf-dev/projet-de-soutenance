@@ -28,6 +28,7 @@ import { ref, onMounted } from 'vue'
 import heade from '../views/widgets/heade.vue'
 import DeveloppementMobile from './DeveloppementMobile.vue'
 import axios from 'axios'
+const API_URL = process.env.VUE_APP_API_URL;
 
 // Données réactives
 const courses1 = ref([]) // Sans categories
@@ -39,7 +40,7 @@ const soussousdomaine = 'Flutter'
 
 onMounted(async () => {
   try {
-    const res = await fetch(`http://localhost:5000/api/dev/by-soussousdomaine/${encodeURIComponent(soussousdomaine)}`)
+    const res = await fetch(`${API_URL}/api/dev/by-soussousdomaine/${encodeURIComponent(soussousdomaine)}`)
     const data = await res.json()
 
     // Séparer les cours selon présence de categories

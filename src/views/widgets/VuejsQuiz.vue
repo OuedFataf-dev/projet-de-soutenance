@@ -7,9 +7,10 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue'
+
 import axios from 'axios'
 import StatsComponent from './statsComponent.vue'
-
+const API_URL = process.env.VUE_APP_API_URL;
 // Props
 const props = defineProps({
   QuizData: Array,
@@ -54,7 +55,7 @@ const loadQuiz = async () => {
   try {
     const encodedDomain = encodeURIComponent(props.categoreContenu || 'Vue js')
     const response = await axios.get(
-      `http://localhost:5000/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
+      `${API_URL}/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
     )
 
     const quizzesFound = response.data.quizzes

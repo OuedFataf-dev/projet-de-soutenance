@@ -36,7 +36,7 @@ const formations = ref([
   { label: 'Data Design & Development', isLink: false },
   { label: 'TypeScript', isLink: false },
 ])
-
+const API_URL = process.env.VUE_APP_API_URL;
 
 import { firstRow } from '../../data/data'
 import { secondRow } from '../../data/data'
@@ -45,7 +45,7 @@ onMounted(async () => {
   const category = route.params.category || 'Développement'
 
   try {
-    const res = await axios.get(`http://localhost:5000/api/course/domain/${encodeURIComponent(category)}`)
+    const res = await axios.get(`${API_URL}/api/course/domain/${encodeURIComponent(category)}`)
     const fetchedCourses = res.data
 
     // Séparer les cours avec et sans catégorie

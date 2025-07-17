@@ -3,13 +3,14 @@
 <head><title>Callback Google</title></head>
 <body>
 <script>
+  const API_URL = process.env.VUE_APP_API_URL;
   const params = new URLSearchParams(window.location.search);
   const token = params.get('token');
 
   console.log('[Callback Google] Token reçu :', token);
 
   if (token && window.opener) {
-    window.opener.postMessage({ token }, 'http://localhost:3000');
+    window.opener.postMessage({ token }, `${API_URL}`);
     window.close();
   } else {
     console.warn('[Callback Google] Pas de token ou pas de fenêtre parente');

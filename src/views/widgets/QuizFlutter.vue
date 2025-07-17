@@ -5,6 +5,8 @@
   />
 </template>
 
+
+
 <script setup>
 import { ref, onMounted, watch } from 'vue'
 import axios from 'axios'
@@ -15,7 +17,7 @@ const props = defineProps({
   QuizData: Array,
   categoreContenu: String
 })
-
+const API_URL = process.env.VUE_APP_API_URL;
 // Références réactives
 const quiz = ref({ Questions: [] })
 const currentIndex = ref(0)
@@ -54,7 +56,7 @@ const loadQuiz = async () => {
   try {
     const encodedDomain = encodeURIComponent(props.categoreContenu || 'flutter')
     const response = await axios.get(
-      `http://localhost:5000/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
+      `${API_URL}/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
     )
 
     const quizzesFound = response.data.quizzes

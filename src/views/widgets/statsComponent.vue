@@ -182,6 +182,7 @@ const props = defineProps({
   QuizData: Array
 })
 
+const API_URL = process.env.VUE_APP_API_URL;
 // Réactifs
 const quiz = ref({ Questions: [] })
 const selectedDifficulty = ref('easy')
@@ -204,7 +205,7 @@ const domain = props.categoreContenu || 'Informatique et Logiciel'
 const ajouterCommentaire = async () => {
   if (nouveauCommentaire.value.nom && nouveauCommentaire.value.texte) {
     try {
-      const response = await axios.post('http://localhost:5000/api/quizzes/addComent', {
+      const response = await axios.post(`${API_URL}/api/quizzes/addComent`, {
         nom: nouveauCommentaire.value.nom,
         texte: nouveauCommentaire.value.texte
       })
@@ -259,7 +260,7 @@ const loadQuiz = async () => {
   try {
     const encodedDomain = encodeURIComponent(domain);
     const response = await axios.get(
-      `http://localhost:5000/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
+      `${API_URL}/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
     );
 
     const quizzesFound = response.data.quizzes;

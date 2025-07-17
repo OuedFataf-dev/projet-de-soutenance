@@ -29,6 +29,7 @@ const module = ref({
   oldPrice: 44.99
 })
 
+const API_URL = process.env.VUE_APP_API_URL;
 const formations = ref([
   { label: 'Business', route: '/webflutter', isLink: true },
   { label: 'Entrepreunariat', route: '/mobile', isLink: true },
@@ -45,7 +46,7 @@ onMounted(async () => {
   const category = route.params.category || 'Marketing'
 
   try {
-    const res = await axios.get(`http://localhost:5000/api/course/domain/${encodeURIComponent(category)}`)
+    const res = await axios.get(`${API_URL}/course/domain/${encodeURIComponent(category)}`)
     const fetchedCourses = res.data
 
     // Séparer les cours avec et sans catégorie

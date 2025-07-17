@@ -24,6 +24,7 @@ const validated = ref(false)
 const selectedDifficulty = ref('Facile') // Valeur par défaut
 const loading = ref(false)
 const error = ref(null)
+const API_URL = process.env.VUE_APP_API_URL;
 
 // Chargement initial
 onMounted(() => {
@@ -54,7 +55,7 @@ const loadQuiz = async () => {
   try {
     const encodedDomain = encodeURIComponent(props.categoreContenu || 'python')
     const response = await axios.get(
-      `http://localhost:5000/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
+      `${API_URL}/api/quizzes/domain/${encodedDomain}?difficulty=${selectedDifficulty.value}`
     )
 
     const quizzesFound = response.data.quizzes

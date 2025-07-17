@@ -40,12 +40,13 @@ const formations = ref([
   { label: 'TypeScript', isLink: false },
 ])
 
+const API_URL = process.env.VUE_APP_API_URL;
 // Récupération dynamique selon la catégorie passée dans l'URL
 onMounted(async () => {
   const category = route.params.category || 'Design'
 
   try {
-    const res = await axios.get(`http://localhost:5000/api/course/domain/${encodeURIComponent(category)}`)
+    const res = await axios.get(`${API_URL}/api/course/domain/${encodeURIComponent(category)}`)
     const fetchedCourses = res.data
 
     // Séparer les cours avec et sans catégorie

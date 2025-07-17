@@ -110,7 +110,9 @@
 import { ref } from 'vue'
 import axios from 'axios'
 
-const CREATE_URL = 'http://localhost:5000/api/quizzes/add'
+const API_URL = process.env.VUE_APP_API_URL;
+
+const CREATE_URL = `${API_URL}/api/quizzes/add`
 
 const success = ref(false)
 const errorMessage = ref('')

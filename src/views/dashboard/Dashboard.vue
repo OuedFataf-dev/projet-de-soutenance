@@ -346,7 +346,7 @@ import { useRouter } from 'vue-router'
 // Sélections
 
 
-
+const API_URL = process.env.VUE_APP_API_URL;
 
 
 const showModal = ref(false);
@@ -365,7 +365,7 @@ function openModal(id) {
 
 // Fonction déconnexion
 function logout() {
-  axios.post('http://localhost:5000/api/auth/logout', {}, {
+  axios.post(`${API_URL}/api/auth/logout`, {}, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
@@ -392,7 +392,7 @@ async function deleteUser(id) {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch(`http://localhost:5000/api/auth/users/${id}`, {
+    const response = await fetch(`${API_URL}/api/auth/users/${id}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -423,7 +423,7 @@ function Rapports() {
 
 async function fetchUsers() {
   try {
-    const response = await fetch("http://localhost:5000/api/auth/users")
+    const response = await fetch(`${API_URL}/api/auth/users`)
     const data = await response.json()
     users.value = data
   } catch (error) {
@@ -443,7 +443,7 @@ function cancelDelete() {
 // Suppression confirmée
 async function confirmDelete() {
   try {
-    await axios.delete(`http://localhost:5000/api/admin/courses/${courseIdToDelete.value}`);
+    await axios.delete(`${API_URL}/api/admin/courses/${courseIdToDelete.value}`);
     courses.value = courses.value.filter(course => course.id !== courseIdToDelete.value);
     showModal.value = false;
     courseIdToDelete.value = null;
@@ -604,16 +604,16 @@ async function updateCoursesFromSelection() {
 
     if (selectedSousSous.value) {
       // Cours spécifique
-      url = `http://localhost:5000/api/dev/by-soussousdomaine/${encodeURIComponent(selectedSousSous.value)}`
+      url = `${API_URL}/api/dev/by-soussousdomaine/${encodeURIComponent(selectedSousSous.value)}`
     } else if (selectedSubDomain.value) {
       // Sous-domaine
-      url = `http://localhost:5000/api/dev/subdomain/${encodeURIComponent(selectedSubDomain.value)}`
+      url = `${API_URL}/api/dev/subdomain/${encodeURIComponent(selectedSubDomain.value)}`
     } else if (selectedDomain.value) {
       // Domaine
-      url = `http://localhost:5000/api/course/domain/${encodeURIComponent(selectedDomain.value)}`
+      url = `${API_URL}/api/course/domain/${encodeURIComponent(selectedDomain.value)}`
     } else {
       // Fallback
-      url = `http://localhost:5000/api/dev/by-soussousdomaine/Flutter`
+      url = `${API_URL}/api/dev/by-soussousdomaine/Flutter`
     }
 
     const res = await axios.get(url)

@@ -201,7 +201,7 @@
 import { ref, computed } from 'vue'
 import axios from 'axios'
 import { list } from 'postcss'
-
+const API_URL = process.env.VUE_APP_API_URL;
 const title = ref('')
 
 const description = ref('')
@@ -365,7 +365,7 @@ const submitForm = async () => {
   }
 
   try {
-    const response = await axios.post('http://localhost:5000/api/dev/create', formData, {
+    const response = await axios.post(`${API_URL}/api/dev/create`  , formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

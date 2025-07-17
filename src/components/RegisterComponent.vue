@@ -144,6 +144,7 @@
 <script>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+const API_URL = process.env.VUE_APP_API_URL;
 
 export default {
   name: 'RegisterOrLoginComponent',
@@ -169,7 +170,7 @@ export default {
       }
 
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/register', {
+        const response = await axios.post(`${API_URL}/api/auth/register`, {
           name: this.name,
           email: this.email,
         });
@@ -202,14 +203,14 @@ export default {
       const top = (window.innerHeight / 2) - (height / 2);
 
       const googleLoginWindow = window.open(
-        'http://localhost:5000/auth/google',
+        `${API_URL}/auth/google`,
         'Connexion Google',
         `width=${width},height=${height},top=${top},left=${left}`
       );
 
       const messageListener = (event) => {
         // ✅ Sécurité : vérifier l’origine
-        if (event.origin !== 'http://localhost:3000') {
+        if (event.origin !== `${API_URL}`) {
           console.warn('Origine invalide:', event.origin);
           return;
         }

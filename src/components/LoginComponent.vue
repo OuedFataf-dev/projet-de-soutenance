@@ -135,6 +135,9 @@
   
 <script>
 import axios from 'axios'
+const API_URL = process.env.VUE_APP_API_URL;
+
+
 import { useAuthStore } from '../stores/auth'
 
 export default {
@@ -154,7 +157,7 @@ export default {
       }
 
       try {
-        const response = await axios.post('http://localhost:5000/api/auth/login', {
+        const response = await axios.post(`${API_URL}`, {
           email: this.email,
         })
 
@@ -212,7 +215,7 @@ export default {
       const messageListener = (event) => {
         console.log('[GoogleLogin] Message reçu:', event.data)
 
-        if (event.origin !== 'http://localhost:3000') {
+        if (event.origin !== `${API_URL}`) {
           console.warn('[GoogleLogin] Origine invalide:', event.origin)
           return
         }
@@ -269,7 +272,7 @@ export default {
       const top = window.innerHeight / 2 - height / 2
 
       const googleLoginWindow = window.open(
-        'http://localhost:5000/auth/google',
+        `${API_URL}/auth/google`,
         'Connexion Google',
         `width=${width},height=${height},top=${top},left=${left}`
       )

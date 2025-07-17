@@ -44,12 +44,13 @@ const formations = ref([
   { label: 'TypeScript', isLink: false },
 ])
 
+const API_URL = process.env.VUE_APP_API_URL;
 onMounted(async () => {
   // Récupérer le sous-domaine depuis l'URL
   const subdomain = route.params.subdomain || 'Design graphique' // Valeur par défaut
 
   try {
-    const res = await axios.get(`http://localhost:5000/api/dev/subdomain/${encodeURIComponent(subdomain)}`)
+    const res = await axios.get(`${API_URL}/api/dev/subdomain/${encodeURIComponent(subdomain)}`)
 
     const fetchedCourses = res.data
 

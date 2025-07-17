@@ -701,10 +701,10 @@ const courses2 = ref([]);
 const selectedDomaine = ref("Angular"); // domaine sélectionné par l’utilisateur
 
 const isFirstLoad = ref(true); // ← Ce flag indique si c'est le premier appel
-
+const API_URL = process.env.VUE_APP_API_URL;
 const fetchCourses = async () => {
   try {
-    const res = await axios.get(`http://localhost:5000/api/course/domain/${selectedDomaine.value}`);
+    const res = await axios.get(`${API_URL}/api/course/domain/${selectedDomaine.value}`);
 
     // Met à jour tous les cours récupérés
     courses.value = res.data;

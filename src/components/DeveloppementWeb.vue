@@ -24,10 +24,10 @@ const courses2 = ref([]) // Avec catégories
 
 // Valeur par défaut
 const soussousdomaine = 'React JS'
-
+const API_URL = process.env.VUE_APP_API_URL;
 onMounted(async () => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/dev/by-soussousdomaine/${encodeURIComponent(soussousdomaine)}`)
+    const response = await axios.get(`${API_URL}/api/dev/by-soussousdomaine/${encodeURIComponent(soussousdomaine)}`)
     const data = response.data
 
     console.log('Données brutes récupérées :', data)
