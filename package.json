@@ -15,7 +15,8 @@
     "dev": "vite --force",
     "build": "vite build",
     "lint": "eslint",
-    "preview": "vite preview"
+   
+     "preview": "vite preview --port $PORT"
   },
   "dependencies": {
     "@coreui/chartjs": "^4.1.0",
