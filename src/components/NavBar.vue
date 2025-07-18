@@ -19,7 +19,7 @@
         Gandyam
       </div>
 
-<div class="relative">
+<div class=" text-2xl  relative">
     <router-link
     
     >
