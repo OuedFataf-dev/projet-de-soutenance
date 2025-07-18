@@ -81,77 +81,10 @@
       <!-- Séparateur -->
       <div class="border-l border-gray-200 h-full"></div>
 
-      <!-- Deuxième Tooltip (Droite) -->
-      <div
-        v-show="showSubTooltip"
-        class="absolute top-0 left-full w-80 border-l-2 border-gray-200 h-96 p-4 z-40 bg-white shadow-lg"
-        @mouseenter="cancelHideTooltip('all')"
-        @mouseleave="startHideTooltip('sub')"
-      >
-        <h5 class="mb-2 text-sm font-semibold text-gray-900">Sous-catégories</h5>
+      
 
-        <div class="space-y-3">
-          <div
-            v-for="(category, index) in filteredSubCategories"
-            :key="index"
-            class="flex items-center justify-between"
-          >
-            <a 
-              :href="category.link"
-              @mouseenter="selectedSubCategory = category.name; showThirdTooltip = category.name; cancelHideTooltip('all')"
-              @mouseleave="startHideTooltip('third')"
-              class="text-sm hover:text-purple-600"
-            >
-              {{ category.name }}
-            </a> 
-            <div
-              class="cursor-pointer"
-              @mouseenter="selectedSubCategory = category.name; showThirdTooltip = category.name; cancelHideTooltip('all')"
-              @mouseleave="startHideTooltip('third')"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-4 h-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+     
 
-      <!-- Troisième Tooltip -->
-      <div
-        v-show="showThirdTooltip"
-        class="absolute top-0 left-[200%] w-72 rounded-tr-lg border-l-2 border-gray-200 h-96 rounded-lg p-4 z-30 bg-white shadow-lg"
-        @mouseenter="cancelHideTooltip('all')"
-        @mouseleave="startHideTooltip('third')"
-      >
-        <h5 class="mb-2 text-sm font-semibold text-gray-900">Formations</h5>
-        <ul class="space-y-2">
-          <li
-            v-for="(subsub, index) in filteredSubsubCategories"
-            :key="index"
-          >
-            <a 
-              v-if="subsub.link" 
-              :href="subsub.link"
-              class="text-sm hover:text-purple-600 block"
-            >
-              {{ subsub.name }}
-            </a>
-            <span v-else class="text-sm block">{{ subsub.name }}</span>
-          </li>
-        </ul>
-      </div>
     </div>
 
     <!-- Menu mobile (optionnel) -->
