@@ -66,7 +66,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const phone = ref('')
 const amount = ref('')
 const message = ref('')

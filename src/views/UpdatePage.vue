@@ -85,7 +85,7 @@ import axios from 'axios'
 
 const route = useRoute()
 const courseId = route.params.id
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const courseData = ref({
   title: '',
   categories: '',

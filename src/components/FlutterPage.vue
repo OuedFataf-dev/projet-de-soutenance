@@ -28,7 +28,7 @@ import { ref, onMounted } from 'vue'
 import heade from '../views/widgets/heade.vue'
 import DeveloppementMobile from './DeveloppementMobile.vue'
 import axios from 'axios'
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 // Données réactives
 const courses1 = ref([]) // Sans categories

@@ -36,7 +36,7 @@ const formations = ref([
   { label: 'Data Design & Development', isLink: false },
   { label: 'TypeScript', isLink: false },
 ])
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 import { firstRow } from '../../data/data'
 import { secondRow } from '../../data/data'

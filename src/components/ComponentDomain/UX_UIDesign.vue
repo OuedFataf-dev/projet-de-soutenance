@@ -44,7 +44,7 @@ const formations = ref([
   { label: 'TypeScript', isLink: false },
 ])
 
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 onMounted(async () => {
   // Récupérer le sous-domaine depuis l'URL
   const subdomain = route.params.subdomain || 'UX/UI Design"' // Valeur par défaut

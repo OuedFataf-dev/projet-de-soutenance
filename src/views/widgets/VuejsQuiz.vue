@@ -10,7 +10,7 @@ import { ref, onMounted, watch } from 'vue'
 
 import axios from 'axios'
 import StatsComponent from './statsComponent.vue'
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 // Props
 const props = defineProps({
   QuizData: Array,

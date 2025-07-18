@@ -24,7 +24,7 @@ const validated = ref(false)
 const selectedDifficulty = ref('Facile') // Valeur par défaut
 const loading = ref(false)
 const error = ref(null)
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 // Chargement initial
 onMounted(() => {

@@ -346,7 +346,7 @@ import { useRouter } from 'vue-router'
 // Sélections
 
 
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 
 const showModal = ref(false);

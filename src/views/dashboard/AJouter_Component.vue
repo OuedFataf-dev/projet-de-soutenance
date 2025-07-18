@@ -201,7 +201,7 @@
 import { ref, computed } from 'vue'
 import axios from 'axios'
 import { list } from 'postcss'
-const API_URL = process.env.VUE_APP_API_URL;
+const API_URL = import.meta.env.VITE_APP_API_URL;
 const title = ref('')
 
 const description = ref('')
