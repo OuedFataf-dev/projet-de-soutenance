@@ -20,15 +20,9 @@
       </div>
 
 <div class="relative">
-    <router-link
-      id="decouvrir"
-      class="text-sm px-8 font-bold hover:text-purple-600"
-      @mouseenter="showMainTooltip('decouvrir')"
-      @mouseleave="startHideTooltip('main')"
-    >
+    
       Découvrir
-    </router-link>
-
+   
    
 
       <!-- Séparateur -->
