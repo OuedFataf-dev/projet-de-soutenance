@@ -411,26 +411,14 @@
 </template>
 
 
-
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
 
-
 const mobileMenuOpen = ref(false);
-
-
 const auth = useAuthStore()
-
 const selectedCategory = ref(null);
-
-
-// Utiliser directement ce que fournit le store :
-
-
-
-
 const router = useRouter()
 
 onMounted(() => {
@@ -441,11 +429,13 @@ const logout = () => {
   auth.logout()
   router.push('/login')
 }
+
 // États pour gérer les tooltips
 const showTooltip = ref(null);
 const showSubTooltip = ref(null);
 const showThirdTooltip = ref(null);
 const selectedSubCategory = ref(null);
+
 // Timeouts pour les fermetures retardées
 const hideTimeouts = ref({
   main: null,
@@ -453,24 +443,19 @@ const hideTimeouts = ref({
   third: null
 });
 
-const filteredSubsubCategories = computed(() => {
-  if (!selectedSubCategory.value) return [];
-  return subSubCategories.filter(sub => sub.parent === selectedSubCategory.value);
-});
-
-
 const selectCategory = (name) => {
   selectedCategory.value = name;
 };
+
 // Liste des catégories principales
 const categories = [
   { name: "Développement", margin: "ml-34", link: "/web1" },
-  { name: "Business", margin: "ml-50",link:"/business" },
-  { name: "Finance et Comptabilité", margin: "ml-23",link:"/finance" },
+  { name: "Business", margin: "ml-50", link: "/business" },
+  { name: "Finance et Comptabilité", margin: "ml-23", link: "/finance" },
   { name: "Santé et Bien-être", margin: "ml-33" },
-  { name: "Design", margin: "ml-55" ,link:"/design"},
-  { name: "Informatique et Logiciel", margin: "ml-23",link:"/informatique" },
-  { name: "Marketing", margin: "ml-48" ,link:"/marketing"},
+  { name: "Design", margin: "ml-55", link: "/design" },
+  { name: "Informatique et Logiciel", margin: "ml-23", link: "/informatique" },
+  { name: "Marketing", margin: "ml-48", link: "/marketing" },
   { name: "Développement Personnel", margin: "ml-1 -ml-2" },
   { name: "Productivité Bureautique", margin: "ml-40" },
   { name: "Photographie et Vidéo", margin: "ml-36" }
@@ -478,36 +463,24 @@ const categories = [
 
 // Liste des sous-catégories
 const subCategories = [
-  { name: "Développement mobile", margin: "ml-7", parent: "Développement",link: "/devMobile" },
-  { name: "Génie Logiciel", margin: "ml-24", parent: "Développement",link:'/génie' },
+  { name: "Développement mobile", margin: "ml-7", parent: "Développement", link: "/devMobile" },
+  { name: "Génie Logiciel", margin: "ml-24", parent: "Développement", link: '/génie' },
   { name: "Design pattern", margin: "ml-22", parent: "Développement" },
-  { name: "Programmation Web", margin: "ml-15", parent: "Développement",link:"/web" },
-  { name: "UI/UX", margin: "ml-44", parent: "Design",link:"ui/ux" },
+  { name: "Programmation Web", margin: "ml-15", parent: "Développement", link: "/web" },
+  { name: "UI/UX", margin: "ml-44", parent: "Design", link: "ui/ux" },
   { name: "Graphisme", margin: "ml-36", parent: "Design" },
   { name: "3D & Animation", margin: "ml-28", parent: "Design" },
   { name: "Illustration", margin: "ml-35", parent: "Design" }
 ];
 
-
-
-
 const subSubCategories = [
-  { name: "flutter", margin: "ml-7", parent: "Développement mobile",link: "/devMobile" },
-  { name: "Kotlin", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
-  { name: "react Native", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
-  { name: "Android", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
+  { name: "flutter", margin: "ml-7", parent: "Développement mobile", link: "/devMobile" },
+  { name: "Kotlin", margin: "ml-7", parent: "Développement mobile", link: '/génie' },
+  { name: "react Native", margin: "ml-7", parent: "Développement mobile", link: '/génie' },
+  { name: "Android", margin: "ml-7", parent: "Développement mobile", link: '/génie' },
   { name: "Angulaire", margin: "ml-22", parent: "Programmation Web" },
-  { name: "react js", margin: "ml-20", parent: "Génie Logiciel",link:"/web" },
- 
+  { name: "react js", margin: "ml-20", parent: "Génie Logiciel", link: "/web" },
 ];
-
-   
-
-
-
-   
-
-
 
 // Filtre les sous-catégories en fonction de la catégorie sélectionnée
 const filteredSubCategories = computed(() => {
@@ -515,7 +488,10 @@ const filteredSubCategories = computed(() => {
   return subCategories.filter(sub => sub.parent === showSubTooltip.value);
 });
 
-
+const filteredSubsubCategories = computed(() => {
+  if (!selectedSubCategory.value) return [];
+  return subSubCategories.filter(sub => sub.parent === selectedSubCategory.value);
+});
 
 const mobileSubCategories = computed(() => {
   if (!selectedCategory.value) return [];
