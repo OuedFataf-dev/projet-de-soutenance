@@ -20,7 +20,7 @@
       </div>
 
 
-       <div class="hidden md:block -ml-80 relative">
+       <div class=" -ml-80 relative">
       <!-- ... ton bloc Découvrir avec les tooltips ... -->
     </div>
 
@@ -260,7 +260,7 @@
         <!-- Boutons Connexion et Inscription -->
        <template v-if="!auth.isAuthenticated">
   <router-link
-    to="/dasboard"
+    to="/login"
     class="bg-white border hidden md:block  text-sm border-purple-800 text-purple-900 px-4 py-2 rounded hover:bg-gray-200"
   >
     Se connecter
