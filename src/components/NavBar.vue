@@ -29,57 +29,7 @@
       Découvrir
     </router-link>
 
-    <!-- Tooltip Découvrir -->
-    <div
-      v-show="showTooltip === 'decouvrir'"
-      class="absolute z-50 mt-6 w-80 h-96 rounded-tl-lg bg-white border border-gray-200 shadow-lg left-1/2 transform -translate-x-1/2 flex"
-      @mouseenter="cancelHideTooltip('main')"
-      @mouseleave="startHideTooltip('main')"
-    >
-      <!-- Premier Tooltip (Gauche) -->
-      <div class="w-1/2 p-4 z-50">
-        <h5 class="mb-2 text-sm font-semibold text-gray-900">
-          Parcourir les certifications
-        </h5>
-        <p class="text-sm text-gray-500">Préparations aux certifications.</p>
-        <hr class="h-px my-4 bg-gray-200 border-0" />
-        <div class="space-y-3">
-          <div
-            class="flex items-center justify-between"
-            v-for="category in categories"
-            :key="category.name"
-          >
-            <a
-              @mouseenter="showSubTooltip = category.name; cancelHideTooltip('all')"
-              @mouseleave="startHideTooltip('sub')"
-              :href="category.link"
-              class="hover:text-purple-600 text-sm"
-            >
-              {{ category.name }}
-            </a>
-            <div
-              class="cursor-pointer"
-              @mouseenter="showSubTooltip = category.name; cancelHideTooltip('all')"
-              @mouseleave="startHideTooltip('sub')"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-4 h-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+   
 
       <!-- Séparateur -->
       <div class="border-l border-gray-200 h-full"></div>
@@ -132,30 +82,7 @@
       </div>
 
       <!-- Troisième Tooltip -->
-      <div
-        v-show="showThirdTooltip"
-        class="absolute top-0 left-[200%] w-72 rounded-tr-lg border-l-2 border-gray-200 h-96 rounded-lg p-4 z-30 bg-white shadow-lg"
-        @mouseenter="cancelHideTooltip('all')"
-        @mouseleave="startHideTooltip('third')"
-      >
-        <h5 class="mb-2 text-sm font-semibold text-gray-900">Formations</h5>
-        <ul class="space-y-2">
-          <li
-            v-for="(subsub, index) in filteredSubsubCategories"
-            :key="index"
-          >
-            <a 
-              v-if="subsub.link" 
-              :href="subsub.link"
-              class="text-sm hover:text-purple-600 block"
-            >
-              {{ subsub.name }}
-            </a>
-            <span v-else class="text-sm block">{{ subsub.name }}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+      
 
     <!-- Menu mobile (optionnel) -->
     <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t">
