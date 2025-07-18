@@ -25,7 +25,7 @@
     </div>
 
       <!-- Bouton Découvrir avec Tooltip -->
-      <div class="hidden md:block -ml -80 relative">
+      <div class=" -ml -80 relative">
         <router-link
           
           id="decouvrir"
