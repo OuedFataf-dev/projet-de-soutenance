@@ -29,7 +29,7 @@ const module = ref({
   oldPrice: 44.99
 })
 
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 const formations = ref([
   { label: 'Business', route: '/webflutter', isLink: true },
   { label: 'Entrepreunariat', route: '/mobile', isLink: true },

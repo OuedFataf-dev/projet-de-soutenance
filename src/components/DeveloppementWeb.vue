@@ -24,7 +24,7 @@ const courses2 = ref([]) // Avec catégories
 
 // Valeur par défaut
 const soussousdomaine = 'React JS'
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 onMounted(async () => {
   try {
     const response = await axios.get(`${API_URL}/api/dev/by-soussousdomaine/${encodeURIComponent(soussousdomaine)}`)

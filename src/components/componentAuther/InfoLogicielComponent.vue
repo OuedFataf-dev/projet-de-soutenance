@@ -40,7 +40,7 @@ const formations = ref([
   { label: 'Droites des affaires', isLink: false },
 ])
 
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 
 // Récupération dynamique selon la catégorie passée dans l'URL
 onMounted(async () => {

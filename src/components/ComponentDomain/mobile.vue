@@ -43,7 +43,7 @@ const formations = ref([
   { label: 'Data Design & Development', isLink: false },
   { label: 'TypeScript', isLink: false },
 ])
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 
 onMounted(async () => {
   // Récupérer le sous-domaine depuis l'URL

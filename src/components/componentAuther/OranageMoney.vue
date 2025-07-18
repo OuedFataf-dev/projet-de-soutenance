@@ -66,7 +66,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 const phone = ref('')
 const amount = ref('')
 const message = ref('')

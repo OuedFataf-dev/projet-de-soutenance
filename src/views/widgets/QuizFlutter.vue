@@ -17,7 +17,7 @@ const props = defineProps({
   QuizData: Array,
   categoreContenu: String
 })
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 // Références réactives
 const quiz = ref({ Questions: [] })
 const currentIndex = ref(0)

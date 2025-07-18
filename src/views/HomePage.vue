@@ -701,7 +701,7 @@ const courses2 = ref([]);
 const selectedDomaine = ref("Angular"); // domaine sélectionné par l’utilisateur
 
 const isFirstLoad = ref(true); // ← Ce flag indique si c'est le premier appel
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 const fetchCourses = async () => {
   try {
     const res = await axios.get(`${API_URL}/api/course/domain/${selectedDomaine.value}`);

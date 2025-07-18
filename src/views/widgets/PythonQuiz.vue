@@ -24,7 +24,7 @@ const validated = ref(false)
 const selectedDifficulty = ref('Facile') // Valeur par défaut
 const loading = ref(false)
 const error = ref(null)
-const API_URL = import.meta.env.VITE_APP_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 
 // Chargement initial
 onMounted(() => {
