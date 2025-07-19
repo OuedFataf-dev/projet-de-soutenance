@@ -6,15 +6,18 @@
 </head>
 <body>
   <script>
+    const FRONTEND_URL = 'https://projet-de-soutenance.netlify.app';
+
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
 
     if (token && window.opener) {
       // Envoie le token vers la fenêtre parente (sécurise l'origine)
-      window.opener.postMessage({ token }, 'https://projet-de-soutenance.netlify.app');
+      window.opener.postMessage({ token }, FRONTEND_URL);
       window.close();
     } else {
       console.warn('Token manquant ou pas de fenêtre parente');
+      document.body.innerHTML = '<p>Token manquant ou pas de fenêtre parente.</p>';
     }
   </script>
 </body>
