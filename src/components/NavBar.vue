@@ -19,14 +19,10 @@
         Gandyam
       </div>
 
-<div class="text-2xl ">
+<div class="text-2xl">
   
-      
-      <router-link
-           
-          >
             Decouvrir
-          </router-link>
+        
 
     </div>
     <!-- Tooltip Découvrir -->
