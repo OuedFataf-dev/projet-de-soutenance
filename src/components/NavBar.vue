@@ -19,7 +19,7 @@
         Gandyam
       </div>
  
-       <div class=" -ml -80 relative">
+       <div class="hidden md:block  -ml -80 relative">
         <router-link
           to="/"
           id="decouvrir"
@@ -175,30 +175,41 @@
 
     
 
-    <!-- Menu mobile (optionnel) -->
-    <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t">
-      <div class="px-4 py-2">
-        <div v-for="category in categories" :key="category.name" class="mb-2">
-          <button
-            @click="selectCategory(category.name)"
-            class="w-full text-left px-3 py-2 text-sm font-medium hover:bg-gray-100"
-          >
-            {{ category.name }}
-          </button>
-          <div v-if="selectedCategory === category.name" class="ml-4">
-            <a
-              v-for="subCat in mobileSubCategories"
-              :key="subCat.name"
-              :href="subCat.link"
-              class="block px-3 py-1 text-sm text-gray-600 hover:text-purple-600"
-            >
-              {{ subCat.name }}
-            </a>
-          </div>
-        </div>
+  <div v-if="mobileMenuOpen" class="md:hidden bg-white border-t">
+  <div class="px-4 py-2">
+    <div v-for="category in categories" :key="category.name" class="mb-2">
+      
+      <template v-if="category.link">
+        <a
+          :href="category.link"
+          class="w-full block text-left px-3 py-2 text-sm font-medium hover:bg-gray-100"
+        >
+          {{ category.name }}
+        </a>
+      </template>
+      
+      <template v-else>
+        <span
+          class="w-full block text-left px-3 py-2 text-sm font-medium text-gray-400"
+        >
+          {{ category.name }} (pas de lien)
+        </span>
+      </template>
+
+      <div v-if="selectedCategory === category.name" class="ml-4">
+        <a
+          v-for="subCat in mobileSubCategories"
+          :key="subCat.name"
+          :href="subCat.link"
+          class="block px-3 py-1 text-sm text-gray-600 hover:text-purple-600"
+        >
+          {{ subCat.name }}
+        </a>
       </div>
     </div>
-  
+  </div>
+</div>
+
 
       <!-- Barre de recherche -->
       <input
