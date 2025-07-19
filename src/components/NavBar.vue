@@ -18,11 +18,150 @@
       </button>
         Gandyam
       </div>
-<div class="text-2xl">
-  <router-link>
-    Decouvrir
-  </router-link>
+ 
+       <div class=" -ml -80 relative">
+        <router-link
+          to="/"
+          id="decouvrir"
+          class="text-sm px-8 0 -ml-40  font-bold hover:text-purple-600"
+          @mouseenter="showMainTooltip('decouvrir')"
+          @mouseleave="startHideTooltip('main')"
+        >
+          Découvrir
+        </router-link>
+
+        <!-- Tooltip Découvrir -->
+        <div
+          v-show="showTooltip === 'decouvrir'"
+          class="absolute z-[60] mt-6 w-[300px] h-[500px]  rounded-tl-lg bg-white border border-gray-200 shadow-lg left-1/2 transform -translate-x-1/2 flex"
+          @mouseenter="cancelHideTooltip('main')"
+          @mouseleave="startHideTooltip('main')"
+        >
+         
+           <!-- Premier Tooltip (Gauche) -->
+<div class="w-1/2 p-4 z-50 ">
+  <h5 class="mb-2 text-sm font-semibold whitespace-nowrap text-gray-900">
+    Parcourir les certifications
+  </h5>
+  <p class="text-sm whitespace-nowrap text-gray-500">Préparations aux certifications.</p>
+  <hr class="h-px -ml-4 w-74 my-4 bg-gray-200 border-0" />
+  <div class="space-y-3">
+    <div
+      class="flex items-center space-x-4"
+      v-for="category in categories"
+      :key="category.name"
+    >
+      <div class="flex items-start w-full">
+        <a
+           @mouseenter="showSubTooltip = category.name; cancelHideTooltip('all')"
+          @mouseleave="startHideTooltip('sub')"
+            :href="category.link"
+
+         class="mt-2  hover:text-purple-600 whitespace-nowrap">{{ category.name }}</a>
+        <div
+          class="cursor-pointer mt-2 ml-20"
+          :class="category.margin"
+          @mouseenter="showSubTooltip = category.name; cancelHideTooltip('all')"
+          @mouseleave="startHideTooltip('sub')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-4"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Séparateur -->
+<div class="border-l border-white h-full absolute top-0 left-1/2 transform translate-x-1/2"></div>
+
+<!-- Deuxième Tooltip (Droite) -->
+<div
+  v-show="showSubTooltip"
+  class="absolute top-0 left-[100%] w-80 border-l-2 border-gray-200 h-150 p-4 pl-20 z-20 bg-white"
+  @mouseenter="cancelHideTooltip('all')"
+  @mouseleave="startHideTooltip('sub')"
+>
+  <h5 class="mb-2 text-sm font-semibold  text-gray-900">Sous-catégories</h5>
+
+  <div class="space-y-3">
+    <div
+      v-for="(category, index) in filteredSubCategories"
+      :key="index"
+      class="flex gap-x-2"
+    >
+      <a 
+        :href="category.link"
+        @mouseenter="selectedSubCategory = category.name; showThirdTooltip = true; cancelHideTooltip('all')"
+
+        @mouseleave="startHideTooltip('third')"
+      class="-ml-4 text-center  hover:text-purple-600 whitespace-nowrap">
+        {{ category.name }}
+      </a> 
+      <div
+        class="mt-1 px-5 cursor-pointer"
+        :class="category.margin"
+        @mouseenter="selectedSubCategory = category.name; showThirdTooltip = true; cancelHideTooltip('all')"
+
+        @mouseleave="startHideTooltip('third')"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m8.25 4.5 7.5 7.5-7.5 7.5"
+          />
+        </svg>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+          <!-- Troisième Tooltip (À droite du deuxième tooltip) -->
+          <div class=" ml-16">
+
+            <div
+            
+            v-show="showThirdTooltip"
+            class="absolute top-0 left-[200%] w-70  rounded-tr-lg border-l-2 border-gray-200  h-150 rounded-lg p-4 z-30 bg-white"
+            @mouseenter="cancelHideTooltip('all')"
+            @mouseleave="startHideTooltip('third')"
+          >
+          <ul >
+    <li
+      v-for="(subsub, index) in filteredSubsubCategories"
+      :key="index"
+      :class="subsub.margin"
+    >
+      <a v-if="subsub.link" :href="subsub.link">{{ subsub.name }}</a>
+      <span v-else>{{ subsub.name }}</span>
+    </li>
+  </ul>
+          </div>
+            
+          </div>
+        </div>
+      </div>
 
     <!-- Tooltip Découvrir -->
    
@@ -308,9 +447,20 @@ import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
 
+
 const mobileMenuOpen = ref(false);
+
+
 const auth = useAuthStore()
+
 const selectedCategory = ref(null);
+
+
+// Utiliser directement ce que fournit le store :
+
+
+
+
 const router = useRouter()
 
 onMounted(() => {
@@ -321,13 +471,11 @@ const logout = () => {
   auth.logout()
   router.push('/login')
 }
-
 // États pour gérer les tooltips
 const showTooltip = ref(null);
 const showSubTooltip = ref(null);
 const showThirdTooltip = ref(null);
 const selectedSubCategory = ref(null);
-
 // Timeouts pour les fermetures retardées
 const hideTimeouts = ref({
   main: null,
@@ -335,19 +483,24 @@ const hideTimeouts = ref({
   third: null
 });
 
+const filteredSubsubCategories = computed(() => {
+  if (!selectedSubCategory.value) return [];
+  return subSubCategories.filter(sub => sub.parent === selectedSubCategory.value);
+});
+
+
 const selectCategory = (name) => {
   selectedCategory.value = name;
 };
-
 // Liste des catégories principales
 const categories = [
   { name: "Développement", margin: "ml-34", link: "/web1" },
-  { name: "Business", margin: "ml-50", link: "/business" },
-  { name: "Finance et Comptabilité", margin: "ml-23", link: "/finance" },
+  { name: "Business", margin: "ml-50",link:"/business" },
+  { name: "Finance et Comptabilité", margin: "ml-23",link:"/finance" },
   { name: "Santé et Bien-être", margin: "ml-33" },
-  { name: "Design", margin: "ml-55", link: "/design" },
-  { name: "Informatique et Logiciel", margin: "ml-23", link: "/informatique" },
-  { name: "Marketing", margin: "ml-48", link: "/marketing" },
+  { name: "Design", margin: "ml-55" ,link:"/design"},
+  { name: "Informatique et Logiciel", margin: "ml-23",link:"/informatique" },
+  { name: "Marketing", margin: "ml-48" ,link:"/marketing"},
   { name: "Développement Personnel", margin: "ml-1 -ml-2" },
   { name: "Productivité Bureautique", margin: "ml-40" },
   { name: "Photographie et Vidéo", margin: "ml-36" }
@@ -355,24 +508,36 @@ const categories = [
 
 // Liste des sous-catégories
 const subCategories = [
-  { name: "Développement mobile", margin: "ml-7", parent: "Développement", link: "/devMobile" },
-  { name: "Génie Logiciel", margin: "ml-24", parent: "Développement", link: '/génie' },
+  { name: "Développement mobile", margin: "ml-7", parent: "Développement",link: "/devMobile" },
+  { name: "Génie Logiciel", margin: "ml-24", parent: "Développement",link:'/génie' },
   { name: "Design pattern", margin: "ml-22", parent: "Développement" },
-  { name: "Programmation Web", margin: "ml-15", parent: "Développement", link: "/web" },
-  { name: "UI/UX", margin: "ml-44", parent: "Design", link: "ui/ux" },
+  { name: "Programmation Web", margin: "ml-15", parent: "Développement",link:"/web" },
+  { name: "UI/UX", margin: "ml-44", parent: "Design",link:"ui/ux" },
   { name: "Graphisme", margin: "ml-36", parent: "Design" },
   { name: "3D & Animation", margin: "ml-28", parent: "Design" },
   { name: "Illustration", margin: "ml-35", parent: "Design" }
 ];
 
+
+
+
 const subSubCategories = [
-  { name: "flutter", margin: "ml-7", parent: "Développement mobile", link: "/devMobile" },
-  { name: "Kotlin", margin: "ml-7", parent: "Développement mobile", link: '/génie' },
-  { name: "react Native", margin: "ml-7", parent: "Développement mobile", link: '/génie' },
-  { name: "Android", margin: "ml-7", parent: "Développement mobile", link: '/génie' },
+  { name: "flutter", margin: "ml-7", parent: "Développement mobile",link: "/devMobile" },
+  { name: "Kotlin", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
+  { name: "react Native", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
+  { name: "Android", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
   { name: "Angulaire", margin: "ml-22", parent: "Programmation Web" },
-  { name: "react js", margin: "ml-20", parent: "Génie Logiciel", link: "/web" },
+  { name: "react js", margin: "ml-20", parent: "Génie Logiciel",link:"/web" },
+ 
 ];
+
+   
+
+
+
+   
+
+
 
 // Filtre les sous-catégories en fonction de la catégorie sélectionnée
 const filteredSubCategories = computed(() => {
@@ -380,10 +545,7 @@ const filteredSubCategories = computed(() => {
   return subCategories.filter(sub => sub.parent === showSubTooltip.value);
 });
 
-const filteredSubsubCategories = computed(() => {
-  if (!selectedSubCategory.value) return [];
-  return subSubCategories.filter(sub => sub.parent === selectedSubCategory.value);
-});
+
 
 const mobileSubCategories = computed(() => {
   if (!selectedCategory.value) return [];
@@ -430,8 +592,7 @@ const cancelHideTooltip = (type) => {
     clearTimeout(hideTimeouts.value[type]);
   }
 };
-</script>
-
+</script>  
 <style scoped>
 
 .mobile-menu-open {
