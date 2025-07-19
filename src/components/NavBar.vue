@@ -19,10 +19,14 @@
         Gandyam
       </div>
 
-<div class="text-2xl">
+<div class="text-2xl ">
   
-      Découvrir
-    
+      
+      <router-link
+           
+          >
+            Decouvrir
+          </router-link>
 
     </div>
     <!-- Tooltip Découvrir -->
@@ -100,7 +104,7 @@
         </div>
 
         <!-- Enseigner sur Udemy -->
-        <div class=" relative">
+        <div class="relative">
           <router-link
             id="Enseigner"
             to="/Quiz"
