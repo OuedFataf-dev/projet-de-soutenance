@@ -19,13 +19,12 @@
         Gandyam
       </div>
 
-<div class=" text-2xl  relative">
-    <router-link
-    
-    >
+<div class=" text-2xl  ">
+    <router-link>
       Découvrir
     </router-link>
 
+    </div>
     <!-- Tooltip Découvrir -->
    
 
@@ -35,7 +34,7 @@
       
 
      
-</div>
+
     
 
     <!-- Menu mobile (optionnel) -->
