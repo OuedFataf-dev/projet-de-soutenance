@@ -401,7 +401,8 @@
     :key="cat.name"
     class="flex justify-between items-center py-2 px-2 bg-white  mb-2 rounded hover:bg-purple-100"
   >
-    <span>{{ cat.name }}</span>
+    <a :href="cat.link" class="">{{ cat.name }}</a>
+    
     <button @click="selectCategory(cat.name)">
       <svg
         xmlns="http://www.w3.org/2000/svg"
