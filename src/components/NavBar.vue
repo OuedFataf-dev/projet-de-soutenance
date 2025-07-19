@@ -19,7 +19,7 @@
         Gandyam
       </div>
 
-<div class=" text-2xl  ">
+<div class="text-2xl  ">
     <router-link>
       Découvrir
     </router-link>
