@@ -35,7 +35,7 @@
       
 
      
-
+</div>
     
 
     <!-- Menu mobile (optionnel) -->
@@ -61,7 +61,7 @@
         </div>
       </div>
     </div>
-  </div>
+  
 
       <!-- Barre de recherche -->
       <input
