@@ -18,13 +18,12 @@
       </button>
         Gandyam
       </div>
-
 <div class="text-2xl">
-  
-            Decouvrir
-        
+  <router-link to="/login">
+    Decouvrir
+  </router-link>
+</div>
 
-    </div>
     <!-- Tooltip Découvrir -->
    
 
