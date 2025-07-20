@@ -106,7 +106,7 @@
           class="bg-gray-200 shadow-sm border rounded-xl gap-6 overflow-hidden md:w-1/3 w-full h-auto relative"
         >
           <video
-            :src="`http://localhost:5000/${course.video}`"
+            :src="`https://bacekend-node-js-1.onrender.com/${course.video}`"
             controls 
             autoplay 
             muted 
@@ -262,7 +262,14 @@
           @mouseleave="hideTooltip"
           class="bg-white shadow-sm border rounded-xl overflow-hidden"
         >
-          <img :src="course.image" alt="course image" class="w-full h-40 object-cover">
+           <video
+            :src="`https://bacekend-node-js-1.onrender.com/${course.video}`"
+            controls 
+            autoplay 
+            muted 
+            playsinline
+            class="w-full h-40 md:h-72 object-cover"
+          ></video>
           <div class="p-4">
             <h2 class="text-lg font-bold">{{ course.title }}</h2>
             <p class="text-gray-600 text-sm mt-1">{{ course.author }}</p>
@@ -517,7 +524,7 @@
     <div class="text-3xl font-bold px-10 mb-10 px-10">
       Voir ce que d'autres réalisent grâce à l'apprentissage
     </div>
-    <div class="flex relative -ml-20 flex-wrap  justify-center gap-2 px-2">
+    <div class="flex relative lg:-ml-20 flex-wrap justify-center gap-2 px-2">
       <!-- Card 1 -->
       <div class="bg-white p-6 border shadow-lg rounded-lg w-80">
         <img src="https://s.udemycdn.com/browse_components/student-quote-unit/quote.svg" alt="Guillemet" class="w-4 h-4">
