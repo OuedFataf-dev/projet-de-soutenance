@@ -212,9 +212,8 @@ const videoFile = ref(null)
 
 const list2 = ref('')
 
+const categories = ref([])
 const list3 = ref('')
-
-const categories = ref('')
 const image = ref('')
 const badge = ref('')
 const author = ref('')
