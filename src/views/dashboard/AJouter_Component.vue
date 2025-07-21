@@ -321,53 +321,44 @@ const sousSousDomaines = computed(() => {
   return domaines_info[selectedDomaine.value][selectedSousDomaine.value] || []
 })
 
+
 const submitForm = async () => {
-  const formData = new FormData()
-
-  formData.append('title', title.value)
-  formData.append('description', description.value)
-  formData.append('list1', list1.value)
-  formData.append('list2', list2.value)
-  formData.append('list3', list3.value)
-  formData.append('image', image.value)
-  formData.append('badge', badge.value || '')
-  formData.append('author', author.value)
-  formData.append('rating', rating.value)
-  formData.append('reviews', reviews.value)
-  formData.append('price', price.value)
-  formData.append('originalPrice', originalPrice.value)
- formData.append('categories', JSON.stringify(categories.value))
-
-
-
-  // 🔁 Ajouter le fichier vidéo si sélectionné
-  if (videoFile.value) {
-    formData.append('video', videoFile.value)
+  const payload = {
+    title: title.value,
+    description: description.value,
+    list1: list1.value,
+    list2: list2.value,
+    list3: list3.value,
+    image: image.value,
+    badge: badge.value || '',
+    author: author.value,
+    rating: rating.value,
+    reviews: reviews.value,
+    price: price.value,
+    originalPrice: originalPrice.value,
+    categories: categories.value
   }
 
-  // --- Gestion des domaines ---
   if (selectedSousSousDomaine.value) {
-    formData.append('sousSousDomaines', JSON.stringify([selectedSousSousDomaine.value]))
+    payload.sousSousDomaines = [selectedSousSousDomaine.value]
   } else if (enableSecondSubdomain.value) {
-    formData.append('secondSubdomain', JSON.stringify([selectedSecondSubdomain.value]))
+    payload.secondSubdomain = [selectedSecondSubdomain.value]
   } else {
     if (selectedDomaine.value) {
-      formData.append('domains', JSON.stringify([selectedDomaine.value]))
+      payload.domains = [selectedDomaine.value]
     }
     if (selectedSousDomaine.value) {
-      formData.append('subdomains', JSON.stringify([selectedSousDomaine.value]))
+      payload.subdomains = [selectedSousDomaine.value]
     }
   }
 
-  console.log('--- Données du formulaire ---')
-  for (let pair of formData.entries()) {
-    console.log(`${pair[0]}:`, pair[1])
-  }
+  console.log("--- Payload JSON ---")
+  console.log(JSON.stringify(payload, null, 2))
 
   try {
-    const response = await axios.post(`${API_URL}/api/dev/create`  , formData, {
+    const response = await axios.post(`${API_URL}/api/dev/create`, payload, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'application/json'
       }
     })
     console.log('Cours créé avec succès :', response.data)
