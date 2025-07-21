@@ -336,7 +336,8 @@ const submitForm = async () => {
   formData.append('reviews', reviews.value)
   formData.append('price', price.value)
   formData.append('originalPrice', originalPrice.value)
- formData.append('categories', JSON.stringify([categories.value]))
+ formData.append('categories', JSON.stringify(categories.value))
+
 
 
   // 🔁 Ajouter le fichier vidéo si sélectionné
