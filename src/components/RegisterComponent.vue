@@ -33,6 +33,14 @@
     class="w-full border text-base md:text-lg font-bold h-12 md:h-14 px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
   /> 
 
+   <input 
+    v-model="password"
+    type="password" 
+    placeholder="password"
+    class="w-full border text-base md:text-lg font-bold h-12 md:h-14 px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500"
+  /> 
+
+
   <div class="mt-4">
     <button
       @click="handleSubmit"
@@ -152,6 +160,7 @@ export default {
   data() {
     return {
       name: '',
+      password:'',
       email: '',
     };
   },
@@ -159,7 +168,7 @@ export default {
   methods: {
     async handleSubmit() {
       // 🔍 Validation simple côté client
-      if (!this.name || !this.email) {
+      if (!this.name || !this.email ||!this.password) {
         alert('Veuillez remplir tous les champs');
         return;
       }
@@ -173,6 +182,7 @@ export default {
         const response = await axios.post(`${API_URL}/api/auth/register`, {
           name: this.name,
           email: this.email,
+          password:this.password
         });
 
         const { token, message } = response.data;

@@ -26,6 +26,13 @@
                 class="border text-xl font-bold h-12  mt-5 px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-purple-500"
               /> 
   
+               <input 
+                v-model="password"
+                type="password" 
+                placeholder="password"
+                class="border text-xl font-bold h-12  mt-5 px-4 py-2 w-80 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              /> 
+  
               <div class="mt-5">
                 <button
                  @click="handleSubmit"
@@ -146,67 +153,77 @@ export default {
   data() {
     return {
       email: '',
+      password: '',
     };
   },
 
   methods: {
     async handleSubmit() {
       if (!this.email || !this.email.includes('@') || !this.email.includes('.')) {
-        alert('Veuillez entrer une adresse email valide')
-        return
+        alert('Veuillez entrer une adresse email valide');
+        return;
+      }
+
+      if (!this.password) {
+        alert('Veuillez entrer un mot de passe');
+        return;
       }
 
       try {
         const response = await axios.post(`${API_URL}/api/auth/login`, {
           email: this.email,
-        })
+          password: this.password,
+        });
 
-        const { token, user, message } = response.data
+        const { token, user, message } = response.data;
 
         if (token && user) {
-          localStorage.setItem('authToken', token)
+          localStorage.setItem('authToken', token);
           localStorage.setItem('user', JSON.stringify({
             name: user.name,
             role: user.role,
             email: user.email,
-          }))
+          }));
 
-          const auth = useAuthStore()
+          const auth = useAuthStore();
           auth.login({
             name: user.name,
             role: user.role,
             email: user.email,
-          })
+          });
 
           if (user.role === 'admin') {
-            this.$router.push('/dashboard')
+            this.$router.push('/dashboard');
           } else if (user.role === 'student') {
-            this.$router.push('/flutter')
+            this.$router.push('/flutter');
           } else if (user.role === 'instructor') {
-            this.$router.push('/instructor/panel')
+            this.$router.push('/instructor/panel');
           } else {
-            this.$router.push('/')
+            this.$router.push('/');
           }
 
         } else {
-          alert(message || 'Connexion réussie mais aucun token reçu')
+          alert(message || 'Connexion réussie mais aucun token reçu');
         }
 
       } catch (error) {
-        console.error('Erreur détaillée:', error)
-        alert(error.response?.data?.message || 'Erreur de connexion au serveur.')
+        console.error('Erreur détaillée:', error);
+        alert(error.response?.data?.message || 'Erreur de connexion au serveur.');
       }
     },
 
     parseJwt(token) {
       try {
-        const base64Payload = token.split('.')[1]
-        const payload = atob(base64Payload)
-        return JSON.parse(payload)
+        const base64Payload = token.split('.')[1];
+        const payload = atob(base64Payload);
+        return JSON.parse(payload);
       } catch {
-        return null
+        return null;
       }
-    },
+    }
+  },
+
+
 
     handleGoogleLogin() {
   const auth = useAuthStore()
@@ -281,6 +298,6 @@ export default {
 }
 
   }
-}
+
 
 </script>
