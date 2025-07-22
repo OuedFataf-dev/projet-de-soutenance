@@ -435,7 +435,7 @@
  
     <!-- Authentification -->
     <template v-if="!auth.isAuthenticated">
-      <router-link to="/dasboard" class="block py-2 text-purple-800 hover:underline">Se connecter</router-link>
+      <router-link to="/login" class="block py-2 text-purple-800 hover:underline">Se connecter</router-link>
       <router-link to="/register" class="block py-2 text-purple-800 hover:underline">S’inscrire</router-link>
     </template>
     <template v-else>
