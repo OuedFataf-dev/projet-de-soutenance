@@ -2,6 +2,16 @@
 
 
 
+<div v-if="searchQuery" v-for="course in searchedCourses" :key="course.id" class="border p-4 m-2 rounded shadow">
+  <h3 class="text-lg font-bold">{{ course.title }}</h3>
+  <p class="text-sm text-gray-600">{{ course.description }}</p>
+  <p class="text-sm"><strong>Domaine :</strong> {{ course.domains }}</p>
+  <button @click="ajouterAuPanier(course)" class="mt-2 bg-purple-500 text-white px-3 py-1 rounded">
+    Ajouter au panier
+  </button>
+</div>
+
+
 <div class=" px-10 h-130 p-12 bg-cover bg-center" 
      style="background-image: url('https://img-c.udemycdn.com/notices/web_carousel_slide/image/27f2b7f6-f346-4d3e-927f-c722ad532660.png');"> 
 
@@ -666,6 +676,16 @@ import { ref, onMounted,computed ,watch} from 'vue';
 import axios from 'axios';
 
 
+
+import { useSearchStore } from '../stores/course'
+const searchStore = useSearchStore()
+
+const searchedCourses = computed(() => {
+  if (!searchStore.query) return filteredCourses.value;
+  return filteredCourses.value.filter(course =>
+    course.title.toLowerCase().includes(searchStore.query.toLowerCase())
+  );
+});
 
    
 const hoveredIndex = ref(null);

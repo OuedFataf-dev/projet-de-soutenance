@@ -2,6 +2,7 @@
 
 
 
+ <NavBar/>
 
 
   <div class="mt-20">
@@ -1017,7 +1018,7 @@ import Principale from '../views/widgets/Principale.vue';
  import heade from '../views/widgets/heade.vue';
  import AppFooter from './AppFooter.vue';
  import { ref, computed } from 'vue';
- 
+ import NavBar from './NavBar.vue';
  import { cards } from '../data/data';
  
 

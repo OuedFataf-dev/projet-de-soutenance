@@ -1,5 +1,7 @@
 <template>
-    <nav class="hidden md:block  bg-white shadow-lg  py- -mt-6" >
+   
+    <NavBar/>
+   <nav class="hidden md:block  bg-white shadow-lg  py- -mt-6" >
      
   
       <!-- Menu catégories -->
@@ -934,7 +936,7 @@
   import AppFooter from '../../components/AppFooter.vue';
   
   
- 
+ import NavBar from '../NavBar.vue';
 
 import { useCartStore } from '../../stores/cartStore';
 

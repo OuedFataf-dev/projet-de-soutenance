@@ -1,16 +1,18 @@
 <template>
-  <nav class="bg-white shadow-lg  py- -mt-6" >
+  
+  
+
+  <NavBar/>
+
+  <div class="relative bg-white w-full h-200">
+
+
+      
+    <!-- Bouton hamburger (visible sur mobile uniquement) -->
    
 
-    <!-- Menu catégories -->
-
-    
-
+    <!-- MENU HAMBURGER MOBILE -->
    
-  </nav>
-
-
-  <div class="bg-white w-full h-200">
   <!-- Votre en-tête existant -->
   <div class="font-bold px-10 text-3xl py-20">
     Cours sur le sujet {{ categoryId }}
@@ -923,6 +925,8 @@
 
 <script setup>
 
+import NavBar from '../../components/NavBar.vue';
+
 import { ref, computed } from 'vue';
 import { cards } from '../../data/data';
 import AppFooter from '../../components/AppFooter.vue'
@@ -932,6 +936,48 @@ import AppFooter from '../../components/AppFooter.vue'
 import { useCartStore } from '../../stores/cartStore';
 
 
+
+
+import MobileSidebar from '../../components/MobileSidebar.vue';
+// Simuler un utilisateur connecté/déconnecté
+const auth = {
+  isAuthenticated: true,
+  user: { email: 'test@email.com' }
+}
+
+// État pour ouvrir/fermer le menu mobile
+const mobileMenuOpen = ref(false)
+
+// Catégories & sous-catégories fictives
+
+
+const categories = [
+  { name: "Développement", margin: "ml-34", link: "/web1" },
+  { name: "Business", margin: "ml-50",link:"/business" },
+  { name: "Finance et Comptabilité", margin: "ml-23",link:"/finance" },
+  { name: "Santé et Bien-être", margin: "ml-33" },
+  { name: "Design", margin: "ml-55" ,link:"/design"},
+  { name: "Informatique et Logiciel", margin: "ml-23",link:"/informatique" },
+  { name: "Marketing", margin: "ml-48" ,link:"/marketing"},
+  { name: "Développement Personnel", margin: "ml-1 -ml-2" },
+  { name: "Productivité Bureautique", margin: "ml-40" },
+  { name: "Photographie et Vidéo", margin: "ml-36" }
+];
+
+const selectedCategory = ref(null)
+const mobileSubCategories = [
+  { name: 'Vue.js', link: '#' },
+  { name: 'React', link: '#' }
+]
+
+// Fonctions
+function selectCategory(name) {
+  selectedCategory.value = name
+}
+function logout() {
+  auth.isAuthenticated = false
+  alert('Déconnecté')
+}
 
 
 const cartStore = useCartStore()
