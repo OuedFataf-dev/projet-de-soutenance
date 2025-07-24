@@ -44,6 +44,7 @@ import QuizFlutter from '../views/widgets/QuizFlutter.vue';
 import OranageMoney from '../components/componentAuther/OranageMoney.vue';
 import VuejsQuiz from '../views/widgets/VuejsQuiz.vue';
 import PythonQuiz from '../views/widgets/PythonQuiz.vue';
+import SearchResults from '../components/SearchResults.vue';
 const routes = [
   { path: '/login',           name: 'login',           component: LoginComponent },
 
@@ -88,6 +89,7 @@ const routes = [
 
     { path: '/vue_js',          name: 'vue js',          component: VuejsQuiz},
     { path: '/python',          name: 'python',          component: PythonQuiz},
+     { path: '/search', name: 'SearchResults', component: SearchResults },
 ];
 
 

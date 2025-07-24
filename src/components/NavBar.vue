@@ -212,18 +212,43 @@
 
 
       <!-- Barre de recherche -->
-    
-<input
-  type="text"
-  placeholder="Rechercher un cours..."
-  v-model="searchStore.query"
-  class="border rounded-full px-4 py-2"
-/>
+  <div class="relative w-full max-w-lg mx-auto">
+    <input
+      type="text"
+      placeholder="Rechercher un cours..."
+      v-model="searchStore.query"
+      class="border rounded-full px-4 py-2 w-full"
+      @input="showSuggestions = true"
+      @keydown.enter.prevent="handleSearchSubmit"
+      @blur="() => setTimeout(() => showSuggestions.value = false, 200)" 
+      @focus="() => { if (searchStore.query.trim().length > 0) showSuggestions = true }"
+    />
 
-<div v-for="course in filteredCourses" :key="course.id">
-  <!-- afficher les infos du cours -->
-  <p>{{ course.title }} - {{ course.author }}</p>
-</div>
+    <button
+      @click="handleSearchSubmit"
+      class="absolute right-3 top-2.5 text-gray-500"
+      aria-label="Rechercher"
+    >
+      🔍
+    </button>
+
+    <!-- Suggestions affichées uniquement si on tape -->
+    <ul
+      v-if="showSuggestions && searchedCourses.length"
+      class="absolute top-full left-0 w-full bg-white shadow-md z-50 max-h-60 overflow-y-auto rounded"
+    >
+      <li
+        v-for="course in searchedCourses"
+        :key="course.id"
+        class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+        @mousedown.prevent="selectSuggestion(course.title)" 
+      >
+        <p class="text-sm font-medium text-gray-700">{{ course.title }}</p>
+        <p class="text-xs text-gray-500">{{ course.author }}</p>
+      </li>
+    </ul>
+  </div>
+
 
       <!-- Boutons Udemy Business, Enseigner, Connexion, Inscription -->
       <div class=" -ml-6 space-x-4 flex items-center">
@@ -420,22 +445,51 @@ const courses = ref([]); //
 const auth = useAuthStore()
 
 const selectedCategory = ref(null);
-import { useSearchStore } from '../stores/course'
+
+
+import { useSearchStore } from '../stores/searchStore'
+
+
 const searchStore = useSearchStore()
 
-const filteredCourses = computed(() => {
-  if (!searchQuery.value) return courses.value;
-
-  const query = searchQuery.value.toLowerCase();
-
-  return courses.value.filter(course =>
-    course.title.toLowerCase().includes(query) ||
-    course.author.toLowerCase().includes(query)
-  );
-});
 
 
+const allCourses = ref([])
 
+// Récupérer tous les cours (au montage)
+async function fetchAllCourses() {
+  try {
+    const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com'
+    const res = await axios.get(`${API_URL}/api/course`)
+    allCourses.value = res.data
+  } catch (err) {
+    console.error('Erreur lors de la récupération des cours:', err)
+  }
+}
+
+fetchAllCourses()
+
+const showSuggestions = ref(false)
+
+// Calcul des suggestions selon la recherche
+const searchedCourses = computed(() => {
+  const q = searchStore.query.trim().toLowerCase()
+  if (!q) return []
+  return allCourses.value.filter(course =>
+    course.title.toLowerCase().includes(q)
+  ).slice(0, 5) // max 5 suggestions
+})
+
+function handleSearchSubmit() {
+  if (!searchStore.query.trim()) return
+  router.push({ name: 'SearchResults', query: { q: searchStore.query.trim() } })
+  showSuggestions.value = false
+}
+
+function selectSuggestion(title) {
+  searchStore.query = title
+  handleSearchSubmit()
+}
 
 
 // Utiliser directement ce que fournit le store :

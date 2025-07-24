@@ -2,15 +2,6 @@
 
 
 
-<div v-if="searchQuery" v-for="course in searchedCourses" :key="course.id" class="border p-4 m-2 rounded shadow">
-  <h3 class="text-lg font-bold">{{ course.title }}</h3>
-  <p class="text-sm text-gray-600">{{ course.description }}</p>
-  <p class="text-sm"><strong>Domaine :</strong> {{ course.domains }}</p>
-  <button @click="ajouterAuPanier(course)" class="mt-2 bg-purple-500 text-white px-3 py-1 rounded">
-    Ajouter au panier
-  </button>
-</div>
-
 
 <div class=" px-10 h-130 p-12 bg-cover bg-center" 
      style="background-image: url('https://img-c.udemycdn.com/notices/web_carousel_slide/image/27f2b7f6-f346-4d3e-927f-c722ad532660.png');"> 
@@ -104,7 +95,7 @@
       :style="isMobile ? {} : { transform: `translateX(-${currentIndex * 100}%)` }"
     >
       <div
-        v-for="(group, index) in groupedCourses"
+        v-for="(group, index) in groupedSearchedCourses"
         :key="index"
         class="flex md:flex-row flex-col gap-4 p-4 w-full flex-shrink-0"
       >
@@ -675,18 +666,17 @@ import AppFooter from '../components/AppFooter.vue';
 import { ref, onMounted,computed ,watch} from 'vue';
 import axios from 'axios';
 
-
-
-import { useSearchStore } from '../stores/course'
+import { useSearchStore } from '../stores/searchStore'
 const searchStore = useSearchStore()
 
 const searchedCourses = computed(() => {
   if (!searchStore.query) return filteredCourses.value;
+  const q = searchStore.query.toLowerCase();
   return filteredCourses.value.filter(course =>
-    course.title.toLowerCase().includes(searchStore.query.toLowerCase())
+    course.title.toLowerCase().includes(q) ||
+    course.author.toLowerCase().includes(q)
   );
 });
-
    
 const hoveredIndex = ref(null);
 
@@ -806,15 +796,18 @@ const filteredCourses = computed(() => {
 
 
 // Regroupe les cours filtrés (comme tu le fais déjà)
-const groupedCourses = computed(() => {
-  const groups = [];
-  const groupSize = 3; // Par exemple, 3 cours par slide
-  for (let i = 0; i < filteredCourses.value.length; i += groupSize) {
-    groups.push(filteredCourses.value.slice(i, i + groupSize));
-  }
-  return groups;
-});
 
+
+
+
+const groupedSearchedCourses = computed(() => {
+  const groups = []
+  const groupSize = 3
+  for (let i = 0; i < searchedCourses.value.length; i += groupSize) {
+    groups.push(searchedCourses.value.slice(i, i + groupSize))
+  }
+  return groups
+});
 
 const toggleTooltip = () => {
   showTooltip.value = !showTooltip.value;
