@@ -1,9 +1,4 @@
-
 <script setup>
-
-
-
-
 
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
@@ -46,12 +41,13 @@ const formations = ref([
 ])
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
+
 onMounted(async () => {
   // Récupérer le sous-domaine depuis l'URL
-  const sesubdomain = route.params.sesubdomain || 'Développement Web""' // Valeur par défaut
+  const subdomain = route.params.subdomain || 'Génie Logiciel' // Valeur par défaut
 
   try {
-    const res = await axios.get(`${API_URL}/api/dev/courses/second-subdomain/${encodeURIComponent(sesubdomain)}`)
+    const res = await axios.get(`${API_URL}/api/dev/subdomain/${encodeURIComponent(subdomain)}`)
 
     const fetchedCourses = res.data
 
@@ -75,18 +71,16 @@ onMounted(async () => {
 })
 </script>
 
-
 <template>
+
   <ComponentSous_domain
     :secondRow="secondRow"
     :firstRow="firstRow"
     :coursesData2="courses2"
-    categoryId="Developpement web"
+    categoryId="Génie Logiciel"
     :coursesData3="cards"
     :module="module"
     :formations="formations"
   />
+  
 </template>
-
-
-

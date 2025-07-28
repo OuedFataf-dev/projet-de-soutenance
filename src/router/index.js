@@ -18,7 +18,7 @@ import developpment from '../components/componentAuther/developpment.vue';
 import PagePaiement from '../components/componentAuther/PagePaiement.vue';
 import css from '../components/componentAuther/css.vue';
 import Siderbar from '../views/dashboard/Siderbar.vue';
-import web from '../components/ComponentDomain/web.vue';
+
 import mobile from '../components/ComponentDomain/mobile.vue';
 import Business from '../components/componentAuther/Business.vue';
 import InfoLogicielComponent from '../components/componentAuther/InfoLogicielComponent.vue';
@@ -26,7 +26,6 @@ import AJouter_Component from '../views/dashboard/AJouter_Component.vue';
 import SEO from '../components/ComponentDomain/SEO.vue';
 import UX_UIDesign from '../components/ComponentDomain/UX_UIDesign.vue';
 
-import Genie_Logiciel from '../components/ComponentDomain/Genie_Logiciel.vue';
 import Panier from '../components/componentAuther/Panier.vue';
 import checkoutPage from '../components/componentAuther/checkoutPage.vue';
 import UpdatePage from '../views/UpdatePage.vue';
@@ -45,6 +44,11 @@ import OranageMoney from '../components/componentAuther/OranageMoney.vue';
 import VuejsQuiz from '../views/widgets/VuejsQuiz.vue';
 import PythonQuiz from '../views/widgets/PythonQuiz.vue';
 import SearchResults from '../components/SearchResults.vue';
+import ReactPage from '../components/ReactPage.vue';
+import GenieCompoent from '../components/ComponentDomain/GenieCompoent.vue';
+import Web from '../components/ComponentDomain/Web.vue';
+
+
 const routes = [
   { path: '/login',           name: 'login',           component: LoginComponent },
 
@@ -57,18 +61,18 @@ const routes = [
   { path: '/web',             name: 'web',             component: CategoryPage },
   { path: '/devMobile',       name: 'devMobile',       component: mobile },
   { path: '/ui/ux',           name: 'uiux',            component: UX_UIDesign },
-  { path: '/génie',           name: 'genie',           component: Genie_Logiciel },
+  
   { path: '/register',        name: 'register',        component: RegisterComponent },
   { path: '/design',          name: 'design',          component: design },
   { path: '/',                name: 'home',            component: HomePage },
   { path: '/app',             name: 'app',             component: AppComponent },
   { path: '/flutter',         name: 'flutter',         component: AppSecondePage },
-  { path: '/webflutter',      name: 'webflutter',      component: FlutterPage },
+  { path: '/flutter',      name: 'flutter',      component: FlutterPage },
   { path: '/add',         name: 'add',         component: AJouter_Component ,meta: { requiresAdmin: true }},
   { path: '/html',            name: 'html',            component: pageHtml },
   { path: '/css',             name: 'css',             component: css },
   { path: '/cart',            name: 'cart',            component: Panier },
-  { path: '/mobile',          name: 'mobile',          component: DeveloppementWeb },
+  { path: '/DevWeb',          name: 'devWeb',          component: DeveloppementWeb },
   { path: '/web1',            name: 'web1',            component: developpment },
   { path: '/visuel',          name: 'visuel',          component: PagePaiement },
   { path: '/Ajout', name: 'Ajout', component: Ajout_DeQuiz,meta: { requiresAdmin: true } },
@@ -89,7 +93,14 @@ const routes = [
 
     { path: '/vue_js',          name: 'vue js',          component: VuejsQuiz},
     { path: '/python',          name: 'python',          component: PythonQuiz},
-     { path: '/search', name: 'SearchResults', component: SearchResults },
+     { path: '/search', name: 'search', component: SearchResults },
+     { path: '/react', name: 'reactjs', component:ReactPage },
+      { path: '/genie', name: 'genie',component:GenieCompoent },
+      { path: '/developpemnt_web', name: 'developpemnt_web',component:Web },
+       
+    
+      
+
 ];
 
 

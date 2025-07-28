@@ -1,19 +1,19 @@
 <template>
      <heade
        
-     categoryName2=" Les cours sur Google Flutter vous font découvrir un kit de développement logiciel d'IU open source créé par Google. Apprenez la création de widgets, la gestion des états et le développement multiplate-forme pour être en mesure de créer des applications de haute qualité pour les environnements mobiles, Web et de bureau à partir d'une base de code unique."
-     categoryId3=" Cours sur le sujet Google Flutter"
+     categoryName2="Les cours sur React JS vous apprennent à utiliser la bibliothèque JavaScript afin de créer des interfaces\nutilisateurs. Découvrez comment concevoir des applications Web interactives, une compétence essentielle pour les développeurs front-end et les ingénieurs logiciels qui se concentrent sur le développement Web moderne."
+     categoryId3="Cours sur le sujet React JS"
      />
 
     <DeveloppementMobile
       
        
-      categoryName="Google Flutter"
-      categoryName1="Google Flutter et Dart (langage de programmation)"
+      categoryName="React JS pour le web"
+      categoryName1="React  (Bibliothèque)"
       
       
       :coursesData="courses"
-      categoryId="flutter"
+      categoryId="React js"
       :coursesData1="courses1"
       :coursesData2="courses2"
     />
@@ -36,12 +36,11 @@ const courses2 = ref([]) // Avec categories
 const courses = ref([]) 
 
 // Exemple : valeur par défaut
-const soussousdomaine = 'HTML/CSS'
+const soussousdomaine = 'React js'
 
 onMounted(async () => {
   try {
-    const res = await fetch(`${API_URL}/api/dev/by-SousSousDomaine/${encodeURIComponent(soussousdomaine)}`)
-
+    const res = await fetch(`${API_URL}/api/dev/by-soussousdomaine/${encodeURIComponent(soussousdomaine)}`)
     const data = await res.json()
 
     // Séparer les cours selon présence de categories

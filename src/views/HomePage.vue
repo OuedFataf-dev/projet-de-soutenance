@@ -3,6 +3,17 @@
 
 
 
+
+ <NavBar @search="handleSearch" />
+
+  
+
+      <!-- NavBar visible uniquement sur desktop pour web1 -->
+
+
+       
+    
+
 <div class=" px-10 h-130 p-12 bg-cover bg-center" 
      style="background-image: url('https://img-c.udemycdn.com/notices/web_carousel_slide/image/27f2b7f6-f346-4d3e-927f-c722ad532660.png');"> 
 
@@ -95,7 +106,7 @@
       :style="isMobile ? {} : { transform: `translateX(-${currentIndex * 100}%)` }"
     >
       <div
-        v-for="(group, index) in groupedSearchedCourses"
+        v-for="(group, index) in groupedCourses"
         :key="index"
         class="flex md:flex-row flex-col gap-4 p-4 w-full flex-shrink-0"
       >
@@ -166,6 +177,8 @@
                 <span class="xs">{{ course.list3 }}</span>
               </div>
             </div>
+
+            
 
             <div class="mt-6">
               <button
@@ -669,6 +682,14 @@ import axios from 'axios';
 import { useSearchStore } from '../stores/searchStore'
 const searchStore = useSearchStore()
 
+
+
+// Gérer l'événement depuis NavBar
+const handleSearch = (text) => {
+  searchTerm.value = text
+}
+
+
 const searchedCourses = computed(() => {
   if (!searchStore.query) return filteredCourses.value;
   const q = searchStore.query.toLowerCase();
@@ -699,6 +720,8 @@ function hideTooltip() {
 
 
 import { useCartStore } from '../stores/cartStore';
+import NavBar from '../components/NavBar.vue';
+
 
 const cartStore = useCartStore()
 function ajouterAuPanier(course) {
@@ -709,6 +732,8 @@ function ajouterAuPanier(course) {
   }
   cartStore.addCourse(course)
 }
+
+
 
 
 // Appel API pour récupérer les cours
@@ -764,6 +789,11 @@ const selectDomaine = (domains) => {
   fetchCourses();
 };
 
+
+
+const searchTerm = ref('')
+
+
 watch(selectedDomaine, () => {
   if (selectedDomaine.value) {
     fetchCourses();
@@ -771,43 +801,48 @@ watch(selectedDomaine, () => {
 });
 
 
-const filteredCourses = computed(() => {
-  return selectedDomaine.value
-    ? courses.value.filter(course => {
-        let domainList = [];
+// Combine recherche ET domaine
+const filteredCoursesCombined = computed(() => {
+  return courses.value.filter(course => {
+    const matchesSearch =
+      !searchTerm.value ||
+      course.title.toLowerCase().includes(searchTerm.value.toLowerCase())
 
-        // Vérifie si `course.domains` est un string JSON
-        if (typeof course.domains === 'string') {
-          try {
-            domainList = JSON.parse(course.domains);
-          } catch (e) {
-            console.error("Erreur de parsing JSON dans 'domains'", e);
-            return false;
-          }
-        } else if (Array.isArray(course.domains)) {
-          domainList = course.domains;
+    let matchesDomaine = true
+    if (selectedDomaine.value) {
+      let domainList = []
+
+      if (typeof course.domains === 'string') {
+        try {
+          domainList = JSON.parse(course.domains)
+        } catch (e) {
+          console.error("Erreur JSON dans domains", e)
+          return false
         }
+      } else if (Array.isArray(course.domains)) {
+        domainList = course.domains
+      }
 
-        return domainList.includes(selectedDomaine.value);
-      })
-    : courses.value;
-});
+      matchesDomaine = domainList.includes(selectedDomaine.value)
+    }
+
+    return matchesSearch && matchesDomaine
+  })
+})
 
 
 
 // Regroupe les cours filtrés (comme tu le fais déjà)
 
 
-
-
-const groupedSearchedCourses = computed(() => {
+const groupedCourses = computed(() => {
   const groups = []
   const groupSize = 3
-  for (let i = 0; i < searchedCourses.value.length; i += groupSize) {
-    groups.push(searchedCourses.value.slice(i, i + groupSize))
+  for (let i = 0; i < filteredCoursesCombined.value.length; i += groupSize) {
+    groups.push(filteredCoursesCombined.value.slice(i, i + groupSize))
   }
   return groups
-});
+})
 
 const toggleTooltip = () => {
   showTooltip.value = !showTooltip.value;

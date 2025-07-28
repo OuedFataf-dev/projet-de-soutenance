@@ -1,8 +1,8 @@
 <template>
   
   
-
-  <NavBar/>
+<NavBar/>
+   
 
   <div class="relative bg-white w-full h-200">
 

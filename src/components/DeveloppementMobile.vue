@@ -2,7 +2,6 @@
 
 
 
- <NavBar/>
 
 
   <div class="mt-20">

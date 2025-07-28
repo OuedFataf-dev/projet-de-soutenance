@@ -19,7 +19,7 @@
         Gandyam
       </div>
  
-       <div class="hidden md:block  -ml -80 relative">
+       <div class="hidden md:block  ml-10 relative">
         <router-link
           to="/"
           id="decouvrir"
@@ -212,26 +212,20 @@
 
 
       <!-- Barre de recherche -->
-  <div class="relative w-full max-w-lg mx-auto">
-    <input
+  <div class="-ml-80">
+  <div class="hidden md:block ">
+
+     <input
+      v-model="searchText"
       type="text"
       placeholder="Rechercher un cours..."
-      v-model="searchStore.query"
-      class="border rounded-full px-4 py-2 w-full"
-      @input="showSuggestions = true"
-      @keydown.enter.prevent="handleSearchSubmit"
-      @blur="() => setTimeout(() => showSuggestions.value = false, 200)" 
-      @focus="() => { if (searchStore.query.trim().length > 0) showSuggestions = true }"
+      class="border rounded-xl p-1"
+      @keyup.enter="handleSearch"
     />
-
-    <button
-      @click="handleSearchSubmit"
-      class="absolute right-3 top-2.5 text-gray-500"
-      aria-label="Rechercher"
-    >
-      🔍
-    </button>
-
+  </div>
+  
+   
+   
     <!-- Suggestions affichées uniquement si on tape -->
     <ul
       v-if="showSuggestions && searchedCourses.length"
@@ -421,6 +415,8 @@
   :logout="logout"
    @update:mobileMenuOpen="val => mobileMenuOpen = val"
 />
+
+
 </div>
 
 
@@ -429,18 +425,29 @@
 
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+
+
+import { ref, computed, onMounted ,watch} from 'vue';
 import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
 import MobileSidebar from './MobileSidebar.vue';
 
-
+const searchText = ref('')
 
 let mobileMenuOpen = ref(false)
 
 
 const searchQuery = ref('');
 const courses = ref([]); //
+
+
+// Redirige automatiquement dès que l'utilisateur tape
+function handleSearch() {
+  const query = searchText.value.trim()
+  if (query !== '') {
+    router.push({ path: '/search', query: { q: query } })
+  }
+}
 
 const auth = useAuthStore()
 
@@ -525,6 +532,7 @@ const filteredSubsubCategories = computed(() => {
 });
 
 
+
 const selectCategory = (name) => {
   selectedCategory.value = name;
 };
@@ -546,9 +554,9 @@ const categories = [
 // Liste des sous-catégories
 const subCategories = [
   { name: "Développement mobile", margin: "ml-7", parent: "Développement",link: "/devMobile" },
-  { name: "Génie Logiciel", margin: "ml-24", parent: "Développement",link:'/génie' },
+  { name: "Génie Logiciel", margin: "ml-24", parent: "Développement",link:"genie" },
   { name: "Design pattern", margin: "ml-22", parent: "Développement" },
-  { name: "Programmation Web", margin: "ml-15", parent: "Développement",link:"/web" },
+  { name: "Programmation Web", margin: "ml-15", parent: "Développement",link:"/developpemnt_web" },
   { name: "UI/UX", margin: "ml-44", parent: "Design",link:"ui/ux" },
   { name: "Graphisme", margin: "ml-36", parent: "Design" },
   { name: "3D & Animation", margin: "ml-28", parent: "Design" },
@@ -559,12 +567,12 @@ const subCategories = [
 
 
 const subSubCategories = [
-  { name: "flutter", margin: "ml-7", parent: "Développement mobile",link: "/devMobile" },
+  { name: "flutter", margin: "ml-7", parent: "Développement mobile",link: "/flutter" },
   { name: "Kotlin", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
   { name: "react Native", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
   { name: "Android", margin: "ml-7", parent: "Développement mobile",link:'/génie' },
   { name: "Angulaire", margin: "ml-22", parent: "Programmation Web" },
-  { name: "react js", margin: "ml-20", parent: "Génie Logiciel",link:"/web" },
+  { name: "react js", margin: "ml-20", parent: "Génie Logiciel",link:"/react" },
  
 ];
 
@@ -629,6 +637,10 @@ const cancelHideTooltip = (type) => {
     clearTimeout(hideTimeouts.value[type]);
   }
 };
+
+
+
+
 </script>  
 <style scoped>
 

@@ -7,16 +7,13 @@
       </div>
 
       <!-- NavBar pour toutes les routes sauf celles masquées -->
-      <NavBar v-if="!shouldHide && route.name !== 'web1'" />
-
-      <!-- NavBar visible uniquement sur desktop pour web1 -->
-      <NavBar
-        v-if="route.name === 'web1'"
-        class="hidden sm:block"
-      />
+     
 
       <router-view />
+
+      
     </div>
+    
   </div>
 </template>
 
@@ -35,7 +32,7 @@ onMounted(() => {
 })
 
 const route = useRoute();
-const hiddenNames = ['', 'update', 'add','login' , '','dashboard', 'Quiz', 'principle','Ajout']; // On retire 'web1' ici
+const hiddenNames = ['', 'update', 'add','login' , '','dashboard', 'Quiz','Ajout']; // On retire 'web1' ici
 const shouldHide = computed(() =>
   hiddenNames.includes(route.name)
 );

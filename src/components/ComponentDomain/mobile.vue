@@ -47,7 +47,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onre
 
 onMounted(async () => {
   // Récupérer le sous-domaine depuis l'URL
-  const subdomain = route.params.subdomain || 'Développement Mobile"' // Valeur par défaut
+  const subdomain = route.params.subdomain || 'Développement Mobile' // Valeur par défaut
 
   try {
     const res = await axios.get(`${API_URL}/api/dev/subdomain/${encodeURIComponent(subdomain)}`)

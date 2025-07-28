@@ -1,8 +1,12 @@
 <template>
 
+
+  <NavBar/>
+
   <div class="px-10 mt-10 p-4">
 
-    salu
+  
+    
 
 
 <router-link 
@@ -72,6 +76,7 @@ class="font-bold text-4xl">{{  categoryId3  }}</router-link>
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import NavBar from '../../components/NavBar.vue'
 import { cards as allCards, flutterPageData } from '../../data/data'
 
 // Props

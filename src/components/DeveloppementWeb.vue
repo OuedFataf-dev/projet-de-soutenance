@@ -1,7 +1,7 @@
 <template>
   <heade
     categoryName2="Les cours sur React JS vous apprennent à utiliser la bibliothèque JavaScript afin de créer des interfaces utilisateurs. Découvrez comment concevoir des applications Web interactives, une compétence essentielle pour les développeurs front-end et les ingénieurs logiciels qui se concentrent sur le développement Web moderne."
-    categoryId3="Cours sur le sujet React JS"
+    categoryId3="Cours sur le sujet React js"
   />
 
   <DeveloppementMobile
