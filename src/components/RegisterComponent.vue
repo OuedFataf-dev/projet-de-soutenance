@@ -194,7 +194,9 @@ export default {
 
       if (token) {
         localStorage.setItem('authToken', token);
-        alert('Inscription réussie ! Redirection vers la page de connexion...');
+
+        alert('Inscription réussie ! Un email de vérification vous a été envoyé. Veuillez vérifier votre boîte de réception (ou vos spams).');
+
         this.$router.push('/login');
       } else {
         alert(message || 'Inscription réussie mais aucun token reçu');
@@ -226,8 +228,9 @@ export default {
         alert("Une erreur est survenue : " + error.message);
       }
     }
-  }
-,
+  },
+
+
 
     handleGoogleLogin() {
       const width = 500;
