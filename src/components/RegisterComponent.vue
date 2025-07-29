@@ -166,45 +166,68 @@ export default {
   },
 
   methods: {
-    async handleSubmit() {
-      // 🔍 Validation simple côté client
-      if (!this.name || !this.email ||!this.password) {
-        alert('Veuillez remplir tous les champs');
-        return;
+  async handleSubmit() {
+    // 🔍 Validation simple côté client
+    if (!this.name || !this.email || !this.password) {
+      alert('Veuillez remplir tous les champs');
+      return;
+    }
+
+    if (!this.email.includes('@') || !this.email.includes('.')) {
+      alert('Veuillez entrer une adresse email valide');
+      return;
+    }
+
+    if (this.password.length < 6) {
+      alert('Le mot de passe doit contenir au moins 6 caractères');
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${API_URL}/api/auth/register`, {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      });
+
+      const { token, message } = response.data;
+
+      if (token) {
+        localStorage.setItem('authToken', token);
+        alert('Inscription réussie ! Redirection vers la page de connexion...');
+        this.$router.push('/login');
+      } else {
+        alert(message || 'Inscription réussie mais aucun token reçu');
       }
 
-      if (!this.email.includes('@') || !this.email.includes('.')) {
-        alert('Veuillez entrer une adresse email valide');
-        return;
-      }
+    } catch (error) {
+      console.error('Erreur détaillée:', error);
 
-      try {
-        const response = await axios.post(`${API_URL}/api/auth/register`, {
-          name: this.name,
-          email: this.email,
-          password:this.password
-        });
+      if (error.response) {
+        // 🛑 Erreur côté serveur
+        const status = error.response.status;
+        const serverMsg = error.response.data?.message || 'Erreur côté serveur';
 
-        const { token, message } = response.data;
-
-        if (token) {
-          localStorage.setItem('authToken', token);
-          this.$router.push('/login');
+        if (status === 400) {
+          alert(`Erreur de validation : ${serverMsg}`);
+        } else if (status === 409) {
+          alert('Un compte avec cet email existe déjà.');
+        } else if (status === 500) {
+          alert('Erreur interne du serveur. Veuillez réessayer plus tard.');
         } else {
-          alert(message || 'Inscription réussie mais aucun token reçu');
+          alert(serverMsg);
         }
 
-      } catch (error) {
-        console.error('Erreur détaillée:', error);
-
-        // Affiche un message d’erreur clair
-        if (error.response?.data?.message) {
-          alert(error.response.data.message);
-        } else {
-          alert('Erreur de connexion au serveur. Veuillez réessayer plus tard.');
-        }
+      } else if (error.request) {
+        // 🚫 Pas de réponse du serveur
+        alert("Aucune réponse du serveur. Vérifiez votre connexion Internet.");
+      } else {
+        // ❓ Erreur inattendue
+        alert("Une erreur est survenue : " + error.message);
       }
-    },
+    }
+  }
+,
 
     handleGoogleLogin() {
       const width = 500;

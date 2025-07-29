@@ -219,7 +219,7 @@
       v-model="searchText"
       type="text"
       placeholder="Rechercher un cours..."
-      class="border rounded-xl p-1"
+      class="border w-100 h-10 rounded-2xl p-1"
       @keyup.enter="handleSearch"
     />
   </div>

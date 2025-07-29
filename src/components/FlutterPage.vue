@@ -36,7 +36,7 @@ const courses2 = ref([]) // Avec categories
 const courses = ref([]) 
 
 // Exemple : valeur par défaut
-const soussousdomaine = 'HTML/CSS'
+const soussousdomaine = 'JavaScript'
 
 onMounted(async () => {
   try {
