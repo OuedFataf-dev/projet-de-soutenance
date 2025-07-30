@@ -118,13 +118,15 @@
           class="bg-gray-200 shadow-sm border rounded-xl gap-6 overflow-hidden md:w-1/3 w-full h-auto relative"
         >
           <video
-            :src="`https://bacekend-node-js-1.onrender.com/${course.video}`"
-            controls 
-            autoplay 
-            muted 
-            playsinline
-            class="w-full h-64 md:h-72 object-cover"
-          ></video>
+  v-if="course.video_url"
+  :src="course.video_url"
+  controls 
+  autoplay 
+  muted 
+  playsinline
+  class="w-full h-64 md:h-72 object-cover"
+/>
+<p v-else>Aucune vidéo disponible pour ce cours.</p>
 
           <div class="p-4 px-6 bg-white mt-2">
             <h2 class="text-lg font-bold">{{ course.title }}</h2>
