@@ -753,6 +753,11 @@ const fetchCourses = async () => {
     // Met à jour tous les cours récupérés
     courses.value = res.data;
 
+     courses.value = res.data.map(course => ({
+      ...course,
+      videoUrl: course.video_url
+    }))
+
     // Initialise `courses2` une seule fois avec les cours "Deep learning"
     if (isFirstLoad.value) {
       courses2.value = res.data.filter(course => {
