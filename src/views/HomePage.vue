@@ -298,67 +298,10 @@
 
 
 
-          <div
-    v-show="hoveredIndex === course.id"
-    class="absolute z-10  -top-4  mt-2  w-[400px] px-4 py-4 text-sm font-medium bg-white rounded-lg shadow-lg"
-  >
-    <div class="text-xl font-bold">   {{ course.title }}</div>
-    <div class="text-xs text-green-400">Mise à jour janvier 2025</div>
-    <div class="text-sm text-gray-500">76,5 heures au total · Tous les niveaux · Sous-titres</div>
 
-    <div class="text-sm mt-2">
-         {{ course.description }}
-    </div>
-
-    <div class="mt-4 space-y-3">
-      <div class="flex items-start gap-2">
-        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"/>
-        </svg>
-        <span class="xs"   >{{ course.list1 }}.</span>
-      </div>
-
-      <div class="flex items-start gap-2">
-        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"/>
-        </svg>
-        <span class="xs">{{ course.list2 }}.</span>
-      </div>
-
-      <div class="flex items-start gap-2">
-        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-             stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="m4.5 12.75 6 6 9-13.5"/>
-        </svg>
-        <span class="xs">{{ course.list3 }}.</span>
-      </div>
-    </div>
-
-    <div class="mt-6">
-      <button
-          @click="ajouterAuPanier(course)"
-        class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700"
-      >
-        Ajouter au panier
-      </button>
-    </div>
-    
-  </div>
-          
-
-        </div>
-        
-
-
-
-
-      </div>
-    </div>
+          </div>
+          </div>
+          </div>
 
     <!-- Bouton précédent -->
     <button
