@@ -758,6 +758,11 @@ const fetchCourses = async () => {
       videoUrl: course.video_url
     }))
 
+     courses.value.forEach(course => {
+      console.log('Lien vidéo:', course.videoUrl);
+    });
+
+
     // Initialise `courses2` une seule fois avec les cours "Deep learning"
     if (isFirstLoad.value) {
       courses2.value = res.data.filter(course => {
