@@ -12,7 +12,7 @@
     const token = params.get('token');
 
     if (token && window.opener) {
-      // Envoie le token vers la fenêtre parente (sécurise l'origine)
+      // 🔐 Sécurité : envoyer uniquement à l’origine correcte
       window.opener.postMessage({ token }, FRONTEND_URL);
       window.close();
     } else {
@@ -20,5 +20,5 @@
       document.body.innerHTML = '<p>Token manquant ou pas de fenêtre parente.</p>';
     }
   </script>
-</body>
+</body> 
 </html>

@@ -53,7 +53,7 @@ const routes = [
   { path: '/login',           name: 'login',           component: LoginComponent },
 
   { path: '/seo',             name: 'seo',             component: SEO },
-  { path: '/update/:id',             name: 'update',             component: UpdatePage},
+  { path: '/update/:id',             name: 'update',             component: UpdatePage, meta: { requiresAdmin: true }},
   { path: '/business',        name: 'business',        component: Business },
   { path: '/payement',        name: 'payement',        component: checkoutPage },
   { path: '/informatique',    name: 'informatique',    component: InfoLogicielComponent },
@@ -68,7 +68,7 @@ const routes = [
   { path: '/app',             name: 'app',             component: AppComponent },
   { path: '/flutter',         name: 'flutter',         component: AppSecondePage },
   { path: '/flutter',      name: 'flutter',      component: FlutterPage },
-  { path: '/add',         name: 'add',         component: AJouter_Component},
+  { path: '/add',         name: 'add',         component: AJouter_Component, meta: { requiresAdmin: true }},
   { path: '/html',            name: 'html',            component: pageHtml },
   { path: '/css',             name: 'css',             component: css },
   { path: '/cart',            name: 'cart',            component: Panier },
@@ -77,7 +77,7 @@ const routes = [
   { path: '/visuel',          name: 'visuel',          component: PagePaiement },
   { path: '/Ajout', name: 'Ajout', component: Ajout_DeQuiz,meta: { requiresAdmin: true } },
  { path: '/stats',  name: 'quiz', component: StatsComponent},
-{ path: '/dashboard', name: 'dashboard', component: Dashboard},
+{ path: '/dashboard', name: 'dashboard', component: Dashboard, meta: { requiresAdmin: true }},
 
 
   { path: '/rapport', name: 'rapport', component: Rapport, meta: { requiresAdmin: true } },
