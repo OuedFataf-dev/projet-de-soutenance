@@ -42,6 +42,18 @@
       </div>
     </div>
 
+
+             
+        <label class="block text-sm font-medium">Lien vidéo</label>
+  <input
+    v-model="video_url"
+    type="text"
+    placeholder="https://..."
+    class="border p-2 rounded w-full mt-1"
+  />
+
+
+
     <!-- Notes et avis -->
     <div class="grid grid-cols-2 gap-4">
       <div>
@@ -208,7 +220,7 @@ const description = ref('')
 
 const list1 = ref('')
 const videoFile = ref(null)
-
+const video_url=ref(null)
 
 const list2 = ref('')
 
@@ -336,7 +348,8 @@ const submitForm = async () => {
     reviews: reviews.value,
     price: price.value,
     originalPrice: originalPrice.value,
-    categories: categories.value
+    categories: categories.value,
+    video_url:video_url.value
   }
 
   if (selectedSousSousDomaine.value) {
