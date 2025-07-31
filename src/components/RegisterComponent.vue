@@ -155,7 +155,7 @@ import { useRouter } from 'vue-router';
 
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://bacekend-node-js-1.onrender.com';
-const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com/';
 
 export default {
   name: 'RegisterOrLoginComponent',

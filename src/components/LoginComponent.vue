@@ -142,6 +142,9 @@
   
 <script>
 import axios from 'axios'
+
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://bacekend-node-js-1.onrender.com';
 const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 
 
@@ -225,79 +228,44 @@ export default {
 
 
 
-    handleGoogleLogin() {
-  const auth = useAuthStore()
-  const router = this.$router
-
-  const FRONTEND_URL = 'https://projet-de-soutenance.netlify.app'
-
-  const messageListener = (event) => {
-    console.log('[GoogleLogin] Message reçu:', event.data)
-
-    if (event.origin !== FRONTEND_URL) {
-      console.warn('[GoogleLogin] Origine invalide:', event.origin)
-      return
-    }
-
-    const { token } = event.data || {}
-
-    if (token) {
-      console.log('[GoogleLogin] Token reçu:', token)
-      localStorage.setItem('authToken', token)
-
-      const decodedUser = this.parseJwt(token)
-      if (decodedUser) {
-        const formattedUser = {
-          name: decodedUser.name || '',
-          role: decodedUser.role || '',
-          email: decodedUser.email || ''
-        }
-
-        console.log('[GoogleLogin] User décodé:', formattedUser)
-
-        localStorage.setItem('user', JSON.stringify(formattedUser))
-        auth.login(formattedUser)
-
-        console.log('[GoogleLogin] Store auth.user:', auth.user)
-        console.log('[GoogleLogin] localStorage user:', localStorage.getItem('user'))
-        console.log('[GoogleLogin] localStorage authToken:', localStorage.getItem('authToken'))
-
-        if (formattedUser.role === 'admin') {
-          router.push('/dashboard')
-        } else if (formattedUser.role === 'student') {
-          router.push('/')
-        } else if (formattedUser.role === 'instructor') {
-          router.push('/instructor/panel')
-        } else {
-          router.push('/')
-        }
-      } else {
-        alert('Impossible de décoder le token.')
-      }
-    } else {
-      alert('Erreur : Aucun token reçu depuis la popup Google')
-      console.error('[GoogleLogin] Données reçues sans token:', event.data)
-    }
-
-    googleLoginWindow?.close()
-    window.removeEventListener('message', messageListener)
-  }
-
-  window.addEventListener('message', messageListener, { once: true })
-
-  const width = 500
-  const height = 600
-  const left = window.innerWidth / 2 - width / 2
-  const top = window.innerHeight / 2 - height / 2
+handleGoogleLogin() {
+  const width = 500;
+  const height = 600;
+  const left = (window.innerWidth / 2) - (width / 2);
+  const top = (window.innerHeight / 2) - (height / 2);
 
   const googleLoginWindow = window.open(
-    `${API_URL}/auth/google`,
+    `${BACKEND_URL}/auth/google`,
     'Connexion Google',
     `width=${width},height=${height},top=${top},left=${left}`
-  )
-}
+  );
 
+  const messageListener = (event) => {
+    // Vérifier que le message vient bien du backend (popup)
+    if (event.origin !== BACKEND_URL) { // ici BACKEND_URL doit être l'URL exacte de la popup backend
+      console.warn('Origine invalide:', event.origin);
+      return;
+    }
+
+    const { token } = event.data || {};
+
+    if (token && typeof token === 'string') {
+      localStorage.setItem('authToken', token);
+      this.$router.push('/'); // Redirection vers la page d'accueil
+    } else {
+      alert('Erreur : Aucun token reçu depuis la popup Google');
+      console.error('Données reçues:', event.data);
+    }
+
+    googleLoginWindow.close();
+    window.removeEventListener('message', messageListener);
+  };
+
+  window.addEventListener('message', messageListener, { once: true });
+}
   }
+
+  
 
 
 </script>
