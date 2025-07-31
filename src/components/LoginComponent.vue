@@ -223,9 +223,7 @@ export default {
       } catch {
         return null;
       }
-    }
-  },
-
+    },
 
 
 handleGoogleLogin() {
@@ -263,9 +261,18 @@ handleGoogleLogin() {
 
   window.addEventListener('message', messageListener, { once: true });
 }
+
   }
 
+}
+
   
+
+
+
+  
+
+
 
 
 </script>
