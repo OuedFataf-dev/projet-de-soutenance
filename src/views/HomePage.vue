@@ -117,16 +117,27 @@
           @mouseleave="hideTooltip"
           class="bg-gray-200 shadow-sm border rounded-xl gap-6 overflow-hidden md:w-1/3 w-full h-auto relative"
         >
-          <video
-  v-if="course.video_url"
-  :src="course.video_url"
-  controls 
-  autoplay 
-  muted 
-  playsinline
-  class="w-full h-64 md:h-72 object-cover"
+  
+       <video
+  v-if="course.videoUrl && course.videoUrl.endsWith('.mp4')"
+  :src="course.videoUrl"
+  controls autoplay muted playsinline
+  class="w-full h-64"
 />
-<p v-else>Aucune vidéo disponible pour ce cours.</p>
+
+<iframe
+  v-else-if="course.videoUrl && course.videoUrl.includes('player.cloudinary.com')"
+  :src="course.videoUrl"
+  allow="autoplay; fullscreen"
+  allowfullscreen
+  frameborder="0"
+  class="w-full h-64"
+/>
+
+<p v-else class="text-gray-500">Aucune vidéo disponible.</p>
+
+
+
 
           <div class="p-4 px-6 bg-white mt-2">
             <h2 class="text-lg font-bold">{{ course.title }}</h2>
@@ -298,10 +309,67 @@
 
 
 
+          <div
+    v-show="hoveredIndex === course.id"
+    class="absolute z-10  -top-4  mt-2  w-[400px] px-4 py-4 text-sm font-medium bg-white rounded-lg shadow-lg"
+  >
+    <div class="text-xl font-bold">   {{ course.title }}</div>
+    <div class="text-xs text-green-400">Mise à jour janvier 2025</div>
+    <div class="text-sm text-gray-500">76,5 heures au total · Tous les niveaux · Sous-titres</div>
 
-          </div>
-          </div>
-          </div>
+    <div class="text-sm mt-2">
+         {{ course.description }}
+    </div>
+
+    <div class="mt-4 space-y-3">
+      <div class="flex items-start gap-2">
+        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"/>
+        </svg>
+        <span class="xs"   >{{ course.list1 }}.</span>
+      </div>
+
+      <div class="flex items-start gap-2">
+        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"/>
+        </svg>
+        <span class="xs">{{ course.list2 }}.</span>
+      </div>
+
+      <div class="flex items-start gap-2">
+        <svg class="size-4 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+             stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="m4.5 12.75 6 6 9-13.5"/>
+        </svg>
+        <span class="xs">{{ course.list3 }}.</span>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <button
+          @click="ajouterAuPanier(course)"
+        class="w-full bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700"
+      >
+        Ajouter au panier
+      </button>
+    </div>
+    
+  </div>
+          
+
+        </div>
+        
+
+
+
+
+      </div>
+    </div>
 
     <!-- Bouton précédent -->
     <button
@@ -694,16 +762,13 @@ const fetchCourses = async () => {
     const res = await axios.get(`${API_URL}/api/course/domain/${selectedDomaine.value}`);
 
     // Met à jour tous les cours récupérés
-    courses.value = res.data;
-
-     courses.value = res.data.map(course => ({
-      ...course,
-      videoUrl: course.video_url
-    }))
-
-     courses.value.forEach(course => {
-      console.log('Lien vidéo:', course.videoUrl);
-    });
+    
+courses.value = res.data
+  .filter(course => course.video_url) // filtre ceux avec une URL valide
+  .map(course => ({
+    ...course,
+    videoUrl: course.video_url
+  }))
 
 
     // Initialise `courses2` une seule fois avec les cours "Deep learning"
