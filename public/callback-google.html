@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Callback Google</title>
+  <title>Connexion Google</title>
 </head>
 <body>
   <script>
-    const FRONTEND_URL = 'https://projet-de-soutenance.netlify.app';
+    // 🔒 Sécurité : autorise seulement ton propre domaine
+    const allowedOrigin = "https://projet-de-soutenance.netlify.app";
 
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get('token');
+    // 🔍 Récupère le token dans l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
 
-    if (token && window.opener) {
-      // 🔐 Sécurité : envoyer uniquement à l’origine correcte
-      window.opener.postMessage({ token }, FRONTEND_URL);
-      window.close();
+    if (window.opener && token) {
+      // 🔄 Renvoie le token au parent (page qui a ouvert cette popup)
+      window.opener.postMessage({ type: 'google-auth', token }, allowedOrigin);
+      window.close(); // 🔐 Ferme la popup automatiquement
     } else {
-      console.warn('Token manquant ou pas de fenêtre parente');
-      document.body.innerHTML = '<p>Token manquant ou pas de fenêtre parente.</p>';
+      document.body.innerText = "Token manquant ou pas de fenêtre parente.";
     }
   </script>
-</body> 
+</body>
 </html>

@@ -152,6 +152,9 @@
 <script>
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'https://bacekend-node-js-1.onrender.com';
 const API_URL = import.meta.env.VITE_API_URL || 'https://bacekend-node-js-1.onrender.com';
 
 export default {
@@ -231,42 +234,41 @@ export default {
   },
 
 
+handleGoogleLogin() {
+  const width = 500;
+  const height = 600;
+  const left = (window.innerWidth / 2) - (width / 2);
+  const top = (window.innerHeight / 2) - (height / 2);
 
-    handleGoogleLogin() {
-      const width = 500;
-      const height = 600;
-      const left = (window.innerWidth / 2) - (width / 2);
-      const top = (window.innerHeight / 2) - (height / 2);
+  const googleLoginWindow = window.open(
+    `${BACKEND_URL}/auth/google`,
+    'Connexion Google',
+    `width=${width},height=${height},top=${top},left=${left}`
+  );
 
-      const googleLoginWindow = window.open(
-        `${API_URL}/auth/google`,
-        'Connexion Google',
-        `width=${width},height=${height},top=${top},left=${left}`
-      );
-
-      const messageListener = (event) => {
-        // ✅ Sécurité : vérifier l’origine
-        if (event.origin !== `${API_URL}`) {
-          console.warn('Origine invalide:', event.origin);
-          return;
-        }
-
-        const { token } = event.data || {};
-
-        if (token && typeof token === 'string') {
-          localStorage.setItem('authToken', token);
-          this.$router.push('/'); // Redirection vers la page d'accueil
-        } else {
-          alert('Erreur : Aucun token reçu depuis la popup Google');
-          console.error('Données reçues:', event.data);
-        }
-
-        googleLoginWindow.close();
-        window.removeEventListener('message', messageListener);
-      };
-
-      window.addEventListener('message', messageListener, { once: true });
+  const messageListener = (event) => {
+    // Vérifier que le message vient bien du backend (popup)
+    if (event.origin !== BACKEND_URL) { // ici BACKEND_URL doit être l'URL exacte de la popup backend
+      console.warn('Origine invalide:', event.origin);
+      return;
     }
+
+    const { token } = event.data || {};
+
+    if (token && typeof token === 'string') {
+      localStorage.setItem('authToken', token);
+      this.$router.push('/'); // Redirection vers la page d'accueil
+    } else {
+      alert('Erreur : Aucun token reçu depuis la popup Google');
+      console.error('Données reçues:', event.data);
+    }
+
+    googleLoginWindow.close();
+    window.removeEventListener('message', messageListener);
+  };
+
+  window.addEventListener('message', messageListener, { once: true });
+}
   }
 };
 </script>
